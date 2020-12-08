@@ -8,10 +8,97 @@ index.prototype = {
         this.loadTasks();
     },
 
+
     initEvents: function () {
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
             $("#tblTasks tbody tr").removeClass('row_selected');
             $(this).addClass('row_selected');
+            var selected = $("#tblTasks tbody tr").closest(".row_selected");
+            var data = window["dt_tblTasks"].row(selected).data();
+            name = data.Task_name;
+            progress = data.Progression;
+
+
+            //calculate number of days left
+            dateTime = data.Due_date;
+            var date = dateTime.split(" ");
+            mmddyy = date[0].split("-");
+            due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
+
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+
+
+            var due = new Date(due_date);
+            var current = new Date(today);
+            var diffTime = Math.abs(due - current);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            //countdown timer
+            // Set the date we're counting down to
+            var countDownDate = new Date(data.Due_date).getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element 
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+                    document.getElementById("countdown").style.color = "#858796";
+                // If task is overdue
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "Overdue";
+                    document.getElementById("countdown").style.color = "red";
+                }
+            }, 1000);
+
+            //get number of tasks with same due date
+            var alldates = window['dt_tblTasks'].column(5).data();
+            var i;
+            var dates = [];
+            for (i = 0; i < alldates.length; i++) {
+                var theDate = alldates[i].split(" ");
+                mmddyy = theDate[0].split("-");
+                format_due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
+                dates.push(format_due_date);
+            }
+
+            var due_date_count = 0;
+            for (i = 0; i < dates.length; i++) {
+                if (dates[i] === due_date) {
+                    due_date_count++;
+                }
+            }
+            $('#days').text(diffDays);
+            $('#task_name').text(name);
+            $('#task_name1').text(name);
+            $('#progress').text(progress + '%');
+            $('#due_date').text(date[0]);
+            $('#due_date_no').text(due_date_count);
+
+            $('#countdownModal').on('hidden.bs.modal', function () {
+                clearInterval(x);
+            });
+
+
         });
 
         $('#divRecPerPage_Index').off("click").on("click", function () { //define no. of rows to load per page
@@ -33,6 +120,9 @@ index.prototype = {
                 }
             }
         });
+
+
+
     },
 
     loadTasks: function () {
@@ -105,6 +195,32 @@ index.prototype = {
 
 
             $('#divRecPerPage_Index').removeClass("d-none");
+
+            //split all dates and time 
+            var alldates = window['dt_tblTasks'].column(5).data();
+            var i;
+            var dates = [];
+            for (i = 0; i < alldates.length; i++) {
+                var theDate = alldates[i].split(" ");
+                mmddyy = theDate[0].split("-");
+                due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
+                dates.push(due_date);
+            }
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+            var today_count = 0;
+            for (i = 0; i < dates.length; i++) {
+                if (dates[i] === today) {
+                    today_count++;
+                }
+            }
+
+            $('#taskToday').text(today_count);
 
         });
 
