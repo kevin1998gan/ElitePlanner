@@ -17,6 +17,13 @@ index.prototype = {
             var data = window["dt_tblTasks"].row(selected).data();
             name = data.Task_name;
             progress = data.Progression;
+            type = data.type;
+
+            if (type === "Exam"){
+                $("#progressCard").addClass("d-none");
+            }else{
+                $("#progressCard").removeClass("d-none");
+            }
 
             //countdown timer
             dateTime = data.Due_date;
@@ -78,6 +85,8 @@ index.prototype = {
             $('#task_name').text(name);
             $('#task_name1').text(name);
             $('#progress').text(progress + '%');
+            $('#value').text(progress + '%');
+            $('#myRange').val(progress);
             $('#due_date').text(date[0]);
             $('#due_date_no').text(due_date_count);
 
@@ -139,9 +148,9 @@ index.prototype = {
                 columns: [
                     { title: "No.", data: null }, //0
                     { title: "Task ID", data: "Tasks_Id" }, //1
-                    { title: "Task Name", data: "Task_name" }, //2
-                    { title: "Student Id", data: "Student_Id" }, //3
-                    { title: "Date Created", data: "Date_created" }, //4
+                    { title: "Name", data: "Task_name" }, //2
+                    { title: "Type", data: "type" }, //3
+                    { title: "Student Id", data: "Student_Id" }, //4
                     { title: "Due Date", data: "Due_date" }, //5
                     { title: "Progression", data: "Progression" }, //6
                     { title: "Action", data: null } //7
@@ -150,10 +159,10 @@ index.prototype = {
                 "columnDefs": [
                     {
                         "visible": false,
-                        "targets": [1, 3, 6]
+                        "targets": [1, 4, 6]
                     },
                     {
-                        'targets': [0, 1, 3, 4, 5, 6, 7],
+                        'targets': [0, 1, 4, 5, 6, 7],
                         'searchable': false
                     },
                     {
