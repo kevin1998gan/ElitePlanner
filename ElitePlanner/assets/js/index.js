@@ -18,13 +18,11 @@ index.prototype = {
             name = data.Task_name;
             progress = data.Progression;
 
-
-            //calculate number of days left
+            //countdown timer
             dateTime = data.Due_date;
             var date = dateTime.split(" ");
             mmddyy = date[0].split("-");
             due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
-
 
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
@@ -32,14 +30,6 @@ index.prototype = {
             var yyyy = today.getFullYear();
 
             today = mm + '/' + dd + '/' + yyyy;
-
-
-            var due = new Date(due_date);
-            var current = new Date(today);
-            var diffTime = Math.abs(due - current);
-            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            //countdown timer
             // Set the date we're counting down to
             var countDownDate = new Date(data.Due_date).getTime();
 
@@ -59,16 +49,14 @@ index.prototype = {
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Display the result in the element 
-                document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
-                    document.getElementById("countdown").style.color = "#858796";
+                document.getElementById("days").innerHTML = days + ": " + hours + ": "
+                    + minutes + ": " + seconds;
                 // If task is overdue
                 if (distance < 0) {
                     clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "Overdue";
-                    document.getElementById("countdown").style.color = "red";
+                    document.getElementById("days").innerHTML = "Overdue";
                 }
-            }, 1000);
+            }, 100);
 
             //get number of tasks with same due date
             var alldates = window['dt_tblTasks'].column(5).data();
@@ -80,24 +68,22 @@ index.prototype = {
                 format_due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
                 dates.push(format_due_date);
             }
-
             var due_date_count = 0;
             for (i = 0; i < dates.length; i++) {
                 if (dates[i] === due_date) {
                     due_date_count++;
                 }
             }
-            $('#days').text(diffDays);
+
             $('#task_name').text(name);
             $('#task_name1').text(name);
             $('#progress').text(progress + '%');
             $('#due_date').text(date[0]);
             $('#due_date_no').text(due_date_count);
 
-            $('#countdownModal').on('hidden.bs.modal', function () {
+            $('#tblTasks').on('click', 'tbody tr', function (e) {
                 clearInterval(x);
             });
-
 
         });
 
@@ -119,6 +105,14 @@ index.prototype = {
                     }
                 }
             }
+        });
+
+        //Task Progression 
+        $('#progressOnClick').off("click").on("click", function () {
+            var selected = $("#tblTasks tbody tr").closest(".row_selected");
+            var data = window["dt_tblTasks"].row(selected).data();
+            name = data.Task_name;
+            $('#progression').text(name);
         });
 
 

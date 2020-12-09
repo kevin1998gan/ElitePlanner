@@ -127,6 +127,7 @@
                     <div class="row">
                         <div class="col" style="width: 462.8px;">
                             <div class="card">
+                                <a href="#" class="stretched-link" data-toggle="modal" data-target="#progressModal" id="progressOnClick"></a>
                                 <div class="card-header" style="background: #4c94b2;color: rgb(255,255,255);">
                                     <h4 class="font-weight-bold">Progress</h4>
                                     <div class="d-flex justify-content-between align align-items-center">
@@ -141,38 +142,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card">
-                                <a href="#" class="stretched-link" data-toggle="modal"
-                                    data-target="#countdownModal"></a>
-                                <div class="card-header" style="background: #4c94b2;color: rgb(255,255,255);">
-                                    <h4 class="font-weight-bold">Days Remaining</h4>
-                                    <div class="d-flex justify-content-between align align-items-center">
-                                        <p class="font-italic" id="task_name1"></p>
-                                        <h3 class="font-weight-bold" id="days"></h3>
-                                    </div>
-                                </div>
-                                <div class="card-footer" style="padding: 0px;">
-                                    <p class="font-weight-bold"
-                                        style="font-size: 12px;text-align: center;margin: 0px;background: #19617f;color: rgb(255,255,255);">
-                                        Show&nbsp;<i class="fa fa-arrow-circle-o-right"></i></p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Countdown Modal -->
-                        <div id="countdownModal" class="modal fade" role="dialog">
+                        <!-- Progress Modal -->
+                        <div id="progressModal" class="modal fade" role="dialog">
                             <div class="modal-dialog">
 
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header" style="background-color: #4c94b2;">
-                                        <h4 class="modal-title  font-weight-bold" style="color: white;">Time Remaining:</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title  font-weight-bold" style="color: white;">Progress:
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            style="color: white;">&times;</button>
 
                                     </div>
                                     <div class="modal-body">
-                                        <p id="countdown" style= "font-size: large;">Please Select a task first.</p>
+                                        <p id="progression" style="font-size: large;">Please Select a task first.</p>
+                                        <div class="slidecontainer">
+                                            <input type="range" min="0" max="100" value="50" class="slider"
+                                                id="myRange">
+                                            <p>Progression: <span id="value"></span></p>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" id="onClose"
@@ -181,7 +171,33 @@
                                 </div>
 
                             </div>
+
+                            <script>
+                                var slider = document.getElementById("myRange");
+                                var output = document.getElementById("value");
+                                output.innerHTML = slider.value + "%";
+
+                                slider.oninput = function () {
+                                    output.innerHTML = this.value + "%";
+                                }
+                            </script>
+
                         </div>
+
+                        <div class="col">
+                            <div class="card">
+                                
+                                <div class="card-header" style="background: #4c94b2;color: rgb(255,255,255);">
+                                    <h4 class="font-weight-bold">Time Remaining</h4>
+                                    <div class="d-flex justify-content-between align align-items-center">
+                                        <p class="font-italic" id="task_name1"></p>
+                                        <h3 class="font-weight-bold" id="days"></h3>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
 
                         <div class="col">
                             <div class="card">
