@@ -126,8 +126,9 @@
                     </div>
                     <div class="row">
                         <div class="col" style="width: 462.8px;">
-                            <div class="card d-none" id = "progressCard">
-                                <a href="#" class="stretched-link" data-toggle="modal" data-target="#progressModal" id="progressOnClick"></a>
+                            <div class="card d-none" id="progressCard">
+                                <a href="#" class="stretched-link" data-toggle="modal" data-target="#progressModal"
+                                    id="progressOnClick"></a>
                                 <div class="card-header" style="background: #4c94b2;color: rgb(255,255,255);">
                                     <h4 class="font-weight-bold">Progress</h4>
                                     <div class="d-flex justify-content-between align align-items-center">
@@ -184,9 +185,36 @@
 
                         </div>
 
+                        <div id="editModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #4c94b2;">
+                                        <h4 class="modal-title  font-weight-bold" style="color: white;">Edit
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            style="color: white;">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <p id="selected_task_to_edit" style="font-size: large;">h</p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" id="onCancel"
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-success" id="onSave"
+                                            data-dismiss="modal">Save</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div class="col">
                             <div class="card">
-                                
+
                                 <div class="card-header" style="background: #4c94b2;color: rgb(255,255,255);">
                                     <h4 class="font-weight-bold">Time Remaining</h4>
                                     <div class="d-flex justify-content-between align align-items-center">
@@ -194,7 +222,7 @@
                                         <h3 class="font-weight-bold" id="days"></h3>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 

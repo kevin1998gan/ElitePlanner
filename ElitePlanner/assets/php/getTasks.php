@@ -12,7 +12,7 @@
     }
     
     //get user data from the database
-    $query = $db->query("SELECT * FROM Tasks");
+    $query = $db->query("CALL Get_All_Tasks");
     $rows = array();
     while($r = mysqli_fetch_assoc($query)) {
         $rows[] = $r;

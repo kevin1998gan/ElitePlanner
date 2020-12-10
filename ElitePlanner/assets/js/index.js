@@ -10,7 +10,10 @@ index.prototype = {
 
 
     initEvents: function () {
+        var that = this;
+
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
             $("#tblTasks tbody tr").removeClass('row_selected');
             $(this).addClass('row_selected');
             var selected = $("#tblTasks tbody tr").closest(".row_selected");
@@ -19,9 +22,9 @@ index.prototype = {
             progress = data.Progression;
             type = data.type;
 
-            if (type === "Exam"){
+            if (type === "Exam") {
                 $("#progressCard").addClass("d-none");
-            }else{
+            } else {
                 $("#progressCard").removeClass("d-none");
             }
 
@@ -118,13 +121,57 @@ index.prototype = {
 
         //Task Progression 
         $('#progressOnClick').off("click").on("click", function () {
-            var selected = $("#tblTasks tbody tr").closest(".row_selected");
-            var data = window["dt_tblTasks"].row(selected).data();
-            name = data.Task_name;
-            $('#progression').text(name);
+            if (window['dt_tblTasks'].rows('.selected').any()) {
+                var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                var data = window["dt_tblTasks"].row(selected).data();
+                name = data.Task_name;
+                $('#progression').text(name);
+            } else {
+                $('#progression').text("Please Select a task first. ");
+            }
         });
 
+        $('#progressModal').on('hidden.bs.modal', function () {
+            var selected = $("#tblTasks tbody tr").closest(".row_selected");
+            var data = window["dt_tblTasks"].row(selected).data();
+            var task_id = data.Tasks_Id;
+            var newValue = $('#value').text();
+            var pro_value = newValue.split("%");
+            $.ajax({
+                url: 'assets/php/editProgress.php',
+                data: {
+                    id: task_id,
+                    progression: pro_value[0]
+                },
+                type: 'POST',
+            }).done(function () {
+                if (newValue == "100%") {
+                    that.loadTasks();
+                    $('#task_name').text("");
+                    $('#task_name1').text("");
+                    $('#progress').text("");
+                    $('#value').text("");
+                    $('#myRange').val("");
+                    $('#due_date').text("");
+                    $('#due_date_no').text("");
+                    $('#days').text("");
 
+                } else {
+                    that.loadTasks();
+                    $('#progress').text(newValue);
+                    $('#task_name').text("");
+                    $('#task_name1').text("");
+                    $('#progress').text("");
+                    $('#value').text("");
+                    $('#myRange').val("");
+                    $('#due_date').text("");
+                    $('#due_date_no').text("");
+                    $('#days').text("");
+                }
+
+ 
+            });
+        })
 
     },
 
@@ -170,7 +217,8 @@ index.prototype = {
                         'className': 'text-center',
                         'render': function (data, type, row, meta) {
 
-                            return '<button"><i class="fa fa-eye"></i></button>'
+                            return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal" id="editOnClick">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px">Delete</button>'
+                            
                         }
                     },
 
