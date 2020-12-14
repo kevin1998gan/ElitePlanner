@@ -185,6 +185,7 @@
 
                         </div>
 
+                        <!-- Edit Modal -->
                         <div id="editModal" class="modal fade" role="dialog">
                             <div class="modal-dialog">
 
@@ -202,7 +203,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" id="onCancel"
+                                        <button type="button" class="btn btn-danger" id="onCancelEdit"
                                             data-dismiss="modal">Cancel</button>
                                         <button type="button" class="btn btn-success" id="onSave"
                                             data-dismiss="modal">Save</button>
@@ -211,6 +212,32 @@
 
                             </div>
                         </div>
+
+
+                         <!-- Delete Modal-->
+                        <div id="deleteModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #4c94b2;">
+                                        <h4 class="modal-title  font-weight-bold" style="color: white;">Are you sure?
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            style="color: white;">&times;</button>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" id="onCancelDelete"
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-danger" id="onDelete"
+                                            data-dismiss="modal">Delete</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
 
                         <div class="col">
                             <div class="card">
@@ -230,7 +257,7 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header" style="background: #4c94b2;color: rgb(255,255,255);">
-                                    <h4 class="font-weight-bold">Tasks/Exams Due on This Day</h4>
+                                    <h4 class="font-weight-bold">Total Tasks/Exams on This Day</h4>
                                     <div class="d-flex justify-content-between align align-items-center">
                                         <p class="font-italic" id="due_date"></p>
                                         <h3 class="font-weight-bold" id="due_date_no"></h3>

@@ -217,7 +217,7 @@ index.prototype = {
                         'className': 'text-center',
                         'render': function (data, type, row, meta) {
 
-                            return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal" id="editOnClick">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px">Delete</button>'
+                            return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button>'
                             
                         }
                     },
@@ -228,7 +228,8 @@ index.prototype = {
                 "bFilter": false,
                 "dom": 't<"class = float-right"p>',
                 "language": { "emptyTable": "No data available" },
-                "scrollX": true,
+                "scrollY": "250px",
+                scrollCollapse: true,
                 "initComplete": function () {
                 }
             });
