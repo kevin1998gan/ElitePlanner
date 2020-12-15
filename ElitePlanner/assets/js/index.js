@@ -18,7 +18,7 @@ index.prototype = {
             $(this).addClass('row_selected');
             var selected = $("#tblTasks tbody tr").closest(".row_selected");
             var data = window["dt_tblTasks"].row(selected).data();
-            name = data.Task_name;
+            task_name = data.Task_name;
             progress = data.Progression;
             type = data.type;
 
@@ -85,8 +85,8 @@ index.prototype = {
                 }
             }
 
-            $('#task_name').text(name);
-            $('#task_name1').text(name);
+            $('#task_name').text(task_name);
+            $('#task_name1').text(task_name);
             $('#progress').text(progress + '%');
             $('#value').text(progress + '%');
             $('#myRange').val(progress);
@@ -94,6 +94,10 @@ index.prototype = {
             $('#due_date_no').text(due_date_count);
 
             $('#tblTasks').on('click', 'tbody tr', function (e) {
+                clearInterval(x);
+            });
+
+            $('#progressModal').on('hidden.bs.modal', function () {
                 clearInterval(x);
             });
 
@@ -119,58 +123,84 @@ index.prototype = {
             }
         });
 
+        $('#onDelete').off("click").on("click", function () { //delete action
+            var selected = $("#tblTasks tbody tr").closest(".row_selected");
+            var data = window["dt_tblTasks"].row(selected).data();
+            task_id = data.Tasks_Id;
+            $.ajax({
+                url: 'assets/php/deleteTask.php',
+                data: {
+                    id: task_id
+                },
+                type: 'POST',
+            }).done(function () {
+                that.loadTasks();
+                $('#task_name').text("");
+                $('#task_name1').text("");
+                $('#progress').text("");
+                $('#value').text("");
+                $('#myRange').val("");
+                $('#due_date').text("");
+                $('#due_date_no').text("");
+                $('#days').text("");
+            });
+        });
+
         //Task Progression 
         $('#progressOnClick').off("click").on("click", function () {
-            if (window['dt_tblTasks'].rows('.selected').any()) {
+            if (window['dt_tblTasks'].rows('.row_selected').any()) {
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                name = data.Task_name;
-                $('#progression').text(name);
+                task_name = data.Task_name;
+                $('#progression').text(task_name);
             } else {
                 $('#progression').text("Please Select a task first. ");
             }
         });
 
         $('#progressModal').on('hidden.bs.modal', function () {
-            var selected = $("#tblTasks tbody tr").closest(".row_selected");
-            var data = window["dt_tblTasks"].row(selected).data();
-            var task_id = data.Tasks_Id;
-            var newValue = $('#value').text();
-            var pro_value = newValue.split("%");
-            $.ajax({
-                url: 'assets/php/editProgress.php',
-                data: {
-                    id: task_id,
-                    progression: pro_value[0]
-                },
-                type: 'POST',
-            }).done(function () {
-                if (newValue == "100%") {
-                    that.loadTasks();
-                    $('#task_name').text("");
-                    $('#task_name1').text("");
-                    $('#progress').text("");
-                    $('#value').text("");
-                    $('#myRange').val("");
-                    $('#due_date').text("");
-                    $('#due_date_no').text("");
-                    $('#days').text("");
+            if (window['dt_tblTasks'].rows('.row_selected').any()) {
+                var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                var data = window["dt_tblTasks"].row(selected).data();
+                var task_id = data.Tasks_Id;
+                var newValue = $('#value').text();
+                var pro_value = newValue.split("%");
+                $.ajax({
+                    url: 'assets/php/editProgress.php',
+                    data: {
+                        id: task_id,
+                        progression: pro_value[0]
+                    },
+                    type: 'POST',
+                }).done(function () {
+                    if (newValue == "100%") {
+                        that.loadTasks();
+                        $('#task_name').text("");
+                        $('#task_name1').text("");
+                        $('#progress').text("");
+                        $('#value').text("");
+                        $('#myRange').val("");
+                        $('#due_date').text("");
+                        $('#due_date_no').text("");
+                        $('#days').text("");
+                    } else {
+                        that.loadTasks();
+                        $('#progress').text(newValue);
+                        $('#task_name').text("");
+                        $('#task_name1').text("");
+                        $('#progress').text("");
+                        $('#value').text("");
+                        $('#myRange').val("");
+                        $('#due_date').text("");
+                        $('#due_date_no').text("");
+                        $('#days').text("");
+                    }
 
-                } else {
-                    that.loadTasks();
-                    $('#progress').text(newValue);
-                    $('#task_name').text("");
-                    $('#task_name1').text("");
-                    $('#progress').text("");
-                    $('#value').text("");
-                    $('#myRange').val("");
-                    $('#due_date').text("");
-                    $('#due_date_no').text("");
-                    $('#days').text("");
-                }
 
- 
-            });
+                });
+            } else {
+                $('#progression').text("Please Select a task first. ");
+            }
         })
 
     },
@@ -192,15 +222,16 @@ index.prototype = {
 
             window['dt_tblTasks'] = $('#tblTasks').DataTable({
                 data: rs,
+                "autoWidth": false,
                 columns: [
-                    { title: "No.", data: null }, //0
-                    { title: "Task ID", data: "Tasks_Id" }, //1
-                    { title: "Name", data: "Task_name" }, //2
-                    { title: "Type", data: "type" }, //3
-                    { title: "Student Id", data: "Student_Id" }, //4
-                    { title: "Due Date", data: "Due_date" }, //5
-                    { title: "Progression", data: "Progression" }, //6
-                    { title: "Action", data: null } //7
+                    { title: "No.", data: null, width: "50px"}, //0
+                    { title: "Task ID", data: "Tasks_Id"}, //1   
+                    { title: "Name", data: "Task_name"}, //2
+                    { title: "Type", data: "type"}, //3
+                    { title: "Student Id", data: "Student_Id"}, //4
+                    { title: "Due Date", data: "Due_date"}, //5
+                    { title: "Progression", data: "Progression"}, //6
+                    { title: "Action", data: null} //7
                 ],
                 "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
                 "columnDefs": [
@@ -218,9 +249,10 @@ index.prototype = {
                         'render': function (data, type, row, meta) {
 
                             return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button>'
-                            
+
                         }
                     },
+                    {targets:[2], class:"wrap"}
 
                 ],
                 "lengthChange": false,

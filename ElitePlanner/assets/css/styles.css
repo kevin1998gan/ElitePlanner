@@ -32,3 +32,19 @@
     background: #4CAF50;
     cursor: pointer;
   }
+
+  #task_name1 {
+    width: 11em; 
+    word-wrap: break-word;
+  }
+
+  #task_name {
+    width: 11em; 
+    word-wrap: break-word;
+  }
+
+  td.wrap {
+    width: 25em; 
+    word-break: break-word;
+    vertical-align: top;
+  }

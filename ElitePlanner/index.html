@@ -199,7 +199,31 @@
 
                                     </div>
                                     <div class="modal-body">
-                                        <p id="selected_task_to_edit" style="font-size: large;">h</p>
+                                        <form action="#">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="task">Task/Exam Name:</label>
+                                                    <input type="text" class="form-control" placeholder="Task/Exam Name"
+                                                        id="task">
+                                                   
+                                                </div>
+                                                <div class="col">
+                                                    <label for="type">Type:</label>
+                                                    <select name="type" class="form-control" id="type">
+                                                        <option value="Exam">Exam</option>
+                                                        <option value="Task">Task</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-top: 5px;">
+                                                <div class="col">
+                                                    <label for="date">Due Date:</label>
+                                                    <input type="datetime-local" id="date" class="form-control"
+                                                        name="date">
+                                                </div>
+                                            </div>
+                                        </form>
 
                                     </div>
                                     <div class="modal-footer">
@@ -214,7 +238,7 @@
                         </div>
 
 
-                         <!-- Delete Modal-->
+                        <!-- Delete Modal-->
                         <div id="deleteModal" class="modal fade" role="dialog">
                             <div class="modal-dialog">
 
@@ -229,9 +253,9 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" id="onCancelDelete"
-                                            data-dismiss="modal">Cancel</button>
+                                            data-dismiss="modal">No</button>
                                         <button type="button" class="btn btn-danger" id="onDelete"
-                                            data-dismiss="modal">Delete</button>
+                                            data-dismiss="modal">Yes</button>
                                     </div>
                                 </div>
 
