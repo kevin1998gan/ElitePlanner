@@ -199,13 +199,15 @@
 
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#">
+                                        <form action="#" id="editForm">
                                             <div class="row">
                                                 <div class="col">
                                                     <label for="task">Task/Exam Name:</label>
                                                     <input type="text" class="form-control" placeholder="Task/Exam Name"
-                                                        id="task">
-                                                   
+                                                        id="task" />
+                                                    <li style="list-style-type: none; font-size: 13px"
+                                                        id="task_warning">* Please only use letters and numbers</li>
+
                                                 </div>
                                                 <div class="col">
                                                     <label for="type">Type:</label>
@@ -223,15 +225,16 @@
                                                         name="date">
                                                 </div>
                                             </div>
-                                        </form>
+
 
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" id="onCancelEdit"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-success" id="onSave"
-                                            data-dismiss="modal">Save</button>
+                                        <input type="submit" type="button" class="btn btn-success" id="onSave"
+                                            value="Save"></input>
                                     </div>
+                                    </form>
                                 </div>
 
                             </div>

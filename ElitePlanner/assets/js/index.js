@@ -92,6 +92,10 @@ index.prototype = {
             $('#myRange').val(progress);
             $('#due_date').text(date[0]);
             $('#due_date_no').text(due_date_count);
+            $('#task').val(task_name);
+            $('#type').val(type);
+            $("#date").val(date[0] + "T" + date[1]);
+
 
             $('#tblTasks').on('click', 'tbody tr', function (e) {
                 clearInterval(x);
@@ -135,14 +139,7 @@ index.prototype = {
                 type: 'POST',
             }).done(function () {
                 that.loadTasks();
-                $('#task_name').text("");
-                $('#task_name1').text("");
-                $('#progress').text("");
-                $('#value').text("");
-                $('#myRange').val("");
-                $('#due_date').text("");
-                $('#due_date_no').text("");
-                $('#days').text("");
+
             });
         });
 
@@ -157,6 +154,54 @@ index.prototype = {
                 $('#progression').text("Please Select a task first. ");
             }
         });
+
+        //Form Validation
+        $('#task').off('keyup keypress').on('keyup keypress', function (e) {
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            var task_name = $('#task').val();
+            if (task_name.match(regex)) {
+                $('#task_warning').css('color', 'green');
+            } else {
+                $('#task_warning').css('color', 'red');
+            }
+        });
+
+        $('#onSave').off("click").on("click", function () {
+            var input = document.getElementById("task");
+            var task_name = $('#task').val();
+            var message = "";
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            if (task_name === "") {
+                message = "Please fill this up!"
+            } else if (!task_name.match(regex)) {
+                message = "Please use only letters and numbers"
+            } else {
+                var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                var data = window["dt_tblTasks"].row(selected).data();
+                task_id = data.Tasks_Id;
+                editedTask = $('#task').val();
+                editedType = $('#type').val();
+                editedDate = $("#date").val();
+
+                $.ajax({
+                    url: 'assets/php/editTask.php',
+                    data: {
+                        id: task_id,
+                        task_name: editedTask,
+                        type: editedType,
+                        due_date: editedDate
+                    },
+                    type: 'POST',
+                }).done(function () {
+                    $('#editModal').modal('toggle');
+                    that.loadTasks();
+                });
+            }
+
+            input.setCustomValidity(message);
+
+        });
+
 
         $('#progressModal').on('hidden.bs.modal', function () {
             if (window['dt_tblTasks'].rows('.row_selected').any()) {
@@ -175,25 +220,10 @@ index.prototype = {
                 }).done(function () {
                     if (newValue == "100%") {
                         that.loadTasks();
-                        $('#task_name').text("");
-                        $('#task_name1').text("");
-                        $('#progress').text("");
-                        $('#value').text("");
-                        $('#myRange').val("");
-                        $('#due_date').text("");
-                        $('#due_date_no').text("");
-                        $('#days').text("");
+
                     } else {
                         that.loadTasks();
-                        $('#progress').text(newValue);
-                        $('#task_name').text("");
-                        $('#task_name1').text("");
-                        $('#progress').text("");
-                        $('#value').text("");
-                        $('#myRange').val("");
-                        $('#due_date').text("");
-                        $('#due_date_no').text("");
-                        $('#days').text("");
+
                     }
 
 
@@ -206,6 +236,14 @@ index.prototype = {
     },
 
     loadTasks: function () {
+        $('#task_name').text("");
+        $('#task_name1').text("");
+        $('#progress').text("");
+        $('#value').text("");
+        $('#myRange').val("");
+        $('#due_date').text("");
+        $('#due_date_no').text("");
+        $('#days').text("");
         $.ajax({
             url: 'assets/php/getTasks.php',
             data: {
@@ -224,14 +262,14 @@ index.prototype = {
                 data: rs,
                 "autoWidth": false,
                 columns: [
-                    { title: "No.", data: null, width: "50px"}, //0
-                    { title: "Task ID", data: "Tasks_Id"}, //1   
-                    { title: "Name", data: "Task_name"}, //2
-                    { title: "Type", data: "type"}, //3
-                    { title: "Student Id", data: "Student_Id"}, //4
-                    { title: "Due Date", data: "Due_date"}, //5
-                    { title: "Progression", data: "Progression"}, //6
-                    { title: "Action", data: null} //7
+                    { title: "No.", data: null, width: "50px" }, //0
+                    { title: "Task ID", data: "Tasks_Id" }, //1   
+                    { title: "Name", data: "Task_name" }, //2
+                    { title: "Type", data: "type" }, //3
+                    { title: "Student Id", data: "Student_Id" }, //4
+                    { title: "Due Date", data: "Due_date" }, //5
+                    { title: "Progression", data: "Progression" }, //6
+                    { title: "Action", data: null } //7
                 ],
                 "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
                 "columnDefs": [
@@ -252,7 +290,7 @@ index.prototype = {
 
                         }
                     },
-                    {targets:[2], class:"wrap"}
+                    { targets: [2], class: "wrap" }
 
                 ],
                 "lengthChange": false,
