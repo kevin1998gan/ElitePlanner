@@ -95,7 +95,7 @@ index.prototype = {
             $('#task').val(task_name);
             $('#type').val(type);
             $("#date").val(date[0] + "T" + date[1]);
-
+ 
 
             $('#tblTasks').on('click', 'tbody tr', function (e) {
                 clearInterval(x);
