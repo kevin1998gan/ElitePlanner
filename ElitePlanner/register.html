@@ -28,19 +28,24 @@
                             </div>
                             <form class="user">
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name" name="first_name"></div>
-                                    <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Last Name" name="last_name"></div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="FirstName" placeholder="First Name" name="first_name"> <li style="list-style-type: none; font-size: 13px"
+                                        id="firstName_warning">* Please only use letters</li></div>
+                                    <div class="col-sm-6"><input class="form-control form-control-user" type="text" id="LastName" placeholder="Last Name" name="last_name"> <li style="list-style-type: none; font-size: 13px"
+                                        id="lastName_warning">* Please only use letters</li></div>
                                 </div>
-                                <div class="form-group"><input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
+                                <div class="form-group"><input class="form-control form-control-user" type="email" id="InputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email"> <li style="list-style-type: none; font-size: 13px"
+                                    id="email_warning">* Please use correct email format</li></div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password"></div>
-                                    <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat"></div>
-                                </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Register Account</button>
+                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="PasswordInput" placeholder="Password" name="password" autocomplete="off"> <li style="list-style-type: none; font-size: 13px"
+                                        id="password_warning">* Please make sure that password is longer than 8 characters</li></div>
+                                    <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="RepeatPasswordInput" placeholder="Repeat Password" name="password_repeat" autocomplete="off"> <li style="list-style-type: none; font-size: 13px"
+                                        id="rpassword_warning">* Please make sure that both password match</li></div>
+                                </div><button id = "onRegister" class="btn btn-primary btn-block text-white btn-user" type="submit">Register Account</button>
                                 <hr>
                                 <hr>
                             </form>
                             <div class="text-center"></div>
-                            <div class="text-center"><a class="small" href="/login.html">Already have an account? Login!</a></div>
+                            <div class="text-center"><a class="small" href="login.html">Already have an account? Login!</a></div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +55,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
-    <script src="/assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
+    <script src="assets/js/register.js"></script>
 </body>
 
 </html>

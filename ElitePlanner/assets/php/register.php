@@ -1,9 +1,9 @@
 <?php
 
-    $id = $_POST['id'];
-    $task_name = $_POST['task_name'];
-    $type = $_POST['type'];
-    $due_date = date("Y-m-d H:i:s", strtotime($_POST['due_date']));
+    $fname = $_POST['in_fname'];
+    $lname = $_POST['in_lname'];
+    $email = $_POST['in_email'];
+    $password = md5($_POST["in_password"]);
     //database details
     $dbHost     = 'localhost';
     $dbUsername = 'root';
@@ -17,6 +17,8 @@
     }
     
     //update user data from the database
-    $query = $db->query("CALL edit_Task('$id', '$task_name', '$type', '1803631', '$due_date')");
+    $query = $db->query("CALL insert_User('$fname', '$lname', '$email', '$password')");
+
+
 
 ?>
