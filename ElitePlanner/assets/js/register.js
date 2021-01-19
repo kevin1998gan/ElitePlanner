@@ -39,6 +39,23 @@ register.prototype = {
             } else {
                 $('#email_warning').css('color', 'red');
             }
+
+            $.ajax({
+                url: 'assets/php/checkEmail.php',
+                data: {
+                    in_email: email
+                },
+                type: 'POST',
+            }).done(function (resp) {
+                ds = JSON.parse(resp);
+                if (ds.count == 0) {
+                    $('#emailAvai_warning').addClass("d-none");
+                } else {
+                    $('#emailAvai_warning').removeClass("d-none");
+                }
+
+            });
+
         });
 
         $('#PasswordInput').off('keyup keypress').on('keyup keypress', function (e) {
@@ -78,6 +95,7 @@ register.prototype = {
             var rpassword_message = "";
             var name_regex = "^[A-Za-z]+$";
             var email_regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+            var check = document.getElementById("emailAvai_warning").className
             if (fname === "") {
                 fname_message = "Please fill this up!"
             } else if (!fname.match(name_regex)) {
@@ -90,6 +108,8 @@ register.prototype = {
                 email_message = "Please fill this up!"
             } else if (!email.match(email_regex)) {
                 email_message = "Please use correct email format"
+            } else if (check === "") {
+                email_message = "Email already in use"
             } else if (password === "") {
                 password_message = "Please fill this up!"
             } else if (password.length < 8) {
