@@ -9,8 +9,38 @@ login.prototype = {
 
     initEvents: function () {
         var that = this;
+        $('#onLogin').off("click").on("click", function () {
+            var email_input = document.getElementById("InputEmail");
+            var email = $('#InputEmail').val();
+            var email_message = "";
+            var email_regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+            var password = $('#InputPassword').val();
 
+            if (email === "") {
+                email_message = "Please fill this up!"
+            } else if (!email.match(email_regex)) {
+                email_message = "Please use correct email format"
+            } else {
+                $.ajax({
+                    url: 'assets/php/login.php',
+                    data: {
+                        in_email: email,
+                        in_password: password,
 
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    ds = JSON.parse(resp);
+                    if (ds == null) {
+                        $("#login_warning").removeClass("d-none");
+                    }else{
+                        
+                    }
+                });
+            }
+
+            email_input.setCustomValidity(email_message);
+        });
     }
 };
 

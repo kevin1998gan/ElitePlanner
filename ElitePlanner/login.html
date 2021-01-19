@@ -31,7 +31,9 @@
                                     <form class="user">
                                         <div class="form-group"><input class="form-control form-control-user" type="email" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"></div>
                                         <div class="form-group"><input class="form-control form-control-user" type="password" id="InputPassword" placeholder="Password" name="password" autocomplete="off"></div>
-                                        <button class="btn btn-primary btn-block text-white btn-user" type="submit">Login</button>
+                                        <li class = "d-none" style="list-style-type: none; font-size: 15px; color:red"
+                                        id="login_warning">* Invalid Login</li>
+                                        <button id ="onLogin"class="btn btn-primary btn-block text-white btn-user" onclick= "return false">Login</button>
                                         <hr>
                                     </form>
                                     <div class="text-center"></div>
@@ -47,6 +49,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/login.js"></script>
  
 </body>
 
