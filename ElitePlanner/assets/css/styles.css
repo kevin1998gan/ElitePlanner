@@ -48,3 +48,11 @@
     word-break: break-word;
     vertical-align: top;
   }
+
+  .box-shadow-hover:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }

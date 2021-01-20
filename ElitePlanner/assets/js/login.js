@@ -33,8 +33,19 @@ login.prototype = {
                     ds = JSON.parse(resp);
                     if (ds == null) {
                         $("#login_warning").removeClass("d-none");
-                    }else{
-                        
+                    } else {
+                        $.ajax({
+                            url: 'assets/php/loginSession.php',
+                            data: {
+                                in_id: ds.user_id,
+                                in_fname: ds.fname,
+                                in_lname: ds.lname
+                            },
+                            type: 'POST',
+                        }).done(function (resp) {
+                            rs = JSON.parse(resp);
+                            window.location.href = "index.html";
+                        });
                     }
                 });
             }

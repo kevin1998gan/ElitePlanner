@@ -4,13 +4,29 @@ index = function () {
 
 index.prototype = {
     init: function () {
-        this.initEvents();
-        this.loadTasks();
+        var rs = '';
+        $.ajax({
+            url: 'assets/php/getSession.php',
+            data: {
+            },
+            async: false,
+            type: 'GET',
+            success: function (text) {
+                rs = text;
+            }
+
+        })
+        session_variables = JSON.parse(rs);
+        this.initEvents(session_variables);
+        this.loadTasks(session_variables);
     },
 
 
-    initEvents: function () {
+    initEvents: function (session_variables) {
         var that = this;
+
+
+        $("#userName").text(session_variables.fname + " " + session_variables.lname);
 
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
@@ -21,7 +37,6 @@ index.prototype = {
             task_name = data.Task_name;
             progress = data.Progression;
             type = data.type;
-
             if (type === "Exam") {
                 $("#progressCard").addClass("d-none");
             } else {
@@ -95,7 +110,7 @@ index.prototype = {
             $('#task').val(task_name);
             $('#type').val(type);
             $("#date").val(date[0] + "T" + date[1]);
- 
+
 
             $('#tblTasks').on('click', 'tbody tr', function (e) {
                 clearInterval(x);
@@ -103,6 +118,12 @@ index.prototype = {
 
             $('#progressModal').on('hidden.bs.modal', function () {
                 clearInterval(x);
+            });
+
+            //reset pressed
+            $('#reset').off("click").on("click", function () {
+                clearInterval(x);
+                that.loadTasks(session_variables);
             });
 
         });
@@ -138,7 +159,7 @@ index.prototype = {
                 },
                 type: 'POST',
             }).done(function () {
-                that.loadTasks();
+                that.loadTasks(session_variables);
 
             });
         });
@@ -182,6 +203,8 @@ index.prototype = {
                 editedTask = $('#task').val();
                 editedType = $('#type').val();
                 editedDate = $("#date").val();
+                var newEditedDate = editedDate.split("T");
+                var in_due = newEditedDate[0] + " " + newEditedDate[1];
 
                 $.ajax({
                     url: 'assets/php/editTask.php',
@@ -189,12 +212,12 @@ index.prototype = {
                         id: task_id,
                         task_name: editedTask,
                         type: editedType,
-                        due_date: editedDate
+                        due_date: in_due
                     },
                     type: 'POST',
                 }).done(function () {
                     $('#editModal').modal('toggle');
-                    that.loadTasks();
+                    that.loadTasks(session_variables);
                 });
             }
 
@@ -219,10 +242,10 @@ index.prototype = {
                     type: 'POST',
                 }).done(function () {
                     if (newValue == "100%") {
-                        that.loadTasks();
+                        that.loadTasks(session_variables);
 
                     } else {
-                        that.loadTasks();
+                        that.loadTasks(session_variables);
 
                     }
 
@@ -233,9 +256,35 @@ index.prototype = {
             }
         })
 
+
+
+        //Due Today Clicked
+        $('#dueToday').off("click").on("click", function () {
+            if ($('#taskToday').text() > 0) {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = yyyy + '-' + mm + '-' + dd;
+                window['dt_tblTasks'].search(today).draw();
+            }
+        });
+
+        //Due sameDay Clicked
+        $('#sameDay').off("click").on("click", function () {
+            if ($('#due_date_no').text() > 0) {
+                var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                var data = window["dt_tblTasks"].row(selected).data();
+                var due_date = data.Due_date;
+                var dateToMatch = due_date.split(" ");
+                window['dt_tblTasks'].search(dateToMatch[0]).draw();
+            }
+        });
+
     },
 
-    loadTasks: function () {
+    loadTasks: function (session_variables) {
         $('#task_name').text("");
         $('#task_name1').text("");
         $('#progress').text("");
@@ -247,6 +296,7 @@ index.prototype = {
         $.ajax({
             url: 'assets/php/getTasks.php',
             data: {
+                id: session_variables.id
             },
             type: 'POST'
         }).always(function (resp) {
@@ -266,7 +316,7 @@ index.prototype = {
                     { title: "Task ID", data: "Tasks_Id" }, //1   
                     { title: "Name", data: "Task_name" }, //2
                     { title: "Type", data: "type" }, //3
-                    { title: "Student Id", data: "Student_Id" }, //4
+                    { title: "Student Id", data: "user_id" }, //4
                     { title: "Due Date", data: "Due_date" }, //5
                     { title: "Progression", data: "Progression" }, //6
                     { title: "Action", data: null } //7
@@ -278,7 +328,7 @@ index.prototype = {
                         "targets": [1, 4, 6]
                     },
                     {
-                        'targets': [0, 1, 4, 5, 6, 7],
+                        'targets': [0, 1, 4, 6, 7],
                         'searchable': false
                     },
                     {
