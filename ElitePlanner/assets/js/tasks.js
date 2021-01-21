@@ -28,6 +28,72 @@ tasks.prototype = {
 
     initEvents: function (session_variables) {
         var that = this;
+
+        elem = document.getElementById("add_date")
+        var iso = new Date().toISOString();
+        var minDate = iso.substring(0, iso.length - 1);
+        elem.min = minDate;
+
+        elem2 = document.getElementById("date")
+        elem2.min = minDate;
+
+        $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
+            $("#tblTasks tbody tr").removeClass('row_selected');
+            $(this).addClass('row_selected');
+            var selected = $("#tblTasks tbody tr").closest(".row_selected");
+            var data = window["dt_tblTasks"].row(selected).data();
+            task_name = data.Task_name;
+            dateTime = data.Due_date;
+            var date = dateTime.split(" ");
+            $('#task').val(task_name);
+            $("#date").val(date[0] + "T" + date[1]);
+        });
+
+        $('#onAdd').off("click").on("click", function () {
+            var input = document.getElementById("addtask");
+            var task_name = $('#addtask').val();
+            var message = "";
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+
+            var date_input = document.getElementById("add_date");
+            var add_date = $('#add_date').val();
+            var date_message = "";
+            if (task_name === "") {
+                message = "Please fill this up!"
+            } else if (!task_name.match(regex)) {
+                message = "Please use only letters and numbers"
+            } else if (add_date == "") {
+                date_message = "Please fill this up!"
+            } else {
+                addTask = $('#addtask').val();
+                addType = $('#add_type').val();
+                addDate = $("#add_date").val();
+                progress = 0;
+                var newAddDate = addDate.split("T");
+                var in_due = newAddDate[0] + " " + newAddDate[1];
+                $.ajax({
+                    url: 'assets/php/addTask.php',
+                    data: {
+                        id: session_variables.id,
+                        task_name: addTask,
+                        type: addType,
+                        due_date: in_due,
+                        progression: progress
+                    },
+                    type: 'POST',
+                }).done(function () {
+                    $('#addModal').modal('toggle');
+                    that.loadTasks(session_variables);
+                    $('#addtask').val("");
+                    $("#add_date").val("");
+                });
+            }
+
+            input.setCustomValidity(message);
+            date_input.setCustomValidity(date_message);
+
+        });
+
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
 
         $('#overdue_onClick').off("click").on("click", function () {
@@ -41,6 +107,82 @@ tasks.prototype = {
         $('#reset').off("click").on("click", function () {
             that.loadTasks(session_variables);
         });
+
+        $('#onDelete').off("click").on("click", function () { //delete action
+            var selected = $("#tblTasks tbody tr").closest(".row_selected");
+            var data = window["dt_tblTasks"].row(selected).data();
+            task_id = data.Tasks_Id;
+            $.ajax({
+                url: 'assets/php/deleteTask.php',
+                data: {
+                    id: task_id
+                },
+                type: 'POST',
+            }).done(function () {
+                that.loadTasks(session_variables);
+
+            });
+        });
+
+        $('#onSave').off("click").on("click", function () {
+            var input = document.getElementById("task");
+            var task_name = $('#task').val();
+            var message = "";
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            if (task_name === "") {
+                message = "Please fill this up!"
+            } else if (!task_name.match(regex)) {
+                message = "Please use only letters and numbers"
+            } else {
+                var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                var data = window["dt_tblTasks"].row(selected).data();
+                task_id = data.Tasks_Id;
+                editedTask = $('#task').val();
+                editedType = $('#type').val();
+                editedDate = $("#date").val();
+                var newEditedDate = editedDate.split("T");
+                var in_due = newEditedDate[0] + " " + newEditedDate[1];
+
+                $.ajax({
+                    url: 'assets/php/editTask.php',
+                    data: {
+                        id: task_id,
+                        task_name: editedTask,
+                        type: editedType,
+                        due_date: in_due
+                    },
+                    type: 'POST',
+                }).done(function () {
+                    $('#editModal').modal('toggle');
+                    that.loadTasks(session_variables);
+                });
+            }
+
+            input.setCustomValidity(message);
+
+        });
+
+        //Form Validation
+        $('#task').off('keyup keypress').on('keyup keypress', function (e) {
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            var task_name = $('#task').val();
+            if (task_name.match(regex)) {
+                $('#task_warning').css('color', 'green');
+            } else {
+                $('#task_warning').css('color', 'red');
+            }
+        });
+
+        $('#addtask').off('keyup keypress').on('keyup keypress', function (e) {
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            var task_name = $('#addtask').val();
+            if (task_name.match(regex)) {
+                $('#add_task_warning').css('color', 'green');
+            } else {
+                $('#add_task_warning').css('color', 'red');
+            }
+        });
+
     },
 
     loadTasks: function (session_variables) {
@@ -158,17 +300,17 @@ tasks.prototype = {
             }
 
             var progress = window['dt_tblTasks'].column(6).data();
-            var incomplete_count =  0;
+            var incomplete_count = 0;
             for (i = 0; i < progress.length; i++) {
                 if (progress[i] < 100) {
                     incomplete_count++;
                 }
             }
             $("#overdue_no").text(overdue_count);
-            if(incomplete_count == 0){
-            $("#total_no").text(incomplete_count);
-            }else{
-                $("#total_no").text(incomplete_count-overdue_count);
+            if (incomplete_count == 0) {
+                $("#total_no").text(incomplete_count);
+            } else {
+                $("#total_no").text(incomplete_count - overdue_count);
             }
         });
 

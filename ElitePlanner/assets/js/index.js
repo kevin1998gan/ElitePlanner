@@ -30,7 +30,11 @@ index.prototype = {
     initEvents: function (session_variables) {
         var that = this;
 
-
+        elem = document.getElementById("date")
+        var iso = new Date().toISOString();
+        var minDate = iso.substring(0, iso.length - 1);
+        elem.min = minDate;
+        
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
 
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
@@ -131,6 +135,60 @@ index.prototype = {
                 that.loadTasks(session_variables);
             });
 
+            $('#onDelete').off("click").on("click", function () { //delete action
+                var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                var data = window["dt_tblTasks"].row(selected).data();
+                task_id = data.Tasks_Id;
+                $.ajax({
+                    url: 'assets/php/deleteTask.php',
+                    data: {
+                        id: task_id
+                    },
+                    type: 'POST',
+                }).done(function () {
+                    that.loadTasks(session_variables);
+    
+                });
+            });
+
+            $('#onSave').off("click").on("click", function () {
+                var input = document.getElementById("task");
+                var task_name = $('#task').val();
+                var message = "";
+                var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+                if (task_name === "") {
+                    message = "Please fill this up!"
+                } else if (!task_name.match(regex)) {
+                    message = "Please use only letters and numbers"
+                } else {
+                    var selected = $("#tblTasks tbody tr").closest(".row_selected");
+                    var data = window["dt_tblTasks"].row(selected).data();
+                    task_id = data.Tasks_Id;
+                    editedTask = $('#task').val();
+                    editedType = $('#type').val();
+                    editedDate = $("#date").val();
+                    var newEditedDate = editedDate.split("T");
+                    var in_due = newEditedDate[0] + " " + newEditedDate[1];
+    
+                    $.ajax({
+                        url: 'assets/php/editTask.php',
+                        data: {
+                            id: task_id,
+                            task_name: editedTask,
+                            type: editedType,
+                            due_date: in_due
+                        },
+                        type: 'POST',
+                    }).done(function () {
+                        $('#editModal').modal('toggle');
+                        that.loadTasks(session_variables);
+                    });
+                }
+    
+                input.setCustomValidity(message);
+    
+            });
+
         });
 
         $('#reset').off("click").on("click", function () {
@@ -157,21 +215,7 @@ index.prototype = {
             }
         });
 
-        $('#onDelete').off("click").on("click", function () { //delete action
-            var selected = $("#tblTasks tbody tr").closest(".row_selected");
-            var data = window["dt_tblTasks"].row(selected).data();
-            task_id = data.Tasks_Id;
-            $.ajax({
-                url: 'assets/php/deleteTask.php',
-                data: {
-                    id: task_id
-                },
-                type: 'POST',
-            }).done(function () {
-                that.loadTasks(session_variables);
-
-            });
-        });
+       
 
         //Task Progression 
         $('#progressOnClick').off("click").on("click", function () {
@@ -196,43 +240,7 @@ index.prototype = {
             }
         });
 
-        $('#onSave').off("click").on("click", function () {
-            var input = document.getElementById("task");
-            var task_name = $('#task').val();
-            var message = "";
-            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
-            if (task_name === "") {
-                message = "Please fill this up!"
-            } else if (!task_name.match(regex)) {
-                message = "Please use only letters and numbers"
-            } else {
-                var selected = $("#tblTasks tbody tr").closest(".row_selected");
-                var data = window["dt_tblTasks"].row(selected).data();
-                task_id = data.Tasks_Id;
-                editedTask = $('#task').val();
-                editedType = $('#type').val();
-                editedDate = $("#date").val();
-                var newEditedDate = editedDate.split("T");
-                var in_due = newEditedDate[0] + " " + newEditedDate[1];
 
-                $.ajax({
-                    url: 'assets/php/editTask.php',
-                    data: {
-                        id: task_id,
-                        task_name: editedTask,
-                        type: editedType,
-                        due_date: in_due
-                    },
-                    type: 'POST',
-                }).done(function () {
-                    $('#editModal').modal('toggle');
-                    that.loadTasks(session_variables);
-                });
-            }
-
-            input.setCustomValidity(message);
-
-        });
 
 
         $('#progressModal').on('hidden.bs.modal', function () {
@@ -288,6 +296,7 @@ index.prototype = {
                 var due_date = data.Due_date;
                 var dateToMatch = due_date.split(" ");
                 window['dt_tblTasks'].search(dateToMatch[0]).draw();
+
             }
         });
 

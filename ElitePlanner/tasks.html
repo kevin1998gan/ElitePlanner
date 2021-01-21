@@ -59,11 +59,11 @@
                     <div>
                         <div class="row">
                             <div class="col">
-                                <div class="card box-shadow-hover pointer" id = "overdue_onClick" >
+                                <div class="card box-shadow-hover pointer" id="overdue_onClick">
                                     <div class="card-header text-secondary d-flex justify-content-between align align-items-center"
                                         style="background: #4c94b2;">
                                         <h4 class="font-weight-bold" style="color: #ffffff;">No. of Overdue Tasks</h4>
-                                        <h1 id = "overdue_no" class="font-weight-bold" style="color: #ffffff;"></h1>
+                                        <h1 id="overdue_no" class="font-weight-bold" style="color: #ffffff;"></h1>
                                     </div>
                                     <div class="card-footer" style="padding: 0px;">
                                         <p class="font-weight-bold"
@@ -73,11 +73,12 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card box-shadow-hover pointer" id = "incomplete_onClick" >
+                                <div class="card box-shadow-hover pointer" id="incomplete_onClick">
                                     <div class="card-header text-secondary d-flex justify-content-between align align-items-center"
                                         style="background: #4c94b2;">
-                                        <h4 class="font-weight-bold" style="color: #ffffff;">Total No. of Incomplete Tasks</h4>
-                                        <h1 id = "total_no" class="font-weight-bold" style="color: #ffffff;"></h1>
+                                        <h4 class="font-weight-bold" style="color: #ffffff;">Total No. of Incomplete
+                                            Tasks</h4>
+                                        <h1 id="total_no" class="font-weight-bold" style="color: #ffffff;"></h1>
                                     </div>
                                     <div class="card-footer" style="padding: 0px;">
                                         <p class="font-weight-bold"
@@ -92,26 +93,25 @@
                         <div class="card" style="padding: 0px;margin: 20px 0px 20px 0px;">
                             <div style="margin: 5px;padding: 5px;">
 
-                                <h1 class="font-weight-bold" style="font-size: 25px;">List of Tasks 
-                                    <button id="reset"
-                                        class="btn btn-primary float-right" type="button"
+                                <h1 class="font-weight-bold" style="font-size: 25px;">List of Tasks
+                                    <button id="reset" class="btn btn-primary float-right" type="button"
                                         style="background: rgba(255,255,255,0);border-style: none;"><i
                                             class="fa fa-refresh"
                                             style="background: rgba(220,0,0,0);color: rgb(231,0,0);font-size: 25px;"></i>
-                                        </button>
-                                        <button id="create"
-                                        class="btn btn-primary float-right" type="button"
-                                        style="background: rgba(255,255,255,0);border-style: none;"><i
-                                            class="fa fa-plus"
+                                    </button>
+                                    <button id="create" class="btn btn-primary float-right" type="button"
+                                        style="background: rgba(255,255,255,0);border-style: none;" data-toggle="modal" data-target="#addModal"><i
+                                            class="fa fa-plus" 
                                             style="background: rgba(220,0,0,0);color: rgb(0, 0, 0);font-size: 25px;"></i>
-                                        </button>
+                                    </button>
                                 </h1>
 
                                 <div class="row">
                                     <div class="col-md-12">
 
                                         <div class="d-flex"><input type="text" id="txtTasks"
-                                                class="form-control form-control-sm" placeholder="Task name/ Status"></div>
+                                                class="form-control form-control-sm" placeholder="Task name/ Status">
+                                        </div>
 
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 mt-2">
@@ -151,6 +151,142 @@
                                     <table class="table table-sm w-100" id="tblTasks">
                                     </table>
                                 </div>
+
+                                <!-- Add Modal -->
+                                <div id="addModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #4c94b2;">
+                                                <h4 class="modal-title  font-weight-bold" style="color: white;">Add
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    style="color: white;">&times;</button>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="#" id="addForm">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="addtask">Task/Exam Name:</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Task/Exam Name" id="addtask" />
+                                                            <li style="list-style-type: none; font-size: 13px"
+                                                                id="add_task_warning">* Please only use letters and numbers
+                                                            </li>
+
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="type">Type:</label>
+                                                            <select name="type" class="form-control" id="add_type" disabled>
+                                                                <option value="Task">Task</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 5px;">
+                                                        <div class="col">
+                                                            <label for="add_date">Due Date:</label>
+                                                            <input type="datetime-local" id="add_date" class="form-control"
+                                                                name="add_date" required>
+                                                        </div>
+                                                    </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" id="onCancelAdd"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <input type="submit" type="button" class="btn btn-success" id="onAdd"
+                                                    value="Add"></input>
+                                            </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Edit Modal -->
+                                <div id="editModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #4c94b2;">
+                                                <h4 class="modal-title  font-weight-bold" style="color: white;">Edit
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    style="color: white;">&times;</button>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="#" id="editForm">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="task">Task/Exam Name:</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Task/Exam Name" id="task" />
+                                                            <li style="list-style-type: none; font-size: 13px"
+                                                                id="task_warning">* Please only use letters and numbers
+                                                            </li>
+
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="type">Type:</label>
+                                                            <select name="type" class="form-control" id="type" disabled>
+                                                                <option value="Task">Task</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row" style="margin-top: 5px;">
+                                                        <div class="col">
+                                                            <label for="date">Due Date:</label>
+                                                            <input type="datetime-local" id="date" class="form-control"
+                                                                name="date">
+                                                        </div>
+                                                    </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" id="onCancelEdit"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <input type="submit" type="button" class="btn btn-success" id="onSave"
+                                                    value="Save"></input>
+                                            </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Delete Modal-->
+                                <div id="deleteModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #4c94b2;">
+                                                <h4 class="modal-title  font-weight-bold" style="color: white;">Are you
+                                                    sure?
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    style="color: white;">&times;</button>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" id="onCancelDelete"
+                                                    data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-danger" id="onDelete"
+                                                    data-dismiss="modal">Yes</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
