@@ -12,7 +12,12 @@ index.prototype = {
             async: false,
             type: 'GET',
             success: function (text) {
-                rs = text;
+                if (text == "[]") {
+                    alert("Please login first");
+                    window.location.href = "login.html";
+                } else {
+                    rs = text;
+                }
             }
 
         })
@@ -126,6 +131,10 @@ index.prototype = {
                 that.loadTasks(session_variables);
             });
 
+        });
+
+        $('#reset').off("click").on("click", function () {
+            that.loadTasks(session_variables);
         });
 
         $('#divRecPerPage_Index').off("click").on("click", function () { //define no. of rows to load per page
@@ -348,8 +357,6 @@ index.prototype = {
                 "bFilter": false,
                 "dom": 't<"class = float-right"p>',
                 "language": { "emptyTable": "No data available" },
-                "scrollY": "250px",
-                scrollCollapse: true,
                 "initComplete": function () {
                 }
             });
