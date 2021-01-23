@@ -1,8 +1,8 @@
-tasks = function () {
+exams = function () {
     this.init();
 };
 
-tasks.prototype = {
+exams.prototype = {
     init: function () {
         var rs = '';
         $.ajax({
@@ -36,21 +36,18 @@ tasks.prototype = {
 
         elem2 = document.getElementById("date")
         elem2.min = minDate;
-
+ 
         
-        $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
-            $("#tblTasks tbody tr").removeClass('row_selected');
+        $('#tblExams').off("click").on('click', 'tbody tr', function (e) { // table row onclick
+            $("#tblExams tbody tr").removeClass('row_selected');
             $(this).addClass('row_selected');
-            var selected = $("#tblTasks tbody tr").closest(".row_selected");
-            var data = window["dt_tblTasks"].row(selected).data();
+            var selected = $("#tblExams tbody tr").closest(".row_selected");
+            var data = window["dt_tblExams"].row(selected).data();
             task_name = data.Task_name;
             dateTime = data.Due_date;
-            progress = data.Progression;
             var date = dateTime.split(" ");
             $('#task').val(task_name);
             $("#date").val(date[0] + "T" + date[1]);
-            $('#value').text(progress + '%');
-            $('#myRange').val(progress);
         });
 
         $('#onAdd').off("click").on("click", function () {
@@ -100,12 +97,12 @@ tasks.prototype = {
 
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
 
-        $('#overdue_onClick').off("click").on("click", function () {
-            window['dt_tblTasks'].search("Overdue").draw();
+        $('#today_onClick').off("click").on("click", function () {
+            window['dt_tblExams'].search("Today").draw();
         });
 
-        $('#incomplete_onClick').off("click").on("click", function () {
-            window['dt_tblTasks'].search("Incomplete").draw();
+        $('#upcoming_onClick').off("click").on("click", function () {
+            window['dt_tblExams'].search("Upcoming").draw();
         });
 
         $('#reset').off("click").on("click", function () {
@@ -113,8 +110,24 @@ tasks.prototype = {
         });
 
         $('#onDelete').off("click").on("click", function () { //delete action
-            var selected = $("#tblTasks tbody tr").closest(".row_selected");
-            var data = window["dt_tblTasks"].row(selected).data();
+            var selected = $("#tblExams tbody tr").closest(".row_selected");
+            var data = window["dt_tblExams"].row(selected).data();
+            task_id = data.Tasks_Id;
+            $.ajax({
+                url: 'assets/php/deleteTask.php',
+                data: {
+                    id: task_id
+                },
+                type: 'POST',
+            }).done(function () {
+                that.loadTasks(session_variables);
+
+            });
+        });
+
+        $('#onDone').off("click").on("click", function () { //done action
+            var selected = $("#tblExams tbody tr").closest(".row_selected");
+            var data = window["dt_tblExams"].row(selected).data();
             task_id = data.Tasks_Id;
             $.ajax({
                 url: 'assets/php/deleteTask.php',
@@ -138,8 +151,8 @@ tasks.prototype = {
             } else if (!task_name.match(regex)) {
                 message = "Please use only letters and numbers"
             } else {
-                var selected = $("#tblTasks tbody tr").closest(".row_selected");
-                var data = window["dt_tblTasks"].row(selected).data();
+                var selected = $("#tblExams tbody tr").closest(".row_selected");
+                var data = window["dt_tblExams"].row(selected).data();
                 task_id = data.Tasks_Id;
                 editedTask = $('#task').val();
                 editedType = $('#type').val();
@@ -159,27 +172,6 @@ tasks.prototype = {
                 }).done(function () {
                     $('#editModal').modal('toggle');
                     that.loadTasks(session_variables);
-                });
-
-                var newValue = $('#value').text();
-                var pro_value = newValue.split("%");
-                $.ajax({
-                    url: 'assets/php/editProgress.php',
-                    data: {
-                        id: task_id,
-                        progression: pro_value[0]
-                    },
-                    type: 'POST',
-                }).done(function () {
-                    if (newValue == "100%") {
-                        that.loadTasks(session_variables);
-
-                    } else {
-                        that.loadTasks(session_variables);
-
-                    }
-
-
                 });
             }
 
@@ -211,24 +203,24 @@ tasks.prototype = {
     },
 
     loadTasks: function (session_variables) {
-        task_type = "Task";
+        task_type = "Exam"
         $.ajax({
             url: 'assets/php/getUserTasks.php',
             data: {
                 id: session_variables.id,
-                type : task_type
+                type: task_type
             },
             type: 'POST'
         }).always(function (resp) {
             rs = JSON.parse(resp);
 
             try {
-                window['dt_tblTasks'].destroy();
-                $('#tblTasks').empty();
+                window['dt_tblExams'].destroy();
+                $('#tblExams').empty();
             } catch (e) {
             }
 
-            window['dt_tblTasks'] = $('#tblTasks').DataTable({
+            window['dt_tblExams'] = $('#tblExams').DataTable({
                 data: rs,
                 "autoWidth": false,
                 columns: [
@@ -238,15 +230,15 @@ tasks.prototype = {
                     { title: "Type", data: "type" }, //3
                     { title: "Student Id", data: "user_id" }, //4
                     { title: "Due Date", data: "Due_date" }, //5
-                    { title: "Progression(%)", data: "Progression" }, //6
+                    { title: "Progression", data: "Progression" }, //6
                     { title: "Status", data: null }, //7
-                    { title: "Action", data: null } //8
+                    { title: "Action", data: null} //8
                 ],
                 "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
                 "columnDefs": [
                     {
                         "visible": false,
-                        "targets": [1, 3, 4]
+                        "targets": [1, 3, 4, 6]
                     },
                     {
                         'targets': [0, 1, 3, 4, 6, 8],
@@ -256,14 +248,19 @@ tasks.prototype = {
                         'targets': 7,
                         'className': 'text-center',
                         'render': function (data, type, row, meta) {
-                            var now = new Date().getTime();
-                            var due_date = new Date(data.Due_date).getTime();
-                            if (data.Progression >= 100) {
-                                return "<p style ='color:green'>Complete</p>"
-                            } else if (now > due_date) {
-                                return "<p style ='color:red'>Overdue</p>"
-                            } else if (data.Progression < 100) {
-                                return "<p style ='color:black'>Incomplete</p>"
+                            var today = new Date();
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+                            var date = data.Due_date;
+                            var d_date = date.split(" ");
+                            today = yyyy + '-' + mm + '-' + dd;
+                            if (today < d_date[0]) {
+                                return "<p style ='color:black'>Upcoming</p>"
+                            } else if (today == d_date[0]) {
+                                return "<p style ='color:red'>Today</p>"
+                            } else if (today > d_date[0]) {
+                                return "<p style ='color:red'>Missed</p>"
                             }
 
                         }
@@ -273,7 +270,7 @@ tasks.prototype = {
                         'className': 'text-center',
                         'render': function (data, type, row, meta) {
 
-                            return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button>'
+                            return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button><button class = "btn btn-success done" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#doneModal">Done</button>'
 
                         }
                     },
@@ -290,11 +287,11 @@ tasks.prototype = {
             });
 
             $('#txtTasks').keyup(function () {
-                window['dt_tblTasks'].search($(this).val()).draw();
+                window['dt_tblExams'].search($(this).val()).draw();
             });
 
-            window['dt_tblTasks'].on('order.dt search.dt', function () {
-                window['dt_tblTasks'].column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            window['dt_tblExams'].on('order.dt search.dt', function () {
+                window['dt_tblExams'].column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
                     cell.innerHTML = i + 1;
                 });
             }).draw();
@@ -303,7 +300,7 @@ tasks.prototype = {
 
 
             //split all dates and time 
-            var alldates = window['dt_tblTasks'].column(5).data();
+            var alldates = window['dt_tblExams'].column(5).data();
             var i;
             var dates = [];
             for (i = 0; i < alldates.length; i++) {
@@ -317,29 +314,24 @@ tasks.prototype = {
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
-            var progress = window['dt_tblTasks'].column(6).data();
-            var incomplete_count = 0;
 
             today = mm + '/' + dd + '/' + yyyy;
-            var overdue_count = 0;
+            var today_count = 0;
+            var upcoming_count = 0;
             for (i = 0; i < dates.length; i++) {
-                if (dates[i] < today && progress[i] < 100) {
-                    overdue_count++;
+                if (dates[i] === today) {
+                    today_count++;
                 }
             }
 
-
-            for (i = 0; i < progress.length; i++) {
-                if (progress[i] < 100) {
-                    incomplete_count++;
+            for (i = 0; i < dates.length; i++) {
+                if (dates[i] > today) {
+                    upcoming_count++;
                 }
             }
-            $("#overdue_no").text(overdue_count);
-            if (incomplete_count == 0) {
-                $("#total_no").text(incomplete_count);
-            } else {
-                $("#total_no").text(incomplete_count - overdue_count);
-            }
+
+            $("#exams_today").text(today_count);
+            $("#total_no").text(upcoming_count);
         });
 
     }
@@ -347,5 +339,5 @@ tasks.prototype = {
 };
 
 $(function () {
-    new tasks();
+    new exams();
 });

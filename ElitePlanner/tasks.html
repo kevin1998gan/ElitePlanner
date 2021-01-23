@@ -100,8 +100,8 @@
                                             style="background: rgba(220,0,0,0);color: rgb(231,0,0);font-size: 25px;"></i>
                                     </button>
                                     <button id="create" class="btn btn-primary float-right" type="button"
-                                        style="background: rgba(255,255,255,0);border-style: none;" data-toggle="modal" data-target="#addModal"><i
-                                            class="fa fa-plus" 
+                                        style="background: rgba(255,255,255,0);border-style: none;" data-toggle="modal"
+                                        data-target="#addModal"><i class="fa fa-plus"
                                             style="background: rgba(220,0,0,0);color: rgb(0, 0, 0);font-size: 25px;"></i>
                                     </button>
                                 </h1>
@@ -169,17 +169,19 @@
                                                 <form action="#" id="addForm">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <label for="addtask">Task/Exam Name:</label>
+                                                            <label for="addtask">Task Name:</label>
                                                             <input type="text" class="form-control"
-                                                                placeholder="Task/Exam Name" id="addtask" />
+                                                                placeholder="Task Name" id="addtask" />
                                                             <li style="list-style-type: none; font-size: 13px"
-                                                                id="add_task_warning">* Please only use letters and numbers
+                                                                id="add_task_warning">* Please only use letters and
+                                                                numbers
                                                             </li>
 
                                                         </div>
                                                         <div class="col">
                                                             <label for="type">Type:</label>
-                                                            <select name="type" class="form-control" id="add_type" disabled>
+                                                            <select name="type" class="form-control" id="add_type"
+                                                                disabled>
                                                                 <option value="Task">Task</option>
                                                             </select>
                                                         </div>
@@ -188,8 +190,8 @@
                                                     <div class="row" style="margin-top: 5px;">
                                                         <div class="col">
                                                             <label for="add_date">Due Date:</label>
-                                                            <input type="datetime-local" id="add_date" class="form-control"
-                                                                name="add_date" required>
+                                                            <input type="datetime-local" id="add_date"
+                                                                class="form-control" name="add_date" required>
                                                         </div>
                                                     </div>
 
@@ -224,9 +226,9 @@
                                                 <form action="#" id="editForm">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <label for="task">Task/Exam Name:</label>
+                                                            <label for="task">Task Name:</label>
                                                             <input type="text" class="form-control"
-                                                                placeholder="Task/Exam Name" id="task" />
+                                                                placeholder="Task Name" id="task" />
                                                             <li style="list-style-type: none; font-size: 13px"
                                                                 id="task_warning">* Please only use letters and numbers
                                                             </li>
@@ -248,8 +250,26 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="row" style="margin-top: 5px;">
+                                                        <div class="col">
+                                                            <label for="slider">Progression: <span id="value"></span></label>
+                                                            <input type="range" min="0" max="100" value="50"
+                                                                class="slider" id="myRange" name="slider">
+                                                        </div>
+                                                    </div>
 
                                             </div>
+
+                                            <script>
+                                                var slider = document.getElementById("myRange");
+                                                var output = document.getElementById("value");
+                                                output.innerHTML = slider.value + "%";
+                
+                                                slider.oninput = function () {
+                                                    output.innerHTML = this.value + "%";
+                                                }
+                                            </script>
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" id="onCancelEdit"
                                                     data-dismiss="modal">Cancel</button>

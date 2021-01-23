@@ -1,6 +1,7 @@
 <?php
 
     $id = $_POST["id"];
+    $type = $_POST["type"];
     //database details
     $dbHost     = 'localhost';
     $dbUsername = 'root';
@@ -14,7 +15,7 @@
     }
     
     //get user data from the database
-    $query = $db->query("CALL Get_Tasks('$id')");
+    $query = $db->query("CALL Get_Tasks('$id','$type')");
     $rows = array();
     while($r = mysqli_fetch_assoc($query)) {
         $rows[] = $r;
