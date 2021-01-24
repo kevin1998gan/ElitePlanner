@@ -26,6 +26,7 @@ calendar.prototype = {
     },
 
     initEvents: function (session_variables) {
+        $("#userName").text(session_variables.fname + " " + session_variables.lname);
         $.ajax({
             url: 'assets/php/getTasks.php',
             data: {
@@ -50,18 +51,11 @@ calendar.prototype = {
                     var ro = new Object();
                     ro.start = eventData.Due_date;
                     ro.title = eventData.Task_name;
+                    ro.type = eventData.type;
                     ro.sourceObject = eventData;
-                    console.log("converted event", ro);
                     return ro;
                 },
                 displayEventTime: false,
-                eventRender: function (event, element, view) {
-                    if (event.allDay === 'true') {
-                        event.allDay = true;
-                    } else {
-                        event.allDay = false
-                    }
-                },
                 selectable: true,
                 selectHelper: true,
             });
