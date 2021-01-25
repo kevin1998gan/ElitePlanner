@@ -57,6 +57,9 @@
     cursor: pointer;
   }
 
+  .fc-title:hover {
+    text-decoration: underline;
+  }
   
   #calendar {
     max-width: 900px;

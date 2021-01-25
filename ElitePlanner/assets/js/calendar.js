@@ -58,6 +58,14 @@ calendar.prototype = {
                 displayEventTime: false,
                 selectable: true,
                 selectHelper: true,
+                eventClick: function (event) {
+                    console.log(event.title);
+                },
+                eventMouseover: function(event, jsEvent, view) {
+                    console.log("hi");
+                    $('.fc-title').addClass("pointer");
+                },
+                
             });
         });
 
