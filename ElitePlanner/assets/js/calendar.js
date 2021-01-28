@@ -35,39 +35,54 @@ calendar.prototype = {
             type: 'POST'
         }).always(function (resp) {
             rs = JSON.parse(resp);
-            console.log(rs);
             var calendar = $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                height: 550,
+                height: 530,
                 navLinks: true, // can click day/week names to navigate views
                 editable: false,
                 eventLimit: true,
                 events: rs,
-                eventDataTransform: function (eventData){
+                eventDataTransform: function (eventData) {
                     var ro = new Object();
                     ro.start = eventData.Due_date;
                     ro.title = eventData.Task_name;
                     ro.type = eventData.type;
+                    ro.id = eventData.Tasks_Id;
                     ro.sourceObject = eventData;
+
                     return ro;
                 },
                 displayEventTime: false,
                 selectable: true,
                 selectHelper: true,
-                eventClick: function (event) {
-                    console.log(event.title);
+                eventClick: function (event) { //when event is clicked
+                    var date = event.start._i.split(" ");
+                    $('#task').prop("disabled", true);
+                    $('#type').prop("disabled", true);
+                    $('#date').prop("disabled", true);
+                    $('#task_warning').addClass('d-none');
+                    $('#displayModal').modal('show');
+                    $('#task').val(event.title);
+                    $('#type').val(event.type);
+                    $("#date").val(date[0] + "T" + date[1]);
+                    $('#onEditPressed').off("click").on("click", function () { //edit pressed
+                        $('#task').prop("disabled", false);
+                        $('#type').prop("disabled", false);
+                        $('#date').prop("disabled", false);
+                        $('#task_warning').removeClass('d-none');
+                    });
                 },
-                eventMouseover: function(event, jsEvent, view) {
-                    console.log("hi");
+                eventMouseover: function (event, jsEvent, view) {
                     $('.fc-title').addClass("pointer");
                 },
-                
+
             });
         });
+
 
     }
 };
