@@ -23,9 +23,19 @@ calendar.prototype = {
         })
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
+        this.reloadCalendar(session_variables);
     },
 
     initEvents: function (session_variables) {
+
+        elem = document.getElementById("date")
+        var iso = new Date().toISOString();
+        var minDate = iso.substring(0, iso.length - 1);
+        elem.min = minDate;
+
+        elem2 = document.getElementById("date")
+        elem2.min = minDate;
+
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
         $.ajax({
             url: 'assets/php/getTasks.php',
@@ -71,10 +81,64 @@ calendar.prototype = {
                     $("#date").val(date[0] + "T" + date[1]);
                     $('#onEditPressed').off("click").on("click", function () { //edit pressed
                         $('#task').prop("disabled", false);
-                        $('#type').prop("disabled", false);
                         $('#date').prop("disabled", false);
                         $('#task_warning').removeClass('d-none');
+                        $('#onEditPressed').addClass('d-none');
+                        $('#onSavePressed').removeClass('d-none');
+                        $('#onCancelPressed').removeClass('d-none');
                     });
+
+                    $('#onCancelPressed').off("click").on("click", function () { //edit pressed
+                        $('#task').prop("disabled", true);
+                        $('#date').prop("disabled", true);
+                        $('#task_warning').removeClass('d-none');
+                        $('#onEditPressed').removeClass('d-none');
+                        $('#onSavePressed').addClass('d-none');
+                        $('#onCancelPressed').addClass('d-none');
+                    });
+
+                    $('#onSavePressed').off("click").on("click", function () { //edit pressed
+                        var input = document.getElementById("task");
+                        var task_name = $('#task').val();
+                        var message = "";
+                        var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+                        if (task_name === "") {
+                            message = "Please fill this up!"
+                        } else if (!task_name.match(regex)) {
+                            message = "Please use only letters and numbers"
+                        } else {
+                            task_id = event.id;
+                            editedTask = $('#task').val();
+                            editedType = $('#type').val();
+                            editedDate = $("#date").val();
+                            var newEditedDate = editedDate.split("T");
+                            var in_due = newEditedDate[0] + " " + newEditedDate[1];
+
+                            $.ajax({
+                                url: 'assets/php/editTask.php',
+                                data: {
+                                    id: task_id,
+                                    task_name: editedTask,
+                                    type: editedType,
+                                    due_date: in_due
+                                },
+                                type: 'POST',
+                            }).done(function () {
+                                $('#task').prop("disabled", true);
+                                $('#date').prop("disabled", true);
+                                $('#task_warning').removeClass('d-none');
+                                $('#onEditPressed').removeClass('d-none');
+                                $('#onSavePressed').addClass('d-none');
+                                $('#onCancelPressed').addClass('d-none');
+                            });
+                        }
+                        input.setCustomValidity(message);
+
+                    });
+
+                    $('#displayModal').on('hidden.bs.modal', function () {
+
+                    })
                 },
                 eventMouseover: function (event, jsEvent, view) {
                     $('.fc-title').addClass("pointer");
@@ -83,6 +147,11 @@ calendar.prototype = {
             });
         });
 
+
+    },
+    reloadCalendar: function (session_variables) {
+        var  that = this;
+        that.initEvents(session_variables);
 
     }
 };
