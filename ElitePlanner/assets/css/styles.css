@@ -60,6 +60,10 @@
   .fc-title:hover {
     text-decoration: underline;
   }
+
+  .onDeletePressed:hover {
+    color : white;
+  }
   
   #calendar {
     max-width: 900px;

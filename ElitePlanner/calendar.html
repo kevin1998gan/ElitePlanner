@@ -70,8 +70,12 @@
                                 <div class="modal-header" style="background-color: #4c94b2;">
                                     <h4 class="modal-title  font-weight-bold" style="color: white;">Edit
                                     </h4>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        style="color: white;">&times;</button>
+                                    <div class="pull-right">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            style="color: white;"><i class="fa fa-close"></i></button>
+                                        <button id="onEditPressed" class="bg-transparent border-0 close"
+                                            type="button" onclick="return false;"><i class="fa fa-pencil" style="color: #a5c9d8"></i></button>
+                                    </div>
 
 
                                 </div>
@@ -106,18 +110,17 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="submit" type="button" class="btn btn-primary" id="onEditPressed"
-                                        value="Edit" onclick="return false;"></input>
                                     <input type="submit" type="button" class="btn btn-success d-none" id="onSavePressed"
                                         value="Save" onclick="return false;"></input>
-                                    <input type="submit" type="button" class="btn btn-danger d-none" id="onCancelPressed"
-                                        value="Cancel" onclick="return false;"></input>
+                                    <input type="submit" type="button" class="btn btn-danger d-none"
+                                        id="onCancelPressed" value="Cancel" onclick="return false;"></input>
                                 </div>
                                 </form>
                             </div>
 
                         </div>
                     </div>
+
 
                 </div>
             </div>
@@ -131,6 +134,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
     <script src='assets/js/moment.min.js'></script>
     <script src='assets/js/fullcalendar.min.js'></script>
     <script src='assets/js/calendar.js'></script>

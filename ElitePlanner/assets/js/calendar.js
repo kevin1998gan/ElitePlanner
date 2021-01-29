@@ -23,11 +23,9 @@ calendar.prototype = {
         })
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
-        this.reloadCalendar(session_variables);
     },
 
     initEvents: function (session_variables) {
-
         elem = document.getElementById("date")
         var iso = new Date().toISOString();
         var minDate = iso.substring(0, iso.length - 1);
@@ -45,7 +43,14 @@ calendar.prototype = {
             type: 'POST'
         }).always(function (resp) {
             rs = JSON.parse(resp);
-            var calendar = $('#calendar').fullCalendar({
+
+            try {
+                window['calendar'].destroy();
+                $('#calendar').empty();
+            } catch (e) {
+            }
+
+            window['calendar'] = $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
@@ -83,7 +88,6 @@ calendar.prototype = {
                         $('#task').prop("disabled", false);
                         $('#date').prop("disabled", false);
                         $('#task_warning').removeClass('d-none');
-                        $('#onEditPressed').addClass('d-none');
                         $('#onSavePressed').removeClass('d-none');
                         $('#onCancelPressed').removeClass('d-none');
                     });
@@ -92,9 +96,21 @@ calendar.prototype = {
                         $('#task').prop("disabled", true);
                         $('#date').prop("disabled", true);
                         $('#task_warning').removeClass('d-none');
-                        $('#onEditPressed').removeClass('d-none');
                         $('#onSavePressed').addClass('d-none');
                         $('#onCancelPressed').addClass('d-none');
+                        $('#task_warning').addClass('d-none');
+                        $('#task').val(event.title);
+                        $("#date").val(date[0] + "T" + date[1]);
+                    });
+
+                    $('#task').off('keyup keypress').on('keyup keypress', function (e) {
+                        var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+                        var task_name = $('#task').val();
+                        if (task_name.match(regex)) {
+                            $('#task_warning').css('color', 'green');
+                        } else {
+                            $('#task_warning').css('color', 'red');
+                        }
                     });
 
                     $('#onSavePressed').off("click").on("click", function () { //edit pressed
@@ -127,18 +143,21 @@ calendar.prototype = {
                                 $('#task').prop("disabled", true);
                                 $('#date').prop("disabled", true);
                                 $('#task_warning').removeClass('d-none');
-                                $('#onEditPressed').removeClass('d-none');
                                 $('#onSavePressed').addClass('d-none');
                                 $('#onCancelPressed').addClass('d-none');
+                                $('#task_warning').addClass('d-none');
+                                event.title = $('#task').val();
+                                event.start = in_due;
+                                $('#calendar').fullCalendar('updateEvent', event);
+                               
+
                             });
+                            input.setCustomValidity(message);
                         }
-                        input.setCustomValidity(message);
+
 
                     });
 
-                    $('#displayModal').on('hidden.bs.modal', function () {
-
-                    })
                 },
                 eventMouseover: function (event, jsEvent, view) {
                     $('.fc-title').addClass("pointer");
@@ -149,11 +168,7 @@ calendar.prototype = {
 
 
     },
-    reloadCalendar: function (session_variables) {
-        var  that = this;
-        that.initEvents(session_variables);
 
-    }
 };
 
 $(function () {
