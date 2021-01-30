@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Goals</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=76847a0bdd58b19cbe6130ed63efc460">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=b077f3d66f4dd45a76529f02462151f3">
@@ -15,95 +16,188 @@
 
 <body id="page-top">
     <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #375875;">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+            style="background: #375875;">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="index.html">
                     <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-book"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>ElitePlanner</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="tasks.html"><i class="fas fa-tasks"></i><span>Tasks</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="exams.html"><i class="fas fa-pen"></i><span>Exams</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="calendar.html"><i class="far fa-calendar-alt"></i><span>Calendar</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="goals.html"><i class="far fa-dot-circle"></i><span>Goals</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i
+                                class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="tasks.html"><i
+                                class="fas fa-tasks"></i><span>Tasks</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="exams.html"><i
+                                class="fas fa-pen"></i><span>Exams</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="calendar.html"><i
+                                class="far fa-calendar-alt"></i><span>Calendar</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="goals.html"><i
+                                class="far fa-dot-circle"></i><span>Goals</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html"><i
+                                class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
                     <li class="nav-item"></li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <div></div><a href="#"><span class="userName">John Doe</span><img class="rounded-circle" style="width: 32px;height: 32px;" src="assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656"></a></div>
+                        <div></div><a href="#"><span class="userName" id="userName">John Doe</span><img
+                                class="rounded-circle" style="width: 32px;height: 32px;"
+                                src="assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656"></a>
+                    </div>
                 </nav>
                 <div class="container-fluid">
                     <h2 class="font-weight-bold">Academic Goals</h2>
                     <div>
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Current Goals</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Past Goals</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab"
+                                    data-toggle="tab" href="#tab-1">Current Goals</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab"
+                                    href="#tab-2">Past Goals</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="tab-1">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h4>Current Goals<button class="btn btn-primary float-right" type="button" style="background: rgba(255,255,255,0);border-style: none;"><i class="fa fa-trash-o" style="background: rgba(220,0,0,0);color: rgb(231,0,0);font-size: 25px;"></i></button></h4>
-                                        <div
-                                            class="form-group" style="margin-bottom: 0px;"><label>Goal Name:&nbsp;</label><label class="font-weight-bold">March 2020</label></div>
-                                    <div class="form-group"><label>Targeted CGPA:&nbsp;</label><label class="font-weight-bold">3.5</label></div>
-                                    <h4>Efforts Needed</h4>
-                                    <div>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Subject Name</th>
-                                                        <th>Grade Needed</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Java</td>
-                                                        <td>A</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Web Programming</td>
-                                                        <td>B</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div><a class="btn btn-primary float-right" role="button" style="margin-right: 5px;">Edit</a></div>
+                                    <div class="card-body" id="goals">
+                                        <h4>Current Goals<button class="btn btn-primary float-right" type="button"
+                                                style="background: rgba(255,255,255,0);border-style: none;"><i
+                                                    class="fa fa-trash-o"
+                                                    style="background: rgba(220,0,0,0);color: rgb(231,0,0);font-size: 25px;"></i></button>
+                                        </h4>
+                                        <div class="form-group" style="margin-bottom: 0px;"><label>Goal
+                                                Name:&nbsp;</label><label class="font-weight-bold">March 2020</label>
+                                        </div>
+                                        <div class="form-group"><label>Targeted CGPA:&nbsp;</label><label
+                                                class="font-weight-bold">3.5</label></div>
+                                        <h4>Efforts Needed</h4>
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Subject Name</th>
+                                                            <th>Grade Needed</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Java</td>
+                                                            <td>A</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><a class="btn btn-primary float-right" role="button"
+                                                style="margin-right: 5px;">Edit</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" id="noGoals">
+                                        <h4>There are currently no goal created!<button id="createGoals"
+                                                data-toggle="modal" data-target="#createModal"
+                                                class="btn btn-primary float-right" type="button"
+                                                style="background: rgba(255,255,255,0);border-style: none;"><i
+                                                    class="fa fa-plus"
+                                                    style="background: rgba(220,0,0,0);color: rgb(0, 0, 0);font-size: 25px;"></i></button>
+                                        </h4>
+                                    </div>
+
+                                    <!-- Create Modal -->
+                                    <div id="createModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-xl">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #4c94b2;">
+                                                    <h4 class="modal-title  font-weight-bold" style="color: white;">Create New Goal
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        style="color: white;">&times;</button>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="#" id="editForm">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label for="goalName">Goal Name:</label>
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Goal Name" id="goalName" />
+                                                                <li style="list-style-type: none; font-size: 13px"
+                                                                    id="goal_warning">* Please only use letters and
+                                                                    numbers</li>
+
+                                                            </div>
+                                                            <!-- <div class="col">
+                                                                <label for="tcgpa">Target CGPA:</label>
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Target CGPA" id="tcgpa" />
+                                                                <li style="list-style-type: none; font-size: 13px"
+                                                                    id="goal_warning">* Please only use numbers</li>
+                                                            </div> -->
+                                                        </div>
+
+                                                        <div class="row" style="margin-top: 5px;">
+                                                            <div class="col">
+                                                                <label for="start_date">Goal Start Date:</label>
+                                                                <input type="date" id="start_date"
+                                                                    class="form-control" name="start_date">
+                                                            </div>
+
+                                                            <div class="col">
+                                                                <label for="end_date">Goal End Date:</label>
+                                                                <input type="date" id="end_date"
+                                                                    class="form-control" name="end_date">
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                    </form>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" id="onCancelCreate"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <input type="submit" type="button" class="btn btn-success"
+                                                        id="onCreate" value="Create"></input>
+                                                </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane" role="tabpanel" id="tab-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4>Past Goals</h4>
-                                    <div>
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Goal Name</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Goal 1</td>
-                                                        <td>Success</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Goal 2</td>
-                                                        <td>Fail</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                            <div class="tab-pane" role="tabpanel" id="tab-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4>Past Goals</h4>
+                                        <div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Goal Name</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Goal 1</td>
+                                                            <td>Success</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Goal 2</td>
+                                                            <td>Fail</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -112,17 +206,20 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © UTAR 2020</span></div>
-            </div>
-        </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © EPlanner 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/jquery.easing.js">  </script>
     <script src="assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
+    <script src="assets/js/jquery.datatables.js"></script>
+    <script src="assets/js/datatables.bootstrap.js"></script>
+    <script src="assets/js/goals.js"></script>
 </body>
 
 </html>

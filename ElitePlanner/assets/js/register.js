@@ -22,9 +22,9 @@ register.prototype = {
         });
 
         $('#LastName').off('keyup keypress').on('keyup keypress', function (e) {
-            var regex = "^[A-Za-z]+$";
-            var first_name = $('#LastName').val();
-            if (first_name.match(regex)) {
+            var regex = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
+            var last_name = $('#LastName').val();
+            if (last_name.match(regex)) {
                 $('#lastName_warning').css('color', 'green');
             } else {
                 $('#lastName_warning').css('color', 'red');
@@ -94,6 +94,7 @@ register.prototype = {
             var password_message = "";
             var rpassword_message = "";
             var name_regex = "^[A-Za-z]+$";
+            var lname_regex = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
             var email_regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
             var check = document.getElementById("emailAvai_warning").className
             if (fname === "") {
@@ -102,7 +103,7 @@ register.prototype = {
                 fname_message = "Please use only letters"
             } else if (lname === "") {
                 lname_message = "Please fill this up!"
-            } else if (!lname.match(name_regex)) {
+            } else if (!lname.match(lname_regex)) {
                 lname_message = "Please use only letters"
             } else if (email === "") {
                 email_message = "Please fill this up!"
