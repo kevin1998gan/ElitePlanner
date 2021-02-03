@@ -1,5 +1,5 @@
 <?php
-    
+    $id = $_POST["id"];
     //database details
     $dbHost     = 'localhost';
     $dbUsername = 'root';
@@ -13,7 +13,7 @@
     }
     
     //get user data from the database
-    $query = $db->query("CALL getMinMax('$id')");
+    $query = $db->query("CALL getGoals('$id')");
     $rows = "";
     while($r = mysqli_fetch_assoc($query)) {
         $rows = $r;
@@ -21,4 +21,3 @@
     
     //returns data as JSON format
     echo json_encode($rows);
-?>

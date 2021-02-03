@@ -149,11 +149,13 @@ goals.prototype = {
         $.ajax({
             url: 'assets/php/getGoals.php',
             data: {
+                id : session_variables.id
             },
             type: 'POST',
         }).done(function (resp) {
             rs = JSON.parse(resp);  
-
+            console.log(rs);
+            $("#mainName").text(rs.goal_name);
         });
 
 
