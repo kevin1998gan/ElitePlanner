@@ -26,6 +26,21 @@ goals.prototype = {
     },
     initEvents: function (session_variables) {
         var that = this;
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("start_date").setAttribute("min", today);
+
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
         $('#goalName').off('keyup keypress').on('keyup keypress', function (e) {
             var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
@@ -37,7 +52,22 @@ goals.prototype = {
             }
         });
 
+        $('#end_date').off("click").on("click", function () {
+            if ($("#start_date").val() === "") {
+                $("#startMiss_warning").removeClass("d-none");
+                $('#end_date').prop("disabled", true);
+            }
+        });
 
+        $('#start_date').change(function () {
+            if ($("#start_date").val() !== "") {
+                $("#startMiss_warning").addClass("d-none");
+                $('#end_date').prop("disabled", false);
+                elem = document.getElementById("end_date")
+                start = $("#start_date").val();
+                elem.setAttribute("min", start);
+            }
+        });
 
         $('#onCreate').off("click").on("click", function () { //add pressed
             var goal_name = $('#goalName').val();
