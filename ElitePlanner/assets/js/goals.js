@@ -154,9 +154,66 @@ goals.prototype = {
             type: 'POST',
         }).done(function (resp) {
             rs = JSON.parse(resp);  
-            console.log(rs);
+            console.log(rs.goal_id);
             $("#mainName").text(rs.goal_name);
+
+            $.ajax({
+                url: 'assets/php/getUserEfforts.php',
+                data: {
+                    id: rs.goal_id,
+                },
+                type: 'POST'
+            }).always(function (resp) {
+                ds = JSON.parse(resp);
+                console.log(ds);
+
+                try {
+                    window['dt_tblGoals'].destroy();
+                    $('#tblGoals').empty();
+                } catch (e) {
+                }
+
+                window['dt_tblGoals'] = $('#tblGoals').DataTable({
+                    data: ds,
+                    "autoWidth": false,
+                    columns: [
+                        { title: "Effort Name", data: "effort_name"}, //0
+                        { title: "Grade", data: null }, //1
+                        { title: "Credit Hours", data: null }, //1   
+
+                    ],
+                    "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
+                    "columnDefs": [ 
+                        {
+                            'targets': 1,
+                            'className': 'text-center',
+                            'render': function (data, type, row, meta) {
+                               if (data.effort_grade == 1){
+                                return "<p'>A+</p>"
+                               }else if (data.effort_grade == 2){
+                                return "<p'>A</p>"
+                               }
+    
+                            }
+                        }
+
+                    ],
+                    "lengthChange": false,
+                    "searching": true,
+                    "bFilter": false,
+                    "paging": false,
+                    "dom": 't<"class = float-right"p>',
+                    "language": { "emptyTable": "No data available" },
+                    "initComplete": function () {
+                    }
+                });
+
+
+            });
         });
+
+
+
 
 
     }

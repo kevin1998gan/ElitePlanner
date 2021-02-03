@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=b077f3d66f4dd45a76529f02462151f3">
     <link rel="stylesheet" href="assets/css/styles.min.css?h=d71a924458b07cc80ddfb26941cb6133">
-    
+
 </head>
 
 <body id="page-top">
@@ -73,26 +73,17 @@
                                                     style="background: rgba(220,0,0,0);color: rgb(231,0,0);font-size: 25px;"></i></button>
                                         </h4>
                                         <div class="form-group" style="margin-bottom: 0px;"><label>Goal
-                                                Name:&nbsp;</label><label class="font-weight-bold" id = "mainName"></label>
+                                                Name:&nbsp;</label><label class="font-weight-bold"
+                                                id="mainName"></label>
                                         </div>
                                         <div class="form-group"><label>Targeted GPA:&nbsp;</label><label
-                                                class="font-weight-bold" id = "gpa"></label></div>
+                                                class="font-weight-bold" id="gpa"></label></div>
                                         <h4>Efforts Needed</h4>
                                         <div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Subject Name</th>
-                                                            <th>Grade Needed</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Java</td>
-                                                            <td>A</td>
-                                                        </tr>
-                                                    </tbody>
+                                            <div class="table-responsive"
+                                                style="border-top-style: none;border-right-width: 1px;border-right-style: none;border-bottom-style: none;border-left-width: 1px;border-left-style: none;margin-top: 5px;">
+
+                                                <table class="table table-sm w-100" id="tblGoals">
                                                 </table>
                                             </div><a class="btn btn-primary float-right" role="button"
                                                 style="margin-right: 5px;">Edit</a>
@@ -159,7 +150,8 @@
                                                                     id="endntg_warning">* Please fill this up!</li>
                                                                 <li class="d-none"
                                                                     style="list-style-type: none; font-size: 13px; color:red"
-                                                                    id="startMiss_warning">* Please select a start date 1st
+                                                                    id="startMiss_warning">* Please select a start date
+                                                                    1st
                                                                 <li class="d-none"
                                                                     style="list-style-type: none; font-size: 13px; color:red"
                                                                     id="date_warning">* Please ensure that there is at
@@ -190,24 +182,10 @@
                                     <div class="card-body">
                                         <h4>Past Goals</h4>
                                         <div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Goal Name</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Goal 1</td>
-                                                            <td>Success</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Goal 2</td>
-                                                            <td>Fail</td>
-                                                        </tr>
-                                                    </tbody>
+                                            <div class="table-responsive"
+                                                style="border-top-style: none;border-right-width: 1px;border-right-style: none;border-bottom-style: none;border-left-width: 1px;border-left-style: none;margin-top: 5px;">
+
+                                                <table class="table table-sm w-100" id="tblPastGoals">
                                                 </table>
                                             </div>
                                         </div>
