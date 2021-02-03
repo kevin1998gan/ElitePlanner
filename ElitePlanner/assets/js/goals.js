@@ -23,6 +23,7 @@ goals.prototype = {
         })
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
+        this.loadPage(session_variables);
     },
     initEvents: function (session_variables) {
         var that = this;
@@ -39,7 +40,9 @@ goals.prototype = {
         }
 
         today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("start_date").setAttribute("min", today);
+        $("#start_date").val(today);
+        elem = document.getElementById("end_date")
+        elem.setAttribute("min", today);
 
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
         $('#goalName').off('keyup keypress').on('keyup keypress', function (e) {
@@ -49,23 +52,6 @@ goals.prototype = {
                 $('#goal_warning').css('color', 'green');
             } else {
                 $('#goal_warning').css('color', 'red');
-            }
-        });
-
-        $('#end_date').off("click").on("click", function () {
-            if ($("#start_date").val() === "") {
-                $("#startMiss_warning").removeClass("d-none");
-                $('#end_date').prop("disabled", true);
-            }
-        });
-
-        $('#start_date').change(function () {
-            if ($("#start_date").val() !== "") {
-                $("#startMiss_warning").addClass("d-none");
-                $('#end_date').prop("disabled", false);
-                elem = document.getElementById("end_date")
-                start = $("#start_date").val();
-                elem.setAttribute("min", start);
             }
         });
 
@@ -118,6 +104,58 @@ goals.prototype = {
 
 
         });
+
+    },
+
+    loadPage: function (session_variables) {
+        var that = this;
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        $.ajax({
+            url: 'assets/php/getMinMax.php',
+            data: {
+                id : session_variables.id
+            },
+            type: 'POST',
+        }).done(function (resp) {
+            rs = JSON.parse(resp);
+            today = new Date(today);
+            min = new Date(rs.minStart);
+            max = new Date(rs.maxEnd);
+            if (today >= min && today <= max) {
+                $("#goals").removeClass("d-none");
+                $("#noGoals").addClass("d-none");
+            } else {
+                $("#goals").addClass("d-none");
+                $("#noGoals").removeClass("d-none");
+            }
+
+
+        });
+
+
+        $.ajax({
+            url: 'assets/php/getGoals.php',
+            data: {
+            },
+            type: 'POST',
+        }).done(function (resp) {
+            rs = JSON.parse(resp);  
+
+        });
+
 
     }
 };
