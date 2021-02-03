@@ -114,23 +114,28 @@
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background-color: #4c94b2;">
-                                                    <h4 class="modal-title  font-weight-bold" style="color: white;">Create New Goal
+                                                    <h4 class="modal-title  font-weight-bold" style="color: white;">
+                                                        Create New Goal
                                                     </h4>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         style="color: white;">&times;</button>
 
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="#" id="editForm">
+                                                    <form action="#" id="addForm">
                                                         <div class="row">
                                                             <div class="col">
                                                                 <label for="goalName">Goal Name:</label>
                                                                 <input type="text" class="form-control"
                                                                     placeholder="Goal Name" id="goalName" />
+                                                                    <div class = "d-flex flex-row">
                                                                 <li style="list-style-type: none; font-size: 13px"
                                                                     id="goal_warning">* Please only use letters and
                                                                     numbers</li>
-
+                                                                <li class="d-none"
+                                                                    style="list-style-type: none; font-size: 13px; color:red"
+                                                                    id="ntg_warning"> * Please fill this up!</li>
+                                                                        </div>
                                                             </div>
                                                             <!-- <div class="col">
                                                                 <label for="tcgpa">Target CGPA:</label>
@@ -144,18 +149,28 @@
                                                         <div class="row" style="margin-top: 5px;">
                                                             <div class="col">
                                                                 <label for="start_date">Goal Start Date:</label>
-                                                                <input type="date" id="start_date"
-                                                                    class="form-control" name="start_date">
+                                                                <input type="date" id="start_date" class="form-control"
+                                                                    name="start_date" required>
+                                                                <li class="d-none"
+                                                                    style="list-style-type: none; font-size: 13px; color:red"
+                                                                    id="startntg_warning">* Please fill this up!</li>
                                                             </div>
 
                                                             <div class="col">
                                                                 <label for="end_date">Goal End Date:</label>
-                                                                <input type="date" id="end_date"
-                                                                    class="form-control" name="end_date">
+                                                                <input type="date" id="end_date" class="form-control"
+                                                                    name="end_date" required>
+                                                                <li class="d-none"
+                                                                    style="list-style-type: none; font-size: 13px; color:red"
+                                                                    id="endntg_warning">* Please fill this up!</li>
+                                                                <li class="d-none"
+                                                                    style="list-style-type: none; font-size: 13px; color:red"
+                                                                    id="date_warning">* Please ensure that there is at
+                                                                    least 7 weeks between the 2 dates</li>
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                     </form>
 
                                                 </div>
