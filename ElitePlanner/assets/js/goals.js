@@ -118,10 +118,24 @@ goals.prototype = {
 
             // Get the column API object
             var column = window['dt_tblGoals'].column(3);
-
+            $("#editClicked").addClass("d-none");
+            $("#doneClicked").removeClass("d-none");
             // Toggle the visibility
             column.visible(!column.visible());
+
         });
+
+        $('#doneClicked').on('click', function () {
+
+            // Get the column API object
+            var column = window['dt_tblGoals'].column(3);
+            $("#editClicked").removeClass("d-none");
+            $("#doneClicked").addClass("d-none");
+            // Toggle the visibility
+            column.visible(!column.visible());
+
+        });
+
 
     },
 
@@ -182,7 +196,6 @@ goals.prototype = {
                 type: 'POST'
             }).always(function (resp) {
                 ds = JSON.parse(resp);
-
                 try {
                     window['dt_tblGoals'].destroy();
                     $('#tblGoals').empty();
@@ -252,6 +265,50 @@ goals.prototype = {
                     }
                 });
 
+                var info = window["dt_tblGoals"].column(1).data();
+                var allgrade = [];
+                var allhours = [];
+                var totalHours = 0;
+                var totalGradePoint = 0;
+                for (i = 0; i < info.length; i++) {
+                    grade = info[i].effort_grade;
+                    if (grade == 1) {
+                        point = 4.0000;
+                    } else if (grade == 2) {
+                        point = 4.0000;
+                    } else if (grade == 3) {
+                        point = 3.6700;
+                    } else if (grade == 4) {
+                        point = 3.3300;
+                    } else if (grade == 5) {
+                        point = 3.0000;
+                    } else if (grade == 6) {
+                        point = 2.6700;
+                    } else if (grade == 7) {
+                        point = 2.3300;
+                    } else if (grade == 8) {
+                        point = 2.0000;
+                    } else if (grade == 9) {
+                        point = 0;
+                    }
+
+                    allgrade.push(point);
+                }
+
+                for (i = 0; i < info.length; i++) {
+                    hour = parseFloat(info[i].credit_hour);
+                    allhours.push(hour);
+                    totalHours = totalHours + hour;
+                }
+
+                for (i = 0; i < info.length; i++) {
+                    grade_point = allgrade[i] * allhours[i];
+                    totalGradePoint = totalGradePoint + grade_point;
+                }
+
+                var gpa = totalGradePoint/totalHours;
+
+                console.log(gpa.toFixed(4));
 
             });
         });
