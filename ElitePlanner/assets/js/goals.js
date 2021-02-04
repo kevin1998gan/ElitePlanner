@@ -224,6 +224,23 @@ goals.prototype = {
 
         });
 
+        $('#onDelete').off("click").on("click", function () { //delete action
+            var selected = $("#tblGoals tbody tr").closest(".row_selected");
+            var data = window["dt_tblGoals"].row(selected).data();
+            effort_id = data.effort_id;
+            console.log(effort_id);
+            $.ajax({
+                url: 'assets/php/deleteEffort.php',
+                data: {
+                    id: effort_id
+                },
+                type: 'POST',
+            }).done(function () {
+                that.loadPage(session_variables);
+
+            });
+        });
+
 
     },
 
@@ -297,13 +314,14 @@ goals.prototype = {
                         { title: "Effort Name", data: "effort_name" }, //0
                         { title: "Grade", data: null }, //1
                         { title: "Credit Hours", data: "credit_hour", class: "text-center" }, //2  
-                        { title: "Action", data: null, class: "text-center" } //3
+                        { title: "Action", data: null, class: "text-center" }, //3
+                        { title: "Action", data: "effort_id"} //4
                     ],
                     "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
                     "columnDefs": [
                         {
                             "visible": false,
-                            "targets": [3]
+                            "targets": [3,4]
                         },
 
                         {
