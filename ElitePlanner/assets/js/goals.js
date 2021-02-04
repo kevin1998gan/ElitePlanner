@@ -136,6 +136,94 @@ goals.prototype = {
 
         });
 
+        //Form Validation
+        $('#addtask').off('keyup keypress').on('keyup keypress', function (e) {
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            var task_name = $('#addtask').val();
+            if (task_name.match(regex)) {
+                $('#add_task_warning').css('color', 'green');
+            } else {
+                $('#add_task_warning').css('color', 'red');
+            }
+        });
+
+        $('#creditHour').off('keyup keypress').on('keyup keypress', function (e) {
+            var credit_hour = $('#creditHour').val();
+            if (credit_hour.match(/^\d*(\.\d{0,2})?$/)) {
+                $('#hour_task_warning').css('color', 'green');
+            } else {
+                $('#hour_task_warning').css('color', 'red');
+            }
+        });
+        $('#onAdd').off("click").on("click", function () {
+            var input = document.getElementById("addtask");
+            var task_name = $('#addtask').val();
+            var message = "";
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+
+            var hours_input = document.getElementById("creditHour");
+            var credit_hour = $('#creditHour').val();
+            var hour_message = "";
+
+            if (task_name === "") {
+                message = "Please fill this up!"
+            } else if (!task_name.match(regex)) {
+                message = "Please use only letters and numbers"
+            } else if (credit_hour == "") {
+                hour_message = "Please fill this up!"
+            } else {
+                addEffort = $('#addtask').val();
+                addGrade = $('#grade').val();
+                var finalGrade = 0;
+                if (addGrade == "A+") {
+                    finalGrade = 1;
+                } else if (addGrade == "A") {
+                    finalGrade = 2;
+                } else if (addGrade == "A-") {
+                    finalGrade = 3;
+                } else if (addGrade == "B+") {
+                    finalGrade = 4;
+                } else if (addGrade == "B") {
+                    finalGrade = 5;
+                } else if (addGrade == "B-") {
+                    finalGrade = 6;
+                } else if (addGrade == "C+") {
+                    finalGrade = 7;
+                } else if (addGrade == "C-") {
+                    finalGrade = 8;
+                }
+
+
+                addHour = $('#creditHour').val();
+                $.ajax({
+                    url: 'assets/php/getGoals.php',
+                    data: {
+                        id: session_variables.id
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    rs = JSON.parse(resp);
+                    $.ajax({
+                        url: 'assets/php/addEffort.php',
+                        data: {
+                            id: rs.goal_id,
+                            effort: addEffort,
+                            grade: finalGrade,
+                            credit_hour: addHour,
+                        },
+                        type: 'POST',
+                    }).done(function () {
+                        $('#addModal').modal('toggle');
+                        that.loadPage(session_variables);
+                    });
+                });
+            }
+
+            input.setCustomValidity(message);
+            hours_input.setCustomValidity(hour_message);
+
+        });
+
 
     },
 
@@ -306,9 +394,10 @@ goals.prototype = {
                     totalGradePoint = totalGradePoint + grade_point;
                 }
 
-                var gpa = totalGradePoint/totalHours;
+                var gpa = totalGradePoint / totalHours;
 
-                console.log(gpa.toFixed(4));
+                $("#gpa").text(gpa.toFixed(4));
+
 
             });
         });
