@@ -45,6 +45,15 @@ goals.prototype = {
         elem.setAttribute("min", today);
 
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
+
+        $('#tblGoals').off("click").on('click', 'tbody tr', function (e) { // table row onclick
+            $("#tblGoals tbody tr").removeClass('row_selected');
+            $(this).addClass('row_selected');
+            var selected = $("#tblGoals tbody tr").closest(".row_selected");
+            var data = window["dt_tblGoals"].row(selected).data();
+
+        });
+
         $('#goalName').off('keyup keypress').on('keyup keypress', function (e) {
             var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
             var task_name = $('#goalName').val();
@@ -105,6 +114,15 @@ goals.prototype = {
 
         });
 
+        $('#editClicked').on('click', function () {
+
+            // Get the column API object
+            var column = window['dt_tblGoals'].column(3);
+
+            // Toggle the visibility
+            column.visible(!column.visible());
+        });
+
     },
 
     loadPage: function (session_variables) {
@@ -126,7 +144,7 @@ goals.prototype = {
         $.ajax({
             url: 'assets/php/getMinMax.php',
             data: {
-                id : session_variables.id
+                id: session_variables.id
             },
             type: 'POST',
         }).done(function (resp) {
@@ -149,12 +167,11 @@ goals.prototype = {
         $.ajax({
             url: 'assets/php/getGoals.php',
             data: {
-                id : session_variables.id
+                id: session_variables.id
             },
             type: 'POST',
         }).done(function (resp) {
-            rs = JSON.parse(resp);  
-            console.log(rs.goal_id);
+            rs = JSON.parse(resp);
             $("#mainName").text(rs.goal_name);
 
             $.ajax({
@@ -165,7 +182,6 @@ goals.prototype = {
                 type: 'POST'
             }).always(function (resp) {
                 ds = JSON.parse(resp);
-                console.log(ds);
 
                 try {
                     window['dt_tblGoals'].destroy();
@@ -177,25 +193,53 @@ goals.prototype = {
                     data: ds,
                     "autoWidth": false,
                     columns: [
-                        { title: "Effort Name", data: "effort_name"}, //0
+                        { title: "Effort Name", data: "effort_name" }, //0
                         { title: "Grade", data: null }, //1
-                        { title: "Credit Hours", data: null }, //1   
-
+                        { title: "Credit Hours", data: "credit_hour", class: "text-center" }, //2  
+                        { title: "Action", data: null, class: "text-center" } //3
                     ],
                     "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
-                    "columnDefs": [ 
+                    "columnDefs": [
+                        {
+                            "visible": false,
+                            "targets": [3]
+                        },
+
                         {
                             'targets': 1,
                             'className': 'text-center',
                             'render': function (data, type, row, meta) {
-                               if (data.effort_grade == 1){
-                                return "<p'>A+</p>"
-                               }else if (data.effort_grade == 2){
-                                return "<p'>A</p>"
-                               }
-    
+                                if (data.effort_grade == 1) {
+                                    return "<p'>A+</p>"
+                                } else if (data.effort_grade == 2) {
+                                    return "<p'>A</p>"
+                                } else if (data.effort_grade == 3) {
+                                    return "<p'>A-</p>"
+                                } else if (data.effort_grade == 4) {
+                                    return "<p'>B+</p>"
+                                } else if (data.effort_grade == 5) {
+                                    return "<p'>B</p>"
+                                } else if (data.effort_grade == 6) {
+                                    return "<p'>B-</p>"
+                                } else if (data.effort_grade == 7) {
+                                    return "<p'>C+</p>"
+                                } else if (data.effort_grade == 8) {
+                                    return "<p'>C</p>"
+                                } else if (data.effort_grade == 9) {
+                                    return "<p'>F</p>"
+                                }
+
                             }
-                        }
+                        },
+                        {
+                            'targets': 3,
+                            'className': 'text-center',
+                            'render': function (data, type, row, meta) {
+
+                                return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button>'
+
+                            }
+                        },
 
                     ],
                     "lengthChange": false,
