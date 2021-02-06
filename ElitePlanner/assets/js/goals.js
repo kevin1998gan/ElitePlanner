@@ -324,6 +324,7 @@ goals.prototype = {
                     },
                     type: 'POST',
                 }).done(function () {
+                    $('#editModal').modal('toggle');
                     $("#editClicked").removeClass("d-none");
                     $("#doneClicked").addClass("d-none");
                     that.loadPage(session_variables);
@@ -423,7 +424,7 @@ goals.prototype = {
                     data: ds,
                     "autoWidth": false,
                     columns: [
-                        { title: "Effort Name", data: "effort_name" }, //0
+                        { title: "Subject Name", data: "effort_name" }, //0
                         { title: "Grade", data: null }, //1
                         { title: "Credit Hours", data: "credit_hour", class: "text-center" }, //2  
                         { title: "Action", data: null, class: "text-center" }, //3
