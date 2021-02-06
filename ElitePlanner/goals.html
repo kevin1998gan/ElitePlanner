@@ -305,6 +305,76 @@
                 </div>
             </div>
 
+            <!-- Edit Modal -->
+            <div id="editModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #4c94b2;">
+                            <h4 class="modal-title  font-weight-bold" style="color: white;">Edit
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal"
+                                style="color: white;">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" id="editForm">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="edit_task">Effort Name:</label>
+                                        <input type="text" class="form-control" placeholder="Effort Name"
+                                            id="edit_task" />
+                                        <li style="list-style-type: none; font-size: 13px" id="edit_task_warning">*
+                                            Please only use letters
+                                            and
+                                            numbers
+                                        </li>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5px;">
+                                    <div class="col">
+                                        <label for="edit_grade">Grade:</label>
+                                        <select name="type" class="mb-2 form-control" id="edit_grade" required>
+                                            <option value="A+" selected>A+</option>
+                                            <option value="A">A</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B">B</option>
+                                            <option value="B-">B-</option>
+                                            <option value="C+">C+</option>
+                                            <option value="C">C</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="edit_creditHour">Credit Hour:</label>
+                                        <input type="number" class="form-control" placeholder="Credit Hour"
+                                            id="edit_creditHour" step=".01" />
+                                        <li style="list-style-type: none; font-size: 13px" id="edit_hour_task_warning">*
+                                            Please only use numbers
+                                            and not to exceed 2 decimal places
+                                        </li>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" id="onCancelEdit"
+                                        data-dismiss="modal">Cancel</button>
+                                    <input type="submit" type="button" class="btn btn-success" id="onSave"
+                                        value="Save" data-dismiss="modal"></input>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © EPlanner 2020</span></div>

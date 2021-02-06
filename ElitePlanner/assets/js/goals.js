@@ -51,6 +51,29 @@ goals.prototype = {
             $(this).addClass('row_selected');
             var selected = $("#tblGoals tbody tr").closest(".row_selected");
             var data = window["dt_tblGoals"].row(selected).data();
+            effortName = data.effort_name;
+            grade = data.effort_grade;
+            if (grade == 1) {
+                finalGrade = "A+";
+            } else if (grade == 2) {
+                finalGrade = "A";
+            } else if (grade == 3) {
+                finalGrade = "A-";
+            } else if (grade == 4) {
+                finalGrade = "B+";
+            } else if (grade == 5) {
+                finalGrade = "B";
+            } else if (grade == 6) {
+                finalGrade = "B-";
+            } else if (grade == 7) {
+                finalGrade = "C+";
+            } else if (grade == 8) {
+                finalGrade = "C-";
+            }
+            creditHour = data.credit_hour;
+            $("#edit_task").val(effortName);
+            $("#edit_grade").val(finalGrade);
+            $("#edit_creditHour").val(creditHour);
 
         });
 
@@ -147,6 +170,16 @@ goals.prototype = {
             }
         });
 
+        $('#edit_task').off('keyup keypress').on('keyup keypress', function (e) {
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+            var task_name = $('#edit_task').val();
+            if (task_name.match(regex)) {
+                $('#edit_task_warning').css('color', 'green');
+            } else {
+                $('#edit_task_warning').css('color', 'red');
+            }
+        });
+
         $('#creditHour').off('keyup keypress').on('keyup keypress', function (e) {
             var credit_hour = $('#creditHour').val();
             if (credit_hour.match(/^\d*(\.\d{0,2})?$/)) {
@@ -155,6 +188,17 @@ goals.prototype = {
                 $('#hour_task_warning').css('color', 'red');
             }
         });
+
+        $('#edit_creditHour').off('keyup keypress').on('keyup keypress', function (e) {
+            var credit_hour = $('#edit_creditHour').val();
+            if (credit_hour.match(/^\d*(\.\d{0,2})?$/)) {
+                $('#edit_hour_task_warning').css('color', 'green');
+            } else {
+                $('#edit_hour_task_warning').css('color', 'red');
+            }
+        });
+
+
         $('#onAdd').off("click").on("click", function () {
             var input = document.getElementById("addtask");
             var task_name = $('#addtask').val();
@@ -214,9 +258,77 @@ goals.prototype = {
                         type: 'POST',
                     }).done(function () {
                         $('#addModal').modal('toggle');
+                        $("#editClicked").removeClass("d-none");
+                        $("#doneClicked").addClass("d-none");
                         that.loadPage(session_variables);
                     });
                 });
+            }
+
+            input.setCustomValidity(message);
+            hours_input.setCustomValidity(hour_message);
+
+        });
+
+        $('#onSave').off("click").on("click", function () {
+            var input = document.getElementById("edit_task");
+            var task_name = $('#edit_task').val();
+            var message = "";
+            var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
+
+            var hours_input = document.getElementById("edit_creditHour");
+            var credit_hour = $('#edit_creditHour').val();
+            var hour_message = "";
+
+            var selected = $("#tblGoals tbody tr").closest(".row_selected");
+            var data = window["dt_tblGoals"].row(selected).data();
+
+            if (task_name === "") {
+                message = "Please fill this up!"
+            } else if (!task_name.match(regex)) {
+                message = "Please use only letters and numbers"
+            } else if (credit_hour == "") {
+                hour_message = "Please fill this up!"
+            } else {
+                editEffort = $('#edit_task').val();
+                editGrade = $('#edit_grade').val();
+                var finalGrade = 0;
+                if (editGrade == "A+") {
+                    finalGrade = 1;
+                } else if (editGrade == "A") {
+                    finalGrade = 2;
+                } else if (editGrade == "A-") {
+                    finalGrade = 3;
+                } else if (editGrade == "B+") {
+                    finalGrade = 4;
+                } else if (editGrade == "B") {
+                    finalGrade = 5;
+                } else if (editGrade == "B-") {
+                    finalGrade = 6;
+                } else if (editGrade == "C+") {
+                    finalGrade = 7;
+                } else if (editGrade == "C-") {
+                    finalGrade = 8;
+                }
+
+
+                editHour = $('#edit_creditHour').val();
+
+                $.ajax({
+                    url: 'assets/php/updateEffort.php',
+                    data: {
+                        id: data.effort_id,
+                        effort: editEffort,
+                        grade: finalGrade,
+                        credit_hour: editHour,
+                    },
+                    type: 'POST',
+                }).done(function () {
+                    $("#editClicked").removeClass("d-none");
+                    $("#doneClicked").addClass("d-none");
+                    that.loadPage(session_variables);
+                });
+
             }
 
             input.setCustomValidity(message);
@@ -228,7 +340,6 @@ goals.prototype = {
             var selected = $("#tblGoals tbody tr").closest(".row_selected");
             var data = window["dt_tblGoals"].row(selected).data();
             effort_id = data.effort_id;
-            console.log(effort_id);
             $.ajax({
                 url: 'assets/php/deleteEffort.php',
                 data: {
@@ -236,11 +347,12 @@ goals.prototype = {
                 },
                 type: 'POST',
             }).done(function () {
+                $("#editClicked").removeClass("d-none");
+                $("#doneClicked").addClass("d-none");
                 that.loadPage(session_variables);
 
             });
         });
-
 
     },
 
@@ -315,13 +427,13 @@ goals.prototype = {
                         { title: "Grade", data: null }, //1
                         { title: "Credit Hours", data: "credit_hour", class: "text-center" }, //2  
                         { title: "Action", data: null, class: "text-center" }, //3
-                        { title: "Action", data: "effort_id"} //4
+                        { title: "Action", data: "effort_id" } //4
                     ],
                     "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
                     "columnDefs": [
                         {
                             "visible": false,
-                            "targets": [3,4]
+                            "targets": [3, 4]
                         },
 
                         {
@@ -355,7 +467,7 @@ goals.prototype = {
                             'className': 'text-center',
                             'render': function (data, type, row, meta) {
 
-                                return '<button class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button>'
+                                return '<button id = "edit" class = "btn btn-primary edit" style = "padding: 5px" data-toggle="modal" data-target="#editModal">Edit</button><button class = "btn btn-danger delete" style = "margin-left: 5px;padding: 5px" data-toggle="modal" data-target="#deleteModal">Delete</button>'
 
                             }
                         },
