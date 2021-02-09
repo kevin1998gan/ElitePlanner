@@ -127,8 +127,9 @@ goals.prototype = {
                         type: 'POST',
                     }).done(function () {
                         $('#createModal').modal('toggle');
-
-
+                        $('#noGoals').addClass('d-none');
+                        $('#goals').removeClass('d-none');
+                        that.loadPage(session_variables);
                     });
 
                 }
