@@ -110,7 +110,8 @@
                                             <button class="btn btn-success float-right d-none" id="doneClicked"
                                                 style="margin-right: 5px;">Done</button>
                                             <button class="btn btn-success float-right disabled" id="compareClicked"
-                                                style="margin-right: 5px; " data-toggle="modal" data-target="#compareModal"disabled>Compare</button>
+                                                style="margin-right: 5px; " data-toggle="modal"
+                                                data-target="#compareModal" disabled>Compare</button>
                                         </div>
 
                                         <!-- Add Modal -->
@@ -189,7 +190,7 @@
 
                                         <!-- Compare Modal -->
                                         <div id="compareModal" class="modal fade" role="dialog">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-xl">
 
                                                 <!-- Modal content-->
                                                 <div class="modal-content">
@@ -203,7 +204,14 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="#" id="compareForm">
-                                                           
+                                                            <table class="table table-sm w-100" id="compareTable">
+                                                                <tr>
+                                                                    <th>Effort Name</th>
+                                                                    <th>Target Grade</th>
+                                                                    <th>Credit Hour</th>
+                                                                    <th>Actual Grade</th>
+                                                                </tr>
+                                                            </table>
 
                                                     </div>
                                                     <div class="modal-footer">
