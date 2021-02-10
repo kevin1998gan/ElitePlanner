@@ -385,9 +385,11 @@ goals.prototype = {
             today = new Date(today);
             min = new Date(rs.minStart);
             max = new Date(rs.maxEnd);
+
             if (today >= min && today <= max) {
                 $("#goals").removeClass("d-none");
                 $("#noGoals").addClass("d-none");
+                $("#note").text("* Please note that you will only be able to compare after the goal end date set.");
             } else {
                 $("#goals").addClass("d-none");
                 $("#noGoals").removeClass("d-none");
@@ -407,6 +409,21 @@ goals.prototype = {
             rs = JSON.parse(resp);
             $("#mainName").text(rs.goal_name);
             $("#achievedBy").text(rs.goal_endDate);
+            today = new Date(today);
+            endDate = new Date(rs.goal_endDate);
+            var days = today.getTime() - endDate.getTime();
+            var dayDifference = days / (1000 * 3600 * 24);
+
+            if (dayDifference >= 0 && dayDifference <= 21 && rs.status == 0) {
+                $("#goals").removeClass("d-none");
+                $("#noGoals").addClass("d-none");
+                $("#compareClicked").removeClass("disabled");
+                $('#compareClicked').prop('disabled', false);
+                $("#editClicked").addClass("disabled");
+                $('#editClicked').prop('disabled', true);
+                $('#create').addClass("d-none");
+                $("#note").text("* Please compare youur current results to planned results");
+            }
 
             $.ajax({
                 url: 'assets/php/getUserEfforts.php',

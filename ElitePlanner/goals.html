@@ -77,19 +77,23 @@
                                                     Name:&nbsp;</label><label class="font-weight-bold"
                                                     id="mainName"></label>
                                             </div>
-                                            <div class="form-group" style="margin-bottom: 0px;"><label>Targeted GPA:&nbsp;</label><label
-                                                    class="font-weight-bold" id="gpa"></label></div>
+                                            <div class="form-group" style="margin-bottom: 0px;"><label>Targeted
+                                                    GPA:&nbsp;</label><label class="font-weight-bold" id="gpa"></label>
+                                            </div>
 
-                                            <div class="form-group" style="margin-bottom: 0px;" ><label>Achieved by:&nbsp;</label><label
-                                                    class="font-weight-bold" id="achievedBy"></label></div>
+                                            <div class="form-group" style="margin-bottom: 0px;"><label>Achieved
+                                                    by:&nbsp;</label><label class="font-weight-bold"
+                                                    id="achievedBy"></label></div>
                                         </div>
 
-                                        <h4>Efforts Needed <button id="create" class="btn btn-primary float-right"
-                                                type="button"
-                                                style="background: rgba(255,255,255,0);border-style: none;"
-                                                data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"
-                                                    style="background: rgba(220,0,0,0);color: rgb(0, 0, 0);font-size: 25px;"></i>
-                                            </button></h4>
+                                        <div>
+                                            <h4>Efforts Needed <button id="create" class="btn btn-primary float-right"
+                                                    type="button"
+                                                    style="background: rgba(255,255,255,0);border-style: none;"
+                                                    data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"
+                                                        style="background: rgba(220,0,0,0);color: rgb(0, 0, 0);font-size: 25px;"></i>
+                                                </button></h4>
+                                        </div>
 
                                         <div>
                                             <div class="table-responsive"
@@ -97,10 +101,16 @@
 
                                                 <table class="table table-sm w-100" id="tblGoals">
                                                 </table>
-                                            </div><a class="btn btn-primary float-right" id="editClicked" role="button"
-                                                style="margin-right: 5px;">Edit</a>
-                                            <a class="btn btn-success float-right d-none" id="doneClicked" role="button"
-                                                style="margin-right: 5px;">Done</a>
+                                            </div>
+                                            <li id="note" style="list-style-type: none; font-size: 13px">
+
+                                            </li>
+                                            <button class="btn btn-primary float-right" id="editClicked"
+                                                style="margin-right: 5px;">Edit</button>
+                                            <button class="btn btn-success float-right d-none" id="doneClicked"
+                                                style="margin-right: 5px;">Done</button>
+                                            <button class="btn btn-success float-right disabled" id="compareClicked"
+                                                style="margin-right: 5px; " data-toggle="modal" data-target="#compareModal"disabled>Compare</button>
                                         </div>
 
                                         <!-- Add Modal -->
@@ -163,6 +173,37 @@
                                                                 </div>
                                                             </div>
 
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" id="onCancelAdd"
+                                                            data-dismiss="modal">Cancel</button>
+                                                        <input type="submit" type="button" class="btn btn-success"
+                                                            id="onAdd" value="Add"></input>
+                                                    </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Compare Modal -->
+                                        <div id="compareModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background-color: #4c94b2;">
+                                                        <h4 class="modal-title  font-weight-bold" style="color: white;">
+                                                            Compare
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            style="color: white;">&times;</button>
+
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="#" id="compareForm">
+                                                           
 
                                                     </div>
                                                     <div class="modal-footer">
