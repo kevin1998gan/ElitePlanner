@@ -406,6 +406,7 @@ goals.prototype = {
         }).done(function (resp) {
             rs = JSON.parse(resp);
             $("#mainName").text(rs.goal_name);
+            $("#achievedBy").text(rs.goal_endDate);
 
             $.ajax({
                 url: 'assets/php/getUserEfforts.php',
