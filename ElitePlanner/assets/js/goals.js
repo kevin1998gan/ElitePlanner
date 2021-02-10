@@ -420,8 +420,6 @@ goals.prototype = {
                     $('#create').addClass("d-none");
                     $("#note").text("* Please compare your current results to planned results");
 
-
-
                 }
 
                 $.ajax({
@@ -546,6 +544,7 @@ goals.prototype = {
                     var gpa = totalGradePoint / totalHours;
 
                     $("#gpa").text(gpa.toFixed(4));
+                    $("#comparegpa").text(gpa.toFixed(4));
 
                     var grade = "A+";
                     for (i = 0; i < ds.length; i++) {
@@ -587,6 +586,7 @@ goals.prototype = {
                             "</select> </td>" +
                             "</tr>");
                     }
+
 
 
 
