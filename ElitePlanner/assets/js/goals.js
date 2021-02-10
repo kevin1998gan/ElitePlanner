@@ -589,8 +589,6 @@ goals.prototype = {
 
 
 
-
-
                 });
             });
 
