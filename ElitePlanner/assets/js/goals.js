@@ -547,12 +547,48 @@ goals.prototype = {
 
                     $("#gpa").text(gpa.toFixed(4));
 
+                    var grade = "A+";
                     for (i = 0; i < ds.length; i++) {
+
+                        if (ds[i].effort_grade == 1) {
+                            grade = "A+"
+                        } else if (ds[i].effort_grade == 2) {
+                            grade = "A"
+                        } else if (ds[i].effort_grade == 3) {
+                            grade = "A-"
+                        } else if (ds[i].effort_grade == 4) {
+                            grade = "B+"
+                        } else if (ds[i].effort_grade == 5) {
+                            grade = "B"
+                        } else if (ds[i].effort_grade == 6) {
+                            grade = "B-"
+                        } else if (ds[i].effort_grade == 7) {
+                            grade = "C+"
+                        } else if (ds[i].effort_grade == 8) {
+                            grade = "C"
+                        }
+
+
                         $("#compareTable tbody").append(
                             "<tr>" +
-                            "<td>" +ds[i].effort_name+ "</td>" +
+                            "<td>" + ds[i].effort_name + "</td>" +
+                            "<td>" + grade + "</td>" +
+                            "<td>" + ds[i].credit_hour + "</td>" +
+                            "<td>" + "<select name='type' class='mb-2 form-control-sm'id='actualGrade'>" +
+                            "<option value='A+' selected>A+</option>" +
+                            "<option value='A'>A</option>" +
+                            "<option value='A-'>A-</option>" +
+                            "<option value='B+'>B+</option>" +
+                            "<option value='B'>B</option>" +
+                            "<option value='B-'>B-</option>" +
+                            "<option value='C+'>C+</option>" +
+                            "<option value='C'>C</option>" +
+                            "<option value='F'>F</option>" +
+                            "</select> </td>" +
                             "</tr>");
                     }
+
+
 
 
                 });
