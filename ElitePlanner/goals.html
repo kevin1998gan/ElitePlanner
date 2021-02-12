@@ -344,6 +344,55 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
+                                    <!-- Past Goals Modal -->
+                                    <div id="pastGoalModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-xl">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #4c94b2;">
+                                                    <h4 id="goalTitle" class="modal-title  font-weight-bold"
+                                                        style="color: white;">
+
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        style="color: white;">&times;</button>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group" style="margin-bottom: 0px;">
+                                                        <div class="row ml-1">
+                                                            <div class="column">
+                                                                <label>Targeted
+                                                                    GPA:&nbsp;</label><label
+                                                                    class="font-weight-bold"
+                                                                    id="pastgpa"></label>
+                                                            </div>
+                                                            <div class="column ml-5">
+                                                                <label>Actual
+                                                                    GPA:&nbsp;</label><label
+                                                                    class="font-weight-bold"
+                                                                    id="pastactualgpa"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="table-responsive"
+                                                        style="border-top-style: none;border-right-width: 1px;border-right-style: none;border-bottom-style: none;border-left-width: 1px;border-left-style: none;margin-top: 5px;">
+
+                                                        <table class="table table-sm w-100" id="tblPastEfforts">
+                                                        </table>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -457,6 +506,7 @@
     <script src="assets/js/jquery.datatables.js"></script>
     <script src="assets/js/datatables.bootstrap.js"></script>
     <script src="assets/js/goals.js"></script>
+    <script src="assets/js/pastgoals.js"></script>
 </body>
 
 </html>
