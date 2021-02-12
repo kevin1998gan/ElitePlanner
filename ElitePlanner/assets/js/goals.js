@@ -356,6 +356,8 @@ goals.prototype = {
             });
         });
 
+
+
     },
 
     loadPage: function (session_variables) {
@@ -640,6 +642,27 @@ goals.prototype = {
                         $('#actualgpa').text(actual_gpa.toFixed(4));
                     }
 
+
+                    $('#onSubmit').off("click").on("click", function () { //submit action
+                        var actualGPA = $("#actualgpa").text();
+                        var targetGPA = $("#comparegpa").text();
+
+                        $.ajax({
+                            url: 'assets/php/updateGoals.php',
+                            data: {
+                                id: rs.goal_id,
+                                target: targetGPA,
+                                actual: actualGPA
+                            },
+                            type: 'POST',
+                        }).done(function () {
+                            $("#goals").addClass("d-none");
+                            $("#noGoals").removeClass("d-none");
+
+                        });
+
+                    });
+                
                 });
             });
 
