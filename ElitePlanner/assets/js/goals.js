@@ -357,7 +357,6 @@ goals.prototype = {
         });
 
 
-
     },
 
     loadPage: function (session_variables) {
@@ -661,6 +660,20 @@ goals.prototype = {
 
                         });
 
+                    });
+
+                    $('#deleteGoal').off("click").on("click", function () { //delete action
+                        $.ajax({
+                            url: 'assets/php/deleteGoal.php',
+                            data: {
+                                id: rs.goal_id
+                            },
+                            type: 'POST',
+                        }).done(function () {
+                            $("#goals").addClass("d-none");
+                            $("#noGoals").removeClass("d-none");
+            
+                        });
                     });
 
                 });
