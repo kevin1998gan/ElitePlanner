@@ -573,21 +573,72 @@ goals.prototype = {
                             "<td>" + ds[i].effort_name + "</td>" +
                             "<td>" + grade + "</td>" +
                             "<td>" + ds[i].credit_hour + "</td>" +
-                            "<td>" + "<select name='type' class='mb-2 form-control-sm'id='actualGrade'>" +
-                            "<option value='A+' selected>A+</option>" +
-                            "<option value='A'>A</option>" +
-                            "<option value='A-'>A-</option>" +
-                            "<option value='B+'>B+</option>" +
-                            "<option value='B'>B</option>" +
-                            "<option value='B-'>B-</option>" +
-                            "<option value='C+'>C+</option>" +
-                            "<option value='C'>C</option>" +
-                            "<option value='F'>F</option>" +
+                            "<td>" + "<select name='type' class='mb-2 form-control-sm select_actual'id='actualGrade'>" +
+                            "<option value='4.0000' selected>A+</option>" +
+                            "<option value='4.0000'>A</option>" +
+                            "<option value='3.6700'>A-</option>" +
+                            "<option value='3.3300'>B+</option>" +
+                            "<option value='3.0000'>B</option>" +
+                            "<option value='2.6700'>B-</option>" +
+                            "<option value='2.3300'>C+</option>" +
+                            "<option value='2.0000'>C</option>" +
+                            "<option value='0'>F</option>" +
                             "</select> </td>" +
                             "</tr>");
                     }
 
+                    var compare = document.getElementById("compareTable");
+                    var i, s = null, tr, td;
+                    subject = [];
+                    grade = [];
+                    credit = [];
 
+                    for (i = 0; i < compare.rows.length; i++) {
+                        if (compare.rows[i].cells.length > 0) {
+                            subject.push(compare.rows[i].cells[0].innerText);
+
+                        }
+                    }
+                    for (i = 0; i < compare.rows.length; i++) {
+                        if (compare.rows[i].cells.length > 1) {
+                            grade.push(compare.rows[i].cells[1].innerText);
+
+                        }
+                    }
+                    for (i = 0; i < compare.rows.length; i++) {
+                        if (compare.rows[i].cells.length > 2) {
+                            credit.push(compare.rows[i].cells[2].innerText);
+
+                        }
+                    }
+
+                    subject.shift();
+                    grade.shift();
+                    credit.shift();
+
+                    calActualGPA();
+
+                    $(".select_actual").change(function () {
+                        calActualGPA();
+                    });
+
+                    function calActualGPA() {
+                        actual = [];
+                        var allSelect = document.getElementsByClassName("select_actual");
+
+                        for (i = 0; i < allSelect.length; i++) {
+                            actual.push(allSelect[i].value);
+                        }
+
+                        var totalActualGradePoint = 0;
+                        for (i = 0; i < credit.length; i++) {
+                            actual_grade_point = credit[i] * actual[i];
+                            totalActualGradePoint = totalActualGradePoint + actual_grade_point;
+                        }
+                        var actual_gpa = totalActualGradePoint / totalHours;
+
+                        $('#actualgpa').text(actual_gpa.toFixed(4));
+                    }
 
                 });
             });
