@@ -35,6 +35,7 @@ calendar.prototype = {
         elem2.min = minDate;
 
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
+        $("#points").text(session_variables.points);
         $.ajax({
             url: 'assets/php/getTasks.php',
             data: {

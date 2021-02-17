@@ -37,7 +37,7 @@ tasks.prototype = {
         elem2 = document.getElementById("date")
         elem2.min = minDate;
 
-        
+        $("#points").text(session_variables.points);
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
             $("#tblTasks tbody tr").removeClass('row_selected');
             $(this).addClass('row_selected');

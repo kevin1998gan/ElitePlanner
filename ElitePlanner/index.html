@@ -49,7 +49,7 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
+                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1" id ="points">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
                     </div>
                 </nav>
                 <div class="container-fluid">
@@ -181,6 +181,48 @@
                                     output.innerHTML = this.value + "%";
                                 }
                             </script>
+
+                        </div>
+
+                        <!-- Reward Modal -->
+                        <div id="rewardModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-sm">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #4c94b2;">
+                                        <h4 class="modal-title  font-weight-bold" style="color: white;">Daily Login
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="img-thumbnail rounded mx-auto d-block" src = "assets/img/tick.png">
+                                        <p class="text-center">10 points added</p>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Penalty Modal -->
+                        <div id="penaltyModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-sm">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #4c94b2;">
+                                        <h4 class="modal-title  font-weight-bold" style="color: white;">Oops!
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="img-thumbnail rounded mx-auto d-block" src = "assets/img/cross.png">
+                                        <p class="text-center">50 points deducted for not logging in for 1 week</p>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
 
                         </div>
 

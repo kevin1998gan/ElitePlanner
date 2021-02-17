@@ -37,7 +37,7 @@ exams.prototype = {
         elem2 = document.getElementById("date")
         elem2.min = minDate;
  
-        
+        $("#points").text(session_variables.points);
         $('#tblExams').off("click").on('click', 'tbody tr', function (e) { // table row onclick
             $("#tblExams tbody tr").removeClass('row_selected');
             $(this).addClass('row_selected');

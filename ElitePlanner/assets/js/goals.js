@@ -45,7 +45,7 @@ goals.prototype = {
         elem.setAttribute("min", today);
 
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
-
+        $("#points").text(session_variables.points);
         $('#tblGoals').off("click").on('click', 'tbody tr', function (e) { // table row onclick
             $("#tblGoals tbody tr").removeClass('row_selected');
             $(this).addClass('row_selected');

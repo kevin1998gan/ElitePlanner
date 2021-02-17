@@ -22,10 +22,87 @@ index.prototype = {
 
         })
         session_variables = JSON.parse(rs);
+        this.checkPoints(session_variables);
         this.initEvents(session_variables);
         this.loadTasks(session_variables);
     },
 
+    checkPoints: function (session_variables) {
+        last_login = session_variables.login;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today_date = yyyy + '-' + mm + '-' + dd;
+        today = new Date(today_date);
+        last_login = new Date(last_login);
+        var days = today.getTime() - last_login.getTime();
+        var dayDifference = days / (1000 * 3600 * 24);
+        
+        if (dayDifference == 1){
+            $("#rewardModal").modal('toggle');
+        }else if (dayDifference >=7){
+            $("#penaltyModal").modal('toggle');
+        }
+
+        $('#rewardModal').on('hidden.bs.modal', function () {
+            $.ajax({
+                url: 'assets/php/updateLogin.php',
+                data: {
+                    id: session_variables.id,
+                    login: today_date,
+                },
+                type: 'POST',
+            }).done(function () {
+                $.ajax({
+                    url: 'assets/php/updateSession.php',
+                    data: {
+                        login: today_date,
+                        points: 10
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    ds = JSON.parse(resp);
+                    $("#points").text(ds.points);
+
+                });
+
+            });
+        });
+
+        $('#penaltyModal').on('hidden.bs.modal', function () {
+            $.ajax({
+                url: 'assets/php/updateLoginPenalty.php',
+                data: {
+                    id: session_variables.id,
+                    login: today_date,
+                },
+                type: 'POST',
+            }).done(function () {
+                $.ajax({
+                    url: 'assets/php/updateSession.php',
+                    data: {
+                        login: today_date,
+                        points: -50
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    ds = JSON.parse(resp);
+                    $("#points").text(ds.points);
+
+                });
+
+            });
+        });
+
+    },
 
     initEvents: function (session_variables) {
         var that = this;
@@ -34,8 +111,9 @@ index.prototype = {
         var iso = new Date().toISOString();
         var minDate = iso.substring(0, iso.length - 1);
         elem.min = minDate;
-        
+
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
+        $("#points").text(session_variables.points);
 
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
@@ -147,7 +225,7 @@ index.prototype = {
                     type: 'POST',
                 }).done(function () {
                     that.loadTasks(session_variables);
-    
+
                 });
             });
 
@@ -169,7 +247,7 @@ index.prototype = {
                     editedDate = $("#date").val();
                     var newEditedDate = editedDate.split("T");
                     var in_due = newEditedDate[0] + " " + newEditedDate[1];
-    
+
                     $.ajax({
                         url: 'assets/php/editTask.php',
                         data: {
@@ -184,9 +262,9 @@ index.prototype = {
                         that.loadTasks(session_variables);
                     });
                 }
-    
+
                 input.setCustomValidity(message);
-    
+
             });
 
         });
@@ -215,7 +293,7 @@ index.prototype = {
             }
         });
 
-       
+
 
         //Task Progression 
         $('#progressOnClick').off("click").on("click", function () {
