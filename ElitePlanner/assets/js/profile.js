@@ -140,7 +140,7 @@ profile.prototype = {
                 },
                 type: 'POST',
             }).done(function () {
-
+                
             });
         });
 

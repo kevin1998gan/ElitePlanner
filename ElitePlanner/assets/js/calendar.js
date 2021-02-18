@@ -150,7 +150,7 @@ calendar.prototype = {
                                 event.title = $('#task').val();
                                 event.start = in_due;
                                 $('#calendar').fullCalendar('updateEvent', event);
-                               
+
 
                             });
                             input.setCustomValidity(message);
@@ -158,6 +158,12 @@ calendar.prototype = {
 
 
                     });
+
+                    $('#displayModal').on('hidden.bs.modal', function () {
+                        $('#onSavePressed').addClass('d-none');
+                        $('#onCancelPressed').addClass('d-none');
+                        $('#task_warning').addClass('d-none');
+                    })
 
                 },
                 eventMouseover: function (event, jsEvent, view) {
