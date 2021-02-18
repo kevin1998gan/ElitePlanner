@@ -17,29 +17,41 @@
 
 <body id="page-top">
     <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: #375875;">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+            style="background: #375875;">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="index.html">
                     <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-book"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>ELitePlanner</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="tasks.html"><i class="fas fa-tasks"></i><span>Tasks</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="exams.html"><i class="fas fa-pen"></i><span>Exams</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="calendar.html"><i class="far fa-calendar-alt"></i><span>Calendar</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="goals.html"><i class="far fa-dot-circle"></i><span>Goals</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="assets/php/endSession.php"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i
+                                class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="tasks.html"><i
+                                class="fas fa-tasks"></i><span>Tasks</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="exams.html"><i
+                                class="fas fa-pen"></i><span>Exams</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="calendar.html"><i
+                                class="far fa-calendar-alt"></i><span>Calendar</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="goals.html"><i
+                                class="far fa-dot-circle"></i><span>Goals</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/php/endSession.php"><i
+                                class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
                     <li class="nav-item"></li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1" id ="points">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
+                        <div></div><a href="profile.html"><span class="userName" id="userName">John Doe</span><span
+                                class="userName ml-1" id="points">180</span><i class="fa fa-book"
+                                style="color: rgb(189,221,63);"></i></a>
                     </div>
                 </nav>
                 <div class="container-fluid">
@@ -54,38 +66,58 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="col">
-                                                <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" placeholder="John" name="first_name"></div>
+                                                <div class="form-group"><label for="first_name"><strong>First
+                                                            Name</strong></label><input class="form-control" type="text"
+                                                        placeholder="John" name="first_name"></div>
                                             </div>
                                             <div class="col">
-                                                <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" placeholder="Doe" name="last_name"></div>
+                                                <div class="form-group"><label for="last_name"><strong>Last
+                                                            Name</strong></label><input class="form-control" type="text"
+                                                        placeholder="Doe" name="last_name"></div>
                                             </div>
                                         </div>
-                                        <div class="form-group"><button class="btn btn-primary btn-sm float-right" type="submit">Save Settings</button></div>
+                                        <div class="form-group"><button class="btn btn-primary btn-sm float-right"
+                                                type="submit">Save Settings</button></div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <h3 class="text-dark mb-4">Leaderboards</h3>
+                    <h3 class="text-dark mb-4">Coins Shop</h3>
                     <div class="card">
-                        <div class="card-body"></div>
+                        <div class="card-body">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm text-center">
+                                        <img src="assets/img/coin.png" style="height: 150px; width: 150px;">
+                                        <figcaption class = "text-center font-weight-bold">1 Coin - 100 Points</figcaption>
+                                        <button class = "btn btn-primary" id = "buy1coin">Purchase</button> 
+                                    </div>
+                                    <div class="col-sm text-center">
+                                        <img src="assets/img/5coins.png" style="height: 150px; width: 150px;">
+                                        <figcaption class = "text-center font-weight-bold">5 Coins - 450 Points</figcaption>
+                                        <button class = "btn btn-primary" id = "buy5coin">Purchase</button> 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © UTAR 2020</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.easing.js">  </script>
-    <script src="assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
-    <script src="assets/js/jquery.datatables.js"></script>
-    <script src="assets/js/datatables.bootstrap.js"></script>
-    <script src="assets/js/profile.js"></script>
+                <footer class="bg-white sticky-footer">
+                    <div class="container my-auto">
+                        <div class="text-center my-auto copyright"><span>Copyright © EPlanner 2020</span></div>
+                    </div>
+                </footer>
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.easing.js">  </script>
+        <script src="assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
+        <script src="assets/js/jquery.datatables.js"></script>
+        <script src="assets/js/datatables.bootstrap.js"></script>
+        <script src="assets/js/profile.js"></script>
 </body>
 
 </html>
