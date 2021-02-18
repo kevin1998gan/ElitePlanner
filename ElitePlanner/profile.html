@@ -85,13 +85,16 @@
                                             </div>
                                         </div>
                                         <div class="form-group"><button class="btn btn-primary btn-sm float-right"
-                                                type="submit" id = "onSave">Save Settings</button></div>
+                                                type="submit" id="onSave">Save Settings</button></div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <h3 class="text-dark mb-4">Coins Shop</h3>
+
+
+
+                    <h3 class="text-dark mb-4">Coins Shop <span class = "float-right"><small id = "coinNo"></small><img src="assets/img/coin_icon.png" style = "width: 25px; height: 25px;"/></span></h3>
                     <div class="card">
                         <div class="card-body">
                             <div class="card-body">
@@ -114,6 +117,73 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 1 coin Modal Sufficient Points -->
+                <div id="1coinModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #4c94b2;">
+                                <h4 class="modal-title  font-weight-bold" style="color: white;">Are you sure you want to
+                                    exchange 100 points for 1 coin?
+                                </h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="onNo1coin"
+                                    data-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger" id="onYes1coin"
+                                    data-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- 5 coin Modal Sufficient Points -->
+                <div id="5coinModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #4c94b2;">
+                                <h4 class="modal-title  font-weight-bold" style="color: white;">Are you sure you want to
+                                    exchange 450 points for 5 coins?
+                                </h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="onNo5coin"
+                                    data-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger" id="onYes5coin"
+                                    data-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Modal Insufficient Points -->
+                <div id="ModalNoPoints" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #4c94b2;">
+                                <h4 class="modal-title  font-weight-bold" style="color: white;">Oops! You have insufficient points!
+                                </h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <footer class="bg-white sticky-footer">
                     <div class="container my-auto">
                         <div class="text-center my-auto copyright"><span>Copyright © EPlanner 2020</span></div>

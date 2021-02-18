@@ -4,6 +4,7 @@
      $lname = $_POST["in_lname"];
      $points = $_POST["in_points"];
      $login = $_POST["in_login"];
+     $coins = $_POST["in_coin"];
 
 session_start();
 
@@ -12,5 +13,7 @@ $_SESSION["fname"] = $fname;
 $_SESSION["lname"] = $lname;
 $_SESSION["points"] = $points;
 $_SESSION["login"] = $login;
+$_SESSION["coins"] = $coins;
+
 
 echo json_encode($_SESSION);

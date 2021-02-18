@@ -41,7 +41,8 @@ login.prototype = {
                                 in_fname: ds.fname,
                                 in_lname: ds.lname,
                                 in_points: ds.points,
-                                in_login: ds.last_login
+                                in_login: ds.last_login,
+                                in_coin: ds.coins
                             },
                             type: 'POST',
                         }).done(function (resp) {

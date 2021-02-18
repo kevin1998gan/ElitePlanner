@@ -23,6 +23,7 @@ profile.prototype = {
         })
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
+        this.coinsPurchase(session_variables);
     },
 
 
@@ -31,6 +32,7 @@ profile.prototype = {
         $("#points").text(session_variables.points);
         $("#first_name").attr("placeholder", session_variables.fname);
         $("#last_name").attr("placeholder", session_variables.lname);
+        $("#coinNo").text(session_variables.coins);
 
         $('#first_name').off('keyup keypress').on('keyup keypress', function (e) {
             var regex = "^[A-Za-z]+$";
@@ -104,6 +106,27 @@ profile.prototype = {
 
         });
 
+
+    },
+
+    coinsPurchase: function (session_variables) {
+        points = session_variables.points;
+
+        $('#buy1coin').off("click").on("click", function () {
+            if(points>=100){
+                $('#1coinModal').modal('toggle');
+            }else{
+                $('#ModalNoPoints').modal('toggle');
+            }
+        });
+
+        $('#buy5coin').off("click").on("click", function () {
+            if(points>=450){
+                $('#5coinModal').modal('toggle');
+            }else{
+                $('#ModalNoPoints').modal('toggle');
+            }
+        });
 
     }
 
