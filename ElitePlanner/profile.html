@@ -68,16 +68,24 @@
                                             <div class="col">
                                                 <div class="form-group"><label for="first_name"><strong>First
                                                             Name</strong></label><input class="form-control" type="text"
-                                                        placeholder="John" name="first_name"></div>
+                                                        placeholder="John" name="first_name" id="first_name">
+                                                    <li style="list-style-type: none; font-size: 13px"
+                                                        id="firstName_warning">* Please only use letters</li>
+                                                </div>
+
                                             </div>
                                             <div class="col">
                                                 <div class="form-group"><label for="last_name"><strong>Last
                                                             Name</strong></label><input class="form-control" type="text"
-                                                        placeholder="Doe" name="last_name"></div>
+                                                        placeholder="Doe" name="last_name" id="last_name">
+                                                    <li style="list-style-type: none; font-size: 13px"
+                                                        id="lastName_warning">* Please only use letters</li>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="form-group"><button class="btn btn-primary btn-sm float-right"
-                                                type="submit">Save Settings</button></div>
+                                                type="submit" id = "onSave">Save Settings</button></div>
                                     </form>
                                 </div>
                             </div>
@@ -90,15 +98,17 @@
                                 <div class="row">
                                     <div class="col-sm text-center">
                                         <img src="assets/img/coin.png" style="height: 150px; width: 150px;">
-                                        <figcaption class = "text-center font-weight-bold">1 Coin - 100 Points</figcaption>
-                                        <button class = "btn btn-primary" id = "buy1coin">Purchase</button> 
+                                        <figcaption class="text-center font-weight-bold">1 Coin - 100 Points
+                                        </figcaption>
+                                        <button class="btn btn-primary" id="buy1coin">Purchase</button>
                                     </div>
                                     <div class="col-sm text-center">
                                         <img src="assets/img/5coins.png" style="height: 150px; width: 150px;">
-                                        <figcaption class = "text-center font-weight-bold">5 Coins - 450 Points</figcaption>
-                                        <button class = "btn btn-primary" id = "buy5coin">Purchase</button> 
+                                        <figcaption class="text-center font-weight-bold">5 Coins - 450 Points
+                                        </figcaption>
+                                        <button class="btn btn-primary" id="buy5coin">Purchase</button>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
