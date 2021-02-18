@@ -128,6 +128,22 @@ profile.prototype = {
             }
         });
 
+        $('#onYes1coin').off("click").on("click", function () {
+            deductPoints = -100;
+            $.ajax({
+                url: 'assets/php/coinPurchase.php',
+                data: {
+                    id: session_variables.id,
+                    in_points: deductPoints,
+                    in_coins: 1,
+
+                },
+                type: 'POST',
+            }).done(function () {
+
+            });
+        });
+
     }
 
 };
