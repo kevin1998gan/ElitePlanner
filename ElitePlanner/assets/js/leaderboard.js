@@ -51,7 +51,7 @@ leaderboard.prototype = {
                 data: rs,
                 "autoWidth": false,
                 columns: [
-                    { title: "Rank.", data: null, width: "50px"}, //0
+                    { title: "#.", data: null, width: "50px"}, //0
                     { title: "Name", data: null }, //1   
                     { title: "Coins", data: null }, //2
                     { title: "id", data: "user_id" }, //3

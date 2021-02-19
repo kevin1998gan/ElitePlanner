@@ -420,6 +420,31 @@ goals.prototype = {
                     $('#editClicked').prop('disabled', true);
                     $('#create').addClass("d-none");
                     $("#note").text("* Please compare your current results to planned results");
+                } else if (dayDifference > 21 && status == 0 && session_variables.spend == 1) {
+                    $("#goals").removeClass("d-none");
+                    $("#noGoals").addClass("d-none");
+                    $("#compareClicked").removeClass("disabled");
+                    $('#compareClicked').prop('disabled', false);
+                    $("#editClicked").addClass("disabled");
+                    $('#editClicked').prop('disabled', true);
+                    $('#create').addClass("d-none");
+                    $('#spendClicked').prop('disabled', false);
+                    $("#spendClicked").addClass("disabled");
+                    $('#spendClicked').addClass("d-none");
+                    $("#note").text("* You may compare now");
+
+                } else if (dayDifference > 21 && status == 0) {
+                    $("#goals").removeClass("d-none");
+                    $("#noGoals").addClass("d-none");
+                    $("#compareClicked").addClass("disabled");
+                    $('#compareClicked').prop('disabled', true);
+                    $("#editClicked").addClass("disabled");
+                    $('#editClicked').prop('disabled', true);
+                    $('#create').addClass("d-none");
+                    $('#spendClicked').prop('disabled', false);
+                    $("#spendClicked").removeClass("disabled");
+                    $('#spendClicked').removeClass("d-none");
+                    $("#note").text("* Oops! Looks like you took too long to compare your goals");
 
                 }
 
@@ -672,7 +697,58 @@ goals.prototype = {
                         }).done(function () {
                             $("#goals").addClass("d-none");
                             $("#noGoals").removeClass("d-none");
-            
+
+                        });
+                    });
+
+                    $('#spendClicked').off("click").on("click", function () {
+                        points = $("#points").text();
+                        if (points >= 50) {
+                            $('#spendModal').modal('toggle');
+                        } else {
+                            $('#ModalNoPoints').modal('toggle');
+                        }
+                    });
+
+                    $('#onYes').off("click").on("click", function () { //Spend action
+                        $.ajax({
+                            url: 'assets/php/addSpendSession.php',
+                            data: {
+                                spend: 1
+                            },
+                            type: 'POST',
+                        }).done(function () {
+                            deductPoints = -50;
+                            $.ajax({
+                                url: 'assets/php/coinPurchase.php',
+                                data: {
+                                    id: session_variables.id,
+                                    in_points: deductPoints,
+                                    in_coins: 0,
+                                },
+                                type: 'POST',
+                            }).done(function () {
+                                $.ajax({
+                                    url: 'assets/php/updateCoinSession.php',
+                                    data: {
+                                        in_points: deductPoints,
+                                        in_coins: 0,
+
+                                    },
+                                    type: 'POST',
+                                }).done(function (resp) {
+                                    ds = JSON.parse(resp);
+                                    $("#points").text(ds.points);
+                                    $("#compareClicked").removeClass("disabled");
+                                    $('#compareClicked').prop('disabled', false);
+                                    $('#spendClicked').addClass('d-none');
+                                    $("#note").text("* You may compare now");
+                                });
+
+
+                            });
+
+
                         });
                     });
 

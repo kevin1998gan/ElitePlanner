@@ -49,7 +49,9 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1" id ="points">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
+                        <div></div><a href="profile.html"><span class="userName" id="userName">John Doe</span><span
+                                class="userName ml-1" id="points">180</span><i class="fa fa-book"
+                                style="color: rgb(189,221,63);"></i></a>
                     </div>
                 </nav>
                 <div class="container-fluid">
@@ -65,7 +67,8 @@
                             <div class="tab-pane active" role="tabpanel" id="tab-1">
                                 <div class="card">
                                     <div class="card-body" id="goals">
-                                        <h4>Current Goal<button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#deleteGoalModal"
+                                        <h4>Current Goal<button class="btn btn-primary float-right" type="button"
+                                                data-toggle="modal" data-target="#deleteGoalModal"
                                                 style="background: rgba(255,255,255,0);border-style: none;"><i
                                                     class="fa fa-trash-o"
                                                     style="background: rgba(220,0,0,0);color: rgb(231,0,0);font-size: 25px;"></i></button>
@@ -110,6 +113,9 @@
                                             <button class="btn btn-success float-right disabled" id="compareClicked"
                                                 style="margin-right: 5px; " data-toggle="modal"
                                                 data-target="#compareModal" disabled>Compare</button>
+                                            <button class="btn btn-danger float-right disabled d-none" id="spendClicked"
+                                                style="margin-right: 5px; " data-toggle="modal"
+                                                 disabled>Spend</button>
                                         </div>
 
                                         <!-- Add Modal -->
@@ -345,54 +351,52 @@
                                 </div>
                             </div>
 
-                            
-                                    <!-- Past Goals Modal -->
-                                    <div id="pastGoalModal" class="modal fade" role="dialog">
-                                        <div class="modal-dialog modal-xl">
 
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-header" style="background-color: #4c94b2;">
-                                                    <h4 id="goalTitle" class="modal-title  font-weight-bold"
-                                                        style="color: white;">
+                            <!-- Past Goals Modal -->
+                            <div id="pastGoalModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-xl">
 
-                                                    </h4>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        style="color: white;">&times;</button>
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: #4c94b2;">
+                                            <h4 id="goalTitle" class="modal-title  font-weight-bold"
+                                                style="color: white;">
 
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group" style="margin-bottom: 0px;">
-                                                        <div class="row ml-1">
-                                                            <div class="column">
-                                                                <label>Targeted
-                                                                    GPA:&nbsp;</label><label
-                                                                    class="font-weight-bold"
-                                                                    id="pastgpa"></label>
-                                                            </div>
-                                                            <div class="column ml-5">
-                                                                <label>Actual
-                                                                    GPA:&nbsp;</label><label
-                                                                    class="font-weight-bold"
-                                                                    id="pastactualgpa"></label>
-                                                            </div>
-                                                        </div>
+                                            </h4>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                style="color: white;">&times;</button>
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group" style="margin-bottom: 0px;">
+                                                <div class="row ml-1">
+                                                    <div class="column">
+                                                        <label>Targeted
+                                                            GPA:&nbsp;</label><label class="font-weight-bold"
+                                                            id="pastgpa"></label>
                                                     </div>
-                                                    <div class="table-responsive"
-                                                        style="border-top-style: none;border-right-width: 1px;border-right-style: none;border-bottom-style: none;border-left-width: 1px;border-left-style: none;margin-top: 5px;">
-
-                                                        <table class="table table-sm w-100" id="tblPastEfforts">
-                                                        </table>
-
+                                                    <div class="column ml-5">
+                                                        <label>Actual
+                                                            GPA:&nbsp;</label><label class="font-weight-bold"
+                                                            id="pastactualgpa"></label>
                                                     </div>
-
-
                                                 </div>
+                                            </div>
+                                            <div class="table-responsive"
+                                                style="border-top-style: none;border-right-width: 1px;border-right-style: none;border-bottom-style: none;border-left-width: 1px;border-left-style: none;margin-top: 5px;">
+
+                                                <table class="table table-sm w-100" id="tblPastEfforts">
+                                                </table>
 
                                             </div>
+
+
                                         </div>
 
                                     </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -422,6 +426,49 @@
                 </div>
             </div>
 
+            <!-- Spend Modal-->
+            <div id="spendModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #4c94b2;">
+                            <h4 class="modal-title  font-weight-bold" style="color: white;">Are you
+                                sure you want to use 50 points to compare your goal?
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal"
+                                style="color: white;">&times;</button>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" id="onYes" data-dismiss="modal">Yes</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Insufficient Points -->
+            <div id="ModalNoPoints" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #4c94b2;">
+                            <h4 class="modal-title  font-weight-bold" style="color: white;">Oops! You have insufficient
+                                points!
+                            </h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
             <!-- Delete Goal Modal-->
             <div id="deleteGoalModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -439,7 +486,8 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" id="onCancelDelete"
                                 data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-danger" id="deleteGoal" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-danger" id="deleteGoal"
+                                data-dismiss="modal">Yes</button>
                         </div>
                     </div>
 
