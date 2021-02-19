@@ -158,6 +158,34 @@ profile.prototype = {
             });
         });
 
+        $('#onYes5coin').off("click").on("click", function () {
+            deductPoints = -450;
+            $.ajax({
+                url: 'assets/php/coinPurchase.php',
+                data: {
+                    id: session_variables.id,
+                    in_points: deductPoints,
+                    in_coins: 5,
+
+                },
+                type: 'POST',
+            }).done(function () {
+                $.ajax({
+                    url: 'assets/php/updateCoinSession.php',
+                    data: {
+                        in_points: deductPoints,
+                        in_coins: 5,
+    
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    ds = JSON.parse(resp);
+                    $("#points").text(ds.points);
+                    $("#coinNo").text(ds.coins);
+                });
+            });
+        });
+
     }
 
 };
