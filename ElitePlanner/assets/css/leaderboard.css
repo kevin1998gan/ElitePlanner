@@ -1,0 +1,29 @@
+tbody>:nth-child(1){ 
+background-color:gold ;
+   color:black ;
+}
+
+tbody>:nth-child(2){ 
+
+    background-color:silver ;
+    color: black ;
+}
+
+tbody>:nth-child(3){ 
+    background-color: #cd7f32 ;
+    color: black;
+}
+
+.table {
+    border-collapse:collapse;
+    border-radius:6px;
+    -moz-border-radius:6px;
+    background-color: #f2f6f9;
+    color:black;
+    border-radius: 25px;
+}
+
+th{
+    background-color: white;
+}
+    

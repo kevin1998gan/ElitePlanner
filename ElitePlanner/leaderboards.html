@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Calendar</title>
+    <title>Leaderboards</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=76847a0bdd58b19cbe6130ed63efc460">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -15,6 +15,7 @@
     <link href='assets/css/fullcalendar.min.css' rel='stylesheet' />
     <link href='assets/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
     <link href='assets/css/styles.css' rel='stylesheet' />
+    <link href='assets/css/leaderboard.css' rel='stylesheet' />
 </head>
 
 <body id="page-top">
@@ -51,17 +52,28 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1" id ="points">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
+                        <div></div><a href="profile.html"><span class="userName" id="userName">John Doe</span><span
+                                class="userName ml-1" id="points">180</span><i class="fa fa-book"
+                                style="color: rgb(189,221,63);"></i></a>
                     </div>
                 </nav>
                 <div class="container-fluid">
                     <h2 class="font-weight-bold">Leaderboards</h2>
                     <div class="card shadow mb-3">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold">Current Coins: <span><p1 class = "coinNo"></p1> <img src = "assets/img/coin_icon.png"></span> </p>
+                            
+                            <p class="text-primary m-0 font-weight-bold">Current Coins: <span>
+                                    <p1 id="coinNo"></p1> <img src="assets/img/coin_icon.png"><p2 class="text-primary m-0 font-weight-bold float-right">Top 10 Coins Holder</p2>
+                                </span> </p>
+                            
                         </div>
                         <div class="card-body">
-                            
+                            <div class="table-responsive "
+                                style="border-top-style: none;border-right-width: 1px;border-right-style: none;border-bottom-style: none;border-left-width: 1px;border-left-style: none;margin-top: 5px;">
+
+                                <table class="table table-sm w-50 ml-auto mr-auto font-weight-bold" id="tblLeaderboards">
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -78,7 +90,9 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
     <script src="assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
-    <script src='assets/js/moment.min.js'></script>
+    <script src="assets/js/jquery.datatables.js"></script>
+    <script src="assets/js/datatables.bootstrap.js"></script>
+    <script src="assets/js/leaderboard.js"></script>
 </body>
 
 </html>
