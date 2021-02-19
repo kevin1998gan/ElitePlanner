@@ -93,10 +93,10 @@ profile.prototype = {
                         type: 'POST',
                     }).done(function () {
                         ds = JSON.parse(resp);
-                        $("#userName").text(session_variables.fname + " " + session_variables.lname);
-                        $("#points").text(session_variables.points);
-                        $("#first_name").attr("placeholder", session_variables.fname);
-                        $("#last_name").attr("placeholder", session_variables.lname);
+                        $("#userName").text(ds.fname + " " + ds.lname);
+                        $("#points").text(ds.points);
+                        $("#first_name").attr("placeholder", ds.fname);
+                        $("#last_name").attr("placeholder", ds.lname);
                     });
                 });
             }
@@ -110,9 +110,10 @@ profile.prototype = {
     },
 
     coinsPurchase: function (session_variables) {
-        points = session_variables.points;
+        
 
         $('#buy1coin').off("click").on("click", function () {
+            points = $("#points").text();
             if(points>=100){
                 $('#1coinModal').modal('toggle');
             }else{
@@ -121,6 +122,7 @@ profile.prototype = {
         });
 
         $('#buy5coin').off("click").on("click", function () {
+            points = $("#points").text();
             if(points>=450){
                 $('#5coinModal').modal('toggle');
             }else{
@@ -140,7 +142,19 @@ profile.prototype = {
                 },
                 type: 'POST',
             }).done(function () {
-                
+                $.ajax({
+                    url: 'assets/php/updateCoinSession.php',
+                    data: {
+                        in_points: deductPoints,
+                        in_coins: 1,
+    
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    ds = JSON.parse(resp);
+                    $("#points").text(ds.points);
+                    $("#coinNo").text(ds.coins);
+                });
             });
         });
 
