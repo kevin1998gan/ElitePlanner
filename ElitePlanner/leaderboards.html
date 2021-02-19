@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=76847a0bdd58b19cbe6130ed63efc460">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=b077f3d66f4dd45a76529f02462151f3">
+    <link rel="stylesheet" href="assets/css/styles.min.css?h=d71a924458b07cc80ddfb26941cb6133">
+    <link href='assets/css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='assets/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <link href='assets/css/styles.css' rel='stylesheet' />
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+            style="background: #375875;">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="index.html">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-book"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>ELitePlanner</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i
+                                class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="tasks.html"><i
+                                class="fas fa-tasks"></i><span>Tasks</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="exams.html"><i
+                                class="fas fa-pen"></i><span>Exams</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="calendar.html"><i
+                                class="far fa-calendar-alt"></i><span>Calendar</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="goals.html"><i
+                                class="far fa-dot-circle"></i><span>Goals</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/php/endSession.php"><i
+                                class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid">
+                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1" id ="points">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <h2 class="font-weight-bold">Leaderboards</h2>
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold">Current Coins: <span><p1 class = "coinNo"></p1> <img src = "assets/img/coin_icon.png"></span> </p>
+                        </div>
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © EPlanner 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900"></script>
+    <script src='assets/js/moment.min.js'></script>
+</body>
+
+</html>
