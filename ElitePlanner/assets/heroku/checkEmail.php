@@ -13,7 +13,8 @@ $db = new PDO($dsn);
 $email = $_POST['in_email'];
 
 $query = "CALL checkemail('$email')";
-$result = $db->query($query);
-$r = $result->fetch();
+$result = $db->prepare($query);
+$result->execute();
+$r = $result;
 
 echo json_encode($r);
