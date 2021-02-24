@@ -48,7 +48,8 @@ register.prototype = {
                 type: 'POST',
             }).done(function (resp) {
                 ds = JSON.parse(resp);
-                if (ds.count == 0) {
+                console.log(ds);
+                if (ds.dup_count == 0) {
                     $('#emailAvai_warning').addClass("d-none");
                 } else {
                     $('#emailAvai_warning').removeClass("d-none");
