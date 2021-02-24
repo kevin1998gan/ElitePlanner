@@ -1,17 +1,20 @@
 <?php
-    include 'testHeroku.php';
-    $fname = $_POST['in_fname'];
-    $lname = $_POST['in_lname'];
-    $email = $_POST['in_email'];
-    $password = md5($_POST["in_password"]);
+$dsn = "pgsql:"
+    . "host=ec2-3-214-3-162.compute-1.amazonaws.com;"
+    . "dbname=deebgt7apro3pu;"
+    . "user=kriqhejgayywti;"
+    . "port=5432;"
+    . "sslmode=require;"
+    . "password=4f607a0f2d151b2c543417d36e171889bae280575034c526d10c7fdb352f3f7e";
 
-    if($db->connect_error){
-        die("Unable to connect database: " . $db->connect_error);
-    }
-    
-    //update user data from the database
-    $query = $db->query("CALL insert_User('$fname', '$lname', '$email', '$password')");
+$db = new PDO($dsn);
 
 
+$fname = $_POST['in_fname'];
+$lname = $_POST['in_lname'];
+$email = $_POST['in_email'];
+$password = md5($_POST["in_password"]);
 
-?>
+
+$query = "CALL insert_User('$fname', '$lname', '$email', '$password')";
+$result = $db->query($query);
