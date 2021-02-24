@@ -41,7 +41,7 @@ register.prototype = {
             }
 
             $.ajax({
-                url: 'assets/php/checkEmail.php',
+                url: 'assets/heroku/checkEmail.php',
                 data: {
                     in_email: email
                 },
