@@ -9,11 +9,12 @@ $dsn = "pgsql:"
 
 $db = new PDO($dsn);
 //update user data from the database
-$query = $db->query("SELECT * FROM users");
-$rows = array();
-while ($r = mysqli_fetch_assoc($query)) {
-    $rows[] = $r;
+$query = "SELECT * FROM users";
+$result = $db->query($query);
+$data = array();
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $data[] = $row;
 }
 
 //returns data as JSON format
-echo json_encode($rows);
+echo json_encode($data);
