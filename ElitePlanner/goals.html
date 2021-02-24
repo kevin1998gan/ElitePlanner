@@ -66,7 +66,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="tab-1">
                                 <div class="card">
-                                    <div class="card-body" id="goals">
+                                    <div class="card-body d-none" id="goals">
                                         <h4>Current Goal<button class="btn btn-primary float-right" type="button"
                                                 data-toggle="modal" data-target="#deleteGoalModal"
                                                 style="background: rgba(255,255,255,0);border-style: none;"><i
@@ -114,8 +114,7 @@
                                                 style="margin-right: 5px; " data-toggle="modal"
                                                 data-target="#compareModal" disabled>Compare</button>
                                             <button class="btn btn-danger float-right disabled d-none" id="spendClicked"
-                                                style="margin-right: 5px; " data-toggle="modal"
-                                                 disabled>Spend</button>
+                                                style="margin-right: 5px; " data-toggle="modal" disabled>Spend</button>
                                         </div>
 
                                         <!-- Add Modal -->
@@ -238,13 +237,14 @@
                                                         <button type="button" class="btn btn-danger"
                                                             id="onCancelCompare" data-dismiss="modal">Cancel</button>
                                                         <input type="submit" type="button" class="btn btn-success"
-                                                            id="onSubmit" value="Submit"></input>
+                                                            id="onSubmit" data-dismiss="modal" value="Submit"></input>
                                                     </div>
                                                     </form>
                                                 </div>
 
                                             </div>
                                         </div>
+
 
                                     </div>
                                     <div class="card-body d-none" id="noGoals">
@@ -397,6 +397,53 @@
                                 </div>
 
                             </div>
+
+                            <!-- Goals Achieved Reward Modal -->
+                            <div id="goalsAchievedModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-sm">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: #4c94b2;">
+                                            <h4 class="modal-title  font-weight-bold" style="color: white;">
+                                                Congratulations! Goal Achieved!
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="img-thumbnail rounded mx-auto d-block"
+                                                src="assets/img/greenThumbsup.png">
+                                            <p class="text-center">100 points added</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Goals finish Reward Modal -->
+                            <div id="goalsFinishModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-sm">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: #4c94b2;">
+                                            <h4 class="modal-title  font-weight-bold" style="color: white;">
+                                                Keep trying!
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="img-thumbnail rounded mx-auto d-block"
+                                                src="assets/img/keep_trying.png">
+                                            <p class="text-center">50 points added</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -420,7 +420,7 @@ goals.prototype = {
                     $('#editClicked').prop('disabled', true);
                     $('#create').addClass("d-none");
                     $("#note").text("* Please compare your current results to planned results");
-                } else if (dayDifference > 21 && status == 0 && session_variables.spend == 1) {
+                } else if (dayDifference > 21 && rs.status == 0 && session_variables.spend == 1) {
                     $("#goals").removeClass("d-none");
                     $("#noGoals").addClass("d-none");
                     $("#compareClicked").removeClass("disabled");
@@ -433,7 +433,7 @@ goals.prototype = {
                     $('#spendClicked').addClass("d-none");
                     $("#note").text("* You may compare now");
 
-                } else if (dayDifference > 21 && status == 0) {
+                } else if (dayDifference > 21 && rs.status == 0) {
                     $("#goals").removeClass("d-none");
                     $("#noGoals").addClass("d-none");
                     $("#compareClicked").addClass("disabled");
@@ -680,6 +680,55 @@ goals.prototype = {
                             },
                             type: 'POST',
                         }).done(function () {
+                            if (actualGPA >= targetGPA) {
+                                $.ajax({
+                                    url: 'assets/php/goalsAchievedPoints.php',
+                                    data: {
+                                        id: session_variables.id,
+                                        points: 100,
+                                    },
+                                    type: 'POST',
+                                }).done(function () {
+                                    $.ajax({
+                                        url: 'assets/php/updateCoinSession.php',
+                                        data: {
+                                            in_coins: 0,
+                                            in_points: 100
+                                        },
+                                        type: 'POST',
+                                    }).done(function (resp) {
+                                        ds = JSON.parse(resp);
+                                        $("#points").text(ds.points);
+                                        $('#goalsAchievedModal').modal('toggle');
+
+                                    });
+
+                                });
+                            }else{
+                                $.ajax({
+                                    url: 'assets/php/goalsAchievedPoints.php',
+                                    data: {
+                                        id: session_variables.id,
+                                        points: 50,
+                                    },
+                                    type: 'POST',
+                                }).done(function () {
+                                    $.ajax({
+                                        url: 'assets/php/updateCoinSession.php',
+                                        data: {
+                                            in_coins: 0,
+                                            in_points: 50
+                                        },
+                                        type: 'POST',
+                                    }).done(function (resp) {
+                                        ds = JSON.parse(resp);
+                                        $("#points").text(ds.points);
+                                        $('#goalsFinishModal').modal('toggle');
+
+                                    });
+
+                                });
+                            }
                             $("#goals").addClass("d-none");
                             $("#noGoals").removeClass("d-none");
 
