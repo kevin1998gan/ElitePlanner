@@ -122,7 +122,7 @@ register.prototype = {
             } else {
 
                 $.ajax({
-                    url: 'assets/php/register.php',
+                    url: 'assets/heroku/register.php',
                     data: {
                         in_fname: fname,
                         in_lname: lname,

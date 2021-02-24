@@ -1,5 +1,5 @@
 <?php
-
+    include 'testHeroku.php';
     $fname = $_POST['in_fname'];
     $lname = $_POST['in_lname'];
     $email = $_POST['in_email'];
