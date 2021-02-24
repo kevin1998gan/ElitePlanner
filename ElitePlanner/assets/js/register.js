@@ -131,8 +131,7 @@ register.prototype = {
                     },
                     type: 'POST',
                 }).done(function () {
-                    alert("Registered Successfully. You may now login!");
-                    window.location.href = "login.html";
+                    $('#registeredModal').modal('toggle');
                 });
             }
 
@@ -141,6 +140,10 @@ register.prototype = {
             email_input.setCustomValidity(email_message);
             password_input.setCustomValidity(password_message);
             rpassword_input.setCustomValidity(rpassword_message);
+        });
+
+        $('#registeredModal').on('hidden.bs.modal', function () {
+            window.location.href = "login.html";
         });
 
     }

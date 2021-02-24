@@ -10,16 +10,6 @@ login.prototype = {
     initEvents: function () {
         var that = this;
 
-        $.ajax({
-            url: 'assets/heroku/test.php',
-            data: {
-
-            },
-            type: 'POST',
-        }).done(function (resp) {
-            rs = JSON.parse(resp);
-            console.log(rs);
-        });
 
         $('#onLogin').off("click").on("click", function () {
             var email_input = document.getElementById("InputEmail");
