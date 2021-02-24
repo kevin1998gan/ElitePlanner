@@ -11,7 +11,7 @@ $db = new PDO($dsn);
 
 $email = $_POST['in_email'];
 
-$stmt = $db->query("CALL checkemail('$email')");
+$stmt = $db->query("Select checkemail('$email')");
 $r = $stmt->fetch();
 
 
