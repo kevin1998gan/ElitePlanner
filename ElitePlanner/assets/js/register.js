@@ -131,7 +131,7 @@ register.prototype = {
                     },
                     type: 'POST',
                 }).done(function () {
-                    $('#registeredModal').modal('toggle');
+                    window.location.href = "welcome.html";
                 });
             }
 
@@ -142,9 +142,7 @@ register.prototype = {
             rpassword_input.setCustomValidity(rpassword_message);
         });
 
-        $('#registeredModal').on('hidden.bs.modal', function () {
-            window.location.href = "login.html";
-        });
+    
 
     }
 };
