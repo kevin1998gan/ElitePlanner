@@ -14,6 +14,6 @@ $email = $_POST['in_email'];
 
 $query = "CALL checkemail('$email')";
 $result = $db->query($query);
-$r = $result->fetch(PDO::FETCH_ASSOC);
+$r = $result->fetch();
 
 echo json_encode($r);
