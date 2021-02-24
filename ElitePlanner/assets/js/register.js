@@ -49,6 +49,7 @@ register.prototype = {
             }).done(function (resp) {
                 ds = JSON.parse(resp);
                 console.log(resp);
+                console.log(ds);
                 console.log(ds.count);
                 if (ds.count == 0) {
                     $('#emailAvai_warning').addClass("d-none");
