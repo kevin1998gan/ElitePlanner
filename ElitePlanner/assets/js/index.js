@@ -120,8 +120,8 @@ index.prototype = {
             $(this).addClass('row_selected');
             var selected = $("#tblTasks tbody tr").closest(".row_selected");
             var data = window["dt_tblTasks"].row(selected).data();
-            task_name = data.Task_name;
-            progress = data.Progression;
+            task_name = data.task_name;
+            progress = data.progression;
             type = data.type;
             if (type === "Exam") {
                 $("#progressCard").addClass("d-none");
@@ -389,7 +389,7 @@ index.prototype = {
         $('#due_date_no').text("");
         $('#days').text("");
         $.ajax({
-            url: 'assets/php/getTasks.php',
+            url: 'assets/heroku/getTasks.php',
             data: {
                 id: session_variables.id
             },
@@ -408,12 +408,12 @@ index.prototype = {
                 "autoWidth": false,
                 columns: [
                     { title: "No.", data: null, width: "50px" }, //0
-                    { title: "Task ID", data: "Tasks_Id" }, //1   
-                    { title: "Name", data: "Task_name" }, //2
+                    { title: "Task ID", data: "tasks_Id" }, //1   
+                    { title: "Name", data: "task_name" }, //2
                     { title: "Type", data: "type" }, //3
                     { title: "Student Id", data: "user_id" }, //4
-                    { title: "Due Date", data: "Due_date" }, //5
-                    { title: "Progression", data: "Progression" }, //6
+                    { title: "Due Date", data: "due_date" }, //5
+                    { title: "Progression", data: "progression" }, //6
                     { title: "Action", data: null } //7
                 ],
                 "lengthMenu": [[5, 15, 50, -1], [5, 15, 50, "All"]],
