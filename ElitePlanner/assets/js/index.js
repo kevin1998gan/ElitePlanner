@@ -248,7 +248,7 @@ index.prototype = {
                     var in_due = newEditedDate[0] + " " + newEditedDate[1];
 
                     $.ajax({
-                        url: 'assets/php/editTask.php',
+                        url: 'assets/heroku/editTask.php',
                         data: {
                             id: task_id,
                             task_name: editedTask,
@@ -328,7 +328,7 @@ index.prototype = {
                 var newValue = $('#value').text();
                 var pro_value = newValue.split("%");
                 $.ajax({
-                    url: 'assets/php/editProgress.php',
+                    url: 'assets/heroku/editProgress.php',
                     data: {
                         id: task_id,
                         progression: pro_value[0]
