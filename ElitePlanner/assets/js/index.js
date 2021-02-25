@@ -217,7 +217,7 @@ index.prototype = {
                 var data = window["dt_tblTasks"].row(selected).data();
                 task_id = data.Tasks_Id;
                 $.ajax({
-                    url: 'assets/php/deleteTask.php',
+                    url: 'assets/heroku/deleteTask.php',
                     data: {
                         id: task_id
                     },
