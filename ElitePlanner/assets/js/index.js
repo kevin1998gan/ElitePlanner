@@ -45,7 +45,6 @@ index.prototype = {
         last_login = new Date(last_login);
         var days = today.getTime() - last_login.getTime();
         var dayDifference = days / (1000 * 3600 * 24);
-        console.log(dayDifference)
         if (dayDifference >= 1 && dayDifference < 7) {
             $("#rewardModal").modal('toggle');
         } else if (dayDifference >= 7) {
