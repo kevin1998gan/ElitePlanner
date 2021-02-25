@@ -43,8 +43,8 @@ exams.prototype = {
             $(this).addClass('row_selected');
             var selected = $("#tblExams tbody tr").closest(".row_selected");
             var data = window["dt_tblExams"].row(selected).data();
-            task_name = data.Task_name;
-            dateTime = data.Due_date;
+            task_name = data.task_name;
+            dateTime = data.due_date;
             var date = dateTime.split(" ");
             $('#task').val(task_name);
             $("#date").val(date[0] + "T" + date[1]);
@@ -73,7 +73,7 @@ exams.prototype = {
                 var newAddDate = addDate.split("T");
                 var in_due = newAddDate[0] + " " + newAddDate[1];
                 $.ajax({
-                    url: 'assets/php/addTask.php',
+                    url: 'assets/heroku/addTask.php',
                     data: {
                         id: session_variables.id,
                         task_name: addTask,
@@ -112,9 +112,9 @@ exams.prototype = {
         $('#onDelete').off("click").on("click", function () { //delete action
             var selected = $("#tblExams tbody tr").closest(".row_selected");
             var data = window["dt_tblExams"].row(selected).data();
-            task_id = data.Tasks_Id;
+            task_id = data.tasks_Id;
             $.ajax({
-                url: 'assets/php/deleteTask.php',
+                url: 'assets/heroku/deleteTask.php',
                 data: {
                     id: task_id
                 },
@@ -128,9 +128,9 @@ exams.prototype = {
         $('#onDone').off("click").on("click", function () { //done action
             var selected = $("#tblExams tbody tr").closest(".row_selected");
             var data = window["dt_tblExams"].row(selected).data();
-            task_id = data.Tasks_Id;
+            task_id = data.tasks_Id;
             $.ajax({
-                url: 'assets/php/deleteTask.php',
+                url: 'assets/heroku/deleteTask.php',
                 data: {
                     id: task_id
                 },
@@ -153,7 +153,7 @@ exams.prototype = {
             } else {
                 var selected = $("#tblExams tbody tr").closest(".row_selected");
                 var data = window["dt_tblExams"].row(selected).data();
-                task_id = data.Tasks_Id;
+                task_id = data.tasks_Id;
                 editedTask = $('#task').val();
                 editedType = $('#type').val();
                 editedDate = $("#date").val();
@@ -161,7 +161,7 @@ exams.prototype = {
                 var in_due = newEditedDate[0] + " " + newEditedDate[1];
 
                 $.ajax({
-                    url: 'assets/php/editTask.php',
+                    url: 'assets/heroku/editTask.php',
                     data: {
                         id: task_id,
                         task_name: editedTask,
@@ -205,7 +205,7 @@ exams.prototype = {
     loadTasks: function (session_variables) {
         task_type = "Exam"
         $.ajax({
-            url: 'assets/php/getUserTasks.php',
+            url: 'assets/heroku/getUserTasks.php',
             data: {
                 id: session_variables.id,
                 type: task_type
@@ -225,12 +225,12 @@ exams.prototype = {
                 "autoWidth": false,
                 columns: [
                     { title: "No.", data: null, width: "50px" }, //0
-                    { title: "Task ID", data: "Tasks_Id" }, //1   
-                    { title: "Name", data: "Task_name" }, //2
+                    { title: "Task ID", data: "tasks_id" }, //1   
+                    { title: "Name", data: "task_name" }, //2
                     { title: "Type", data: "type" }, //3
                     { title: "Student Id", data: "user_id" }, //4
-                    { title: "Due Date", data: "Due_date" }, //5
-                    { title: "Progression", data: "Progression" }, //6
+                    { title: "Due Date", data: "due_date" }, //5
+                    { title: "Progression", data: "progression" }, //6
                     { title: "Status", data: null }, //7
                     { title: "Action", data: null} //8
                 ],
@@ -252,7 +252,7 @@ exams.prototype = {
                             var dd = String(today.getDate()).padStart(2, '0');
                             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                             var yyyy = today.getFullYear();
-                            var date = data.Due_date;
+                            var date = data.due_date;
                             var d_date = date.split(" ");
                             today = yyyy + '-' + mm + '-' + dd;
                             if (today < d_date[0]) {
