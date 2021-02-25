@@ -215,7 +215,7 @@ index.prototype = {
             $('#onDelete').off("click").on("click", function () { //delete action
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                task_id = data.tasks_Id;
+                task_id = data.tasks_id;
                 $.ajax({
                     url: 'assets/heroku/deleteTask.php',
                     data: {
@@ -240,7 +240,7 @@ index.prototype = {
                 } else {
                     var selected = $("#tblTasks tbody tr").closest(".row_selected");
                     var data = window["dt_tblTasks"].row(selected).data();
-                    task_id = data.tasks_Id;
+                    task_id = data.tasks_id;
                     editedTask = $('#task').val();
                     editedType = $('#type').val();
                     editedDate = $("#date").val();
@@ -324,7 +324,7 @@ index.prototype = {
             if (window['dt_tblTasks'].rows('.row_selected').any()) {
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                var task_id = data.tasks_Id;
+                var task_id = data.tasks_id;
                 var newValue = $('#value').text();
                 var pro_value = newValue.split("%");
                 $.ajax({
@@ -395,9 +395,7 @@ index.prototype = {
             },
             type: 'POST'
         }).always(function (resp) {
-            console.log(resp);
             rs = JSON.parse(resp);
-            console.log(rs);
             try {
                 window['dt_tblTasks'].destroy();
                 $('#tblTasks').empty();
@@ -409,7 +407,7 @@ index.prototype = {
                 "autoWidth": false,
                 columns: [
                     { title: "No.", data: null, width: "50px" }, //0
-                    { title: "Task ID", data: "tasks_Id" }, //1   
+                    { title: "Task ID", data: "tasks_id" }, //1   
                     { title: "Name", data: "task_name" }, //2
                     { title: "Type", data: "type" }, //3
                     { title: "Student Id", data: "user_id" }, //4

@@ -12,5 +12,5 @@ $db = new PDO($dsn);
 $progress = $_POST['progression'];
 $id = $_POST['id'];
 
-$query = "CALL edit_Progress('$id', '$progress')";
+$query = "CALL edit_progress('$id', '$progress')";
 $result = $db->query($query);
