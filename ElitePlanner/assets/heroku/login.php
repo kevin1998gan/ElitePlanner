@@ -14,5 +14,8 @@ $email = $_POST['in_email'];
 $password = md5($_POST["in_password"]);
 
 
-$query = "Select check_user('$email','$password')";
-$result = $db->query($query);
+$stmt = $db->query("Select check_user('$email','$password')");
+$r = $stmt->fetch();
+
+
+echo json_encode($r);
