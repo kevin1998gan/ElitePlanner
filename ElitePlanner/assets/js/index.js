@@ -245,8 +245,8 @@ index.prototype = {
                     editedType = $('#type').val();
                     editedDate = $("#date").val();
                     var newEditedDate = editedDate.split("T");
-                    var in_due = newEditedDate[0] + " " + newEditedDate[1];
-
+                    var noMill = newEditedDate[1].split(".");
+                    var in_due = newEditedDate[0] + " " + noMill[0];
                     $.ajax({
                         url: 'assets/heroku/editTask.php',
                         data: {
