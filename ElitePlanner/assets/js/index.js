@@ -53,7 +53,7 @@ index.prototype = {
 
         $('#rewardModal').on('hidden.bs.modal', function () {
             $.ajax({
-                url: 'assets/php/updateLogin.php',
+                url: 'assets/heroku/updateLogin.php',
                 data: {
                     id: session_variables.id,
                     login: today_date,
@@ -78,7 +78,7 @@ index.prototype = {
 
         $('#penaltyModal').on('hidden.bs.modal', function () {
             $.ajax({
-                url: 'assets/php/updateLoginPenalty.php',
+                url: 'assets/heroku/updateLoginPenalty.php',
                 data: {
                     id: session_variables.id,
                     login: today_date,
