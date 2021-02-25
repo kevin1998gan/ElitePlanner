@@ -13,7 +13,7 @@ $id = $_POST["id"];
 $type = $_POST["type"];
 
 
-$stmt = $db->query("CALL Get_Tasks('$id','$type')");
+$stmt = $db->query("Select * from Get_Tasks('$id','$type')");
 $r = $stmt->fetchAll();
 
 
