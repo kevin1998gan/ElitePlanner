@@ -35,25 +35,25 @@ login.prototype = {
                     console.log(resp);
                     ds = JSON.parse(resp);
                     console.log(ds);
-                    if (ds == null) {
-                        $("#login_warning").removeClass("d-none");
-                    } else {
-                        $.ajax({
-                            url: 'assets/php/loginSession.php',
-                            data: {
-                                in_id: ds.user_id,
-                                in_fname: ds.fname,
-                                in_lname: ds.lname,
-                                in_points: ds.points,
-                                in_login: ds.last_login,
-                                in_coin: ds.coins
-                            },
-                            type: 'POST',
-                        }).done(function (resp) {
-                            rs = JSON.parse(resp);
-                            window.location.href = "index.html";
-                        });
-                    }
+                    // if (ds == null) {
+                    //     $("#login_warning").removeClass("d-none");
+                    // } else {
+                    //     $.ajax({
+                    //         url: 'assets/php/loginSession.php',
+                    //         data: {
+                    //             in_id: ds.user_id,
+                    //             in_fname: ds.fname,
+                    //             in_lname: ds.lname,
+                    //             in_points: ds.points,
+                    //             in_login: ds.last_login,
+                    //             in_coin: ds.coins
+                    //         },
+                    //         type: 'POST',
+                    //     }).done(function (resp) {
+                    //         rs = JSON.parse(resp);
+                    //         window.location.href = "index.html";
+                    //     });
+                    // }
                 });
             }
 
