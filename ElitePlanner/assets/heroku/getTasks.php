@@ -13,10 +13,7 @@ $id = $_POST["id"];
 
 
 $stmt = $db->query("Select * from Get_All_Tasks('$id')");
-$rows = array();
-while ($r = mysqli_fetch_assoc($stmt)) {
-    $rows[] = $r;
-}
+$r = $stmt->fetch();
 
 
 echo json_encode($rows);
