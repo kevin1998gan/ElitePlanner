@@ -112,7 +112,7 @@ exams.prototype = {
         $('#onDelete').off("click").on("click", function () { //delete action
             var selected = $("#tblExams tbody tr").closest(".row_selected");
             var data = window["dt_tblExams"].row(selected).data();
-            task_id = data.tasks_Id;
+            task_id = data.tasks_id;
             $.ajax({
                 url: 'assets/heroku/deleteTask.php',
                 data: {
@@ -128,7 +128,7 @@ exams.prototype = {
         $('#onDone').off("click").on("click", function () { //done action
             var selected = $("#tblExams tbody tr").closest(".row_selected");
             var data = window["dt_tblExams"].row(selected).data();
-            task_id = data.tasks_Id;
+            task_id = data.tasks_id;
             $.ajax({
                 url: 'assets/heroku/deleteTask.php',
                 data: {
@@ -153,12 +153,13 @@ exams.prototype = {
             } else {
                 var selected = $("#tblExams tbody tr").closest(".row_selected");
                 var data = window["dt_tblExams"].row(selected).data();
-                task_id = data.tasks_Id;
+                task_id = data.tasks_id;
                 editedTask = $('#task').val();
                 editedType = $('#type').val();
                 editedDate = $("#date").val();
                 var newEditedDate = editedDate.split("T");
-                var in_due = newEditedDate[0] + " " + newEditedDate[1];
+                var noMill = newEditedDate[1].split(".");
+                var in_due = newEditedDate[0] + " " + noMill[0];
 
                 $.ajax({
                     url: 'assets/heroku/editTask.php',
