@@ -34,7 +34,7 @@ login.prototype = {
                 }).done(function (resp) {
                     console.log(resp);
                     ds = JSON.parse(resp);
-                    console.log(ds);
+                    console.log(ds.fname);
                     // if (ds == null) {
                     //     $("#login_warning").removeClass("d-none");
                     // } else {
