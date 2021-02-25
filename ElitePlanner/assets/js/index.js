@@ -395,8 +395,9 @@ index.prototype = {
             },
             type: 'POST'
         }).always(function (resp) {
+            console.log(resp);
             rs = JSON.parse(resp);
-
+            console.log(rs);
             try {
                 window['dt_tblTasks'].destroy();
                 $('#tblTasks').empty();
