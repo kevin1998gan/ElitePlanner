@@ -130,7 +130,7 @@ index.prototype = {
             }
 
             //countdown timer
-            dateTime = data.Due_date;
+            dateTime = data.due_date;
             var date = dateTime.split(" ");
             mmddyy = date[0].split("-");
             due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
@@ -142,7 +142,7 @@ index.prototype = {
 
             today = mm + '/' + dd + '/' + yyyy;
             // Set the date we're counting down to
-            var countDownDate = new Date(data.Due_date).getTime();
+            var countDownDate = new Date(data.due_date).getTime();
 
             // Update the count down every 1 second
             var x = setInterval(function () {
@@ -215,7 +215,7 @@ index.prototype = {
             $('#onDelete').off("click").on("click", function () { //delete action
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                task_id = data.Tasks_Id;
+                task_id = data.tasks_Id;
                 $.ajax({
                     url: 'assets/heroku/deleteTask.php',
                     data: {
@@ -240,7 +240,7 @@ index.prototype = {
                 } else {
                     var selected = $("#tblTasks tbody tr").closest(".row_selected");
                     var data = window["dt_tblTasks"].row(selected).data();
-                    task_id = data.Tasks_Id;
+                    task_id = data.tasks_Id;
                     editedTask = $('#task').val();
                     editedType = $('#type').val();
                     editedDate = $("#date").val();
@@ -299,7 +299,7 @@ index.prototype = {
             if (window['dt_tblTasks'].rows('.row_selected').any()) {
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                task_name = data.Task_name;
+                task_name = data.task_name;
                 $('#progression').text(task_name);
             } else {
                 $('#progression').text("Please Select a task first. ");
@@ -324,7 +324,7 @@ index.prototype = {
             if (window['dt_tblTasks'].rows('.row_selected').any()) {
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                var task_id = data.Tasks_Id;
+                var task_id = data.tasks_Id;
                 var newValue = $('#value').text();
                 var pro_value = newValue.split("%");
                 $.ajax({
@@ -370,7 +370,7 @@ index.prototype = {
             if ($('#due_date_no').text() > 0) {
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                var due_date = data.Due_date;
+                var due_date = data.due_date;
                 var dateToMatch = due_date.split(" ");
                 window['dt_tblTasks'].search(dateToMatch[0]).draw();
 
