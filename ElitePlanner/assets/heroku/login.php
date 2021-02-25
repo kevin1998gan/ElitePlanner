@@ -14,5 +14,5 @@ $email = $_POST['in_email'];
 $password = md5($_POST["in_password"]);
 
 
-$query = "Select check_User('$email','$password')";
+$query = "Select check_user('$email','$password')";
 $result = $db->query($query);
