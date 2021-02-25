@@ -75,7 +75,7 @@ tasks.prototype = {
                 progress = 0;
                 var newAddDate = addDate.split("T");
                 var noMill = newAddDate[1].split(".");
-                var in_due = newAddDate[0] + + " " + noMill[0];
+                var in_due = newAddDate[0] + " " + noMill[0];
                 $.ajax({
                     url: 'assets/heroku/addTask.php',
                     data: {
