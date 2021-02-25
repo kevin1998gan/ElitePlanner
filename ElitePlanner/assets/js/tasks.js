@@ -43,9 +43,9 @@ tasks.prototype = {
             $(this).addClass('row_selected');
             var selected = $("#tblTasks tbody tr").closest(".row_selected");
             var data = window["dt_tblTasks"].row(selected).data();
-            task_name = data.Task_name;
-            dateTime = data.Due_date;
-            progress = data.Progression;
+            task_name = data.task_name;
+            dateTime = data.due_date;
+            progress = data.progression;
             var date = dateTime.split(" ");
             $('#task').val(task_name);
             $("#date").val(date[0] + "T" + date[1]);
@@ -76,7 +76,7 @@ tasks.prototype = {
                 var newAddDate = addDate.split("T");
                 var in_due = newAddDate[0] + " " + newAddDate[1];
                 $.ajax({
-                    url: 'assets/php/addTask.php',
+                    url: 'assets/heroku/addTask.php',
                     data: {
                         id: session_variables.id,
                         task_name: addTask,
@@ -115,9 +115,9 @@ tasks.prototype = {
         $('#onDelete').off("click").on("click", function () { //delete action
             var selected = $("#tblTasks tbody tr").closest(".row_selected");
             var data = window["dt_tblTasks"].row(selected).data();
-            task_id = data.Tasks_Id;
+            task_id = data.tasks_id;
             $.ajax({
-                url: 'assets/php/deleteTask.php',
+                url: 'assets/heroku/deleteTask.php',
                 data: {
                     id: task_id
                 },
@@ -140,7 +140,7 @@ tasks.prototype = {
             } else {
                 var selected = $("#tblTasks tbody tr").closest(".row_selected");
                 var data = window["dt_tblTasks"].row(selected).data();
-                task_id = data.Tasks_Id;
+                task_id = data.tasks_id;
                 editedTask = $('#task').val();
                 editedType = $('#type').val();
                 editedDate = $("#date").val();
@@ -148,7 +148,7 @@ tasks.prototype = {
                 var in_due = newEditedDate[0] + " " + newEditedDate[1];
 
                 $.ajax({
-                    url: 'assets/php/editTask.php',
+                    url: 'assets/heroku/editTask.php',
                     data: {
                         id: task_id,
                         task_name: editedTask,
@@ -164,7 +164,7 @@ tasks.prototype = {
                 var newValue = $('#value').text();
                 var pro_value = newValue.split("%");
                 $.ajax({
-                    url: 'assets/php/editProgress.php',
+                    url: 'assets/heroku/editProgress.php',
                     data: {
                         id: task_id,
                         progression: pro_value[0]
@@ -233,12 +233,12 @@ tasks.prototype = {
                 "autoWidth": false,
                 columns: [
                     { title: "No.", data: null, width: "50px" }, //0
-                    { title: "Task ID", data: "Tasks_Id" }, //1   
-                    { title: "Name", data: "Task_name" }, //2
+                    { title: "Task ID", data: "tasks_id" }, //1   
+                    { title: "Name", data: "task_name" }, //2
                     { title: "Type", data: "type" }, //3
                     { title: "Student Id", data: "user_id" }, //4
-                    { title: "Due Date", data: "Due_date" }, //5
-                    { title: "Progression(%)", data: "Progression" }, //6
+                    { title: "Due Date", data: "due_date" }, //5
+                    { title: "Progression(%)", data: "progression" }, //6
                     { title: "Status", data: null }, //7
                     { title: "Action", data: null } //8
                 ],
@@ -257,12 +257,12 @@ tasks.prototype = {
                         'className': 'text-center',
                         'render': function (data, type, row, meta) {
                             var now = new Date().getTime();
-                            var due_date = new Date(data.Due_date).getTime();
-                            if (data.Progression >= 100) {
+                            var due_date = new Date(data.due_date).getTime();
+                            if (data.progression >= 100) {
                                 return "<p style ='color:green'>Complete</p>"
                             } else if (now > due_date) {
                                 return "<p style ='color:red'>Overdue</p>"
-                            } else if (data.Progression < 100) {
+                            } else if (data.progression < 100) {
                                 return "<p style ='color:black'>Incomplete</p>"
                             }
 
