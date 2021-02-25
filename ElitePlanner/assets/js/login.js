@@ -24,7 +24,7 @@ login.prototype = {
                 email_message = "Please use correct email format"
             } else {
                 $.ajax({
-                    url: 'assets/php/login.php',
+                    url: 'assets/heroku/login.php',
                     data: {
                         in_email: email,
                         in_password: password,
@@ -32,7 +32,9 @@ login.prototype = {
                     },
                     type: 'POST',
                 }).done(function (resp) {
+                    console.log(resp);
                     ds = JSON.parse(resp);
+                    console.log(ds);
                     if (ds == null) {
                         $("#login_warning").removeClass("d-none");
                     } else {
