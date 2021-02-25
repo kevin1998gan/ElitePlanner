@@ -13,7 +13,7 @@ $id = $_POST["id"];
 
 
 $stmt = $db->query("Select * from Get_All_Tasks('$id')");
-$r = $stmt->fetch();
+$r = $stmt->fetchAll();
 
 
-echo json_encode($rows);
+echo json_encode($r);
