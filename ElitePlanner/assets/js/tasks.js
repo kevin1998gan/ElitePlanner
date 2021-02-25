@@ -213,7 +213,7 @@ tasks.prototype = {
     loadTasks: function (session_variables) {
         task_type = "Task";
         $.ajax({
-            url: 'assets/php/getUserTasks.php',
+            url: 'assets/heroku/getUserTasks.php',
             data: {
                 id: session_variables.id,
                 type : task_type
@@ -221,7 +221,6 @@ tasks.prototype = {
             type: 'POST'
         }).always(function (resp) {
             rs = JSON.parse(resp);
-
             try {
                 window['dt_tblTasks'].destroy();
                 $('#tblTasks').empty();
