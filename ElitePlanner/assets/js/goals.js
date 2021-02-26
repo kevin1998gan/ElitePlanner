@@ -245,7 +245,7 @@ goals.prototype = {
 
                 addHour = $('#creditHour').val();
                 $.ajax({
-                    url: 'assets/php/getGoals.php',
+                    url: 'assets/heroku/getGoals.php',
                     data: {
                         id: session_variables.id
                     },
