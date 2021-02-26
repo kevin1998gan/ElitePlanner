@@ -380,7 +380,7 @@ goals.prototype = {
         today = yyyy + '-' + mm + '-' + dd;
 
         $.ajax({
-            url: 'assets/php/getMinMax.php',
+            url: 'assets/heroku/getMinMax.php',
             data: {
                 id: session_variables.id
             },
