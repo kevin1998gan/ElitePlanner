@@ -35,7 +35,7 @@ pastGoals.prototype = {
 
 
             $.ajax({
-                url: 'assets/php/getUserEfforts.php',
+                url: 'assets/heroku/getUserEfforts.php',
                 data: {
                     id: data.goal_id
                 },
@@ -105,7 +105,7 @@ pastGoals.prototype = {
     },
     loadPastGoals: function (session_variables) {
         $.ajax({
-            url: 'assets/php/getPastGoals.php',
+            url: 'assets/heroku/getPastGoals.php',
             data: {
                 id: session_variables.id
             },
@@ -123,8 +123,8 @@ pastGoals.prototype = {
                 "autoWidth": false,
                 columns: [
                     { title: "Goal Name", data: "goal_name" }, //0
-                    { title: "Start Date", data: "goal_startDate" }, //1
-                    { title: "End Date", data: "goal_endDate" }, //2  
+                    { title: "Start Date", data: "goal_startdate" }, //1
+                    { title: "End Date", data: "goal_enddate" }, //2  
                     { title: "Status", data: null }, //3
                     { title: "Goalid", data: "goal_id" } //4
                 ],
