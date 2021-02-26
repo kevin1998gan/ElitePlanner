@@ -710,7 +710,7 @@ goals.prototype = {
                                 });
                             }else{
                                 $.ajax({
-                                    url: 'assets/php/goalsAchievedPoints.php',
+                                    url: 'assets/heroku/goalsAchievedPoints.php',
                                     data: {
                                         id: session_variables.id,
                                         points: 30,
@@ -742,7 +742,7 @@ goals.prototype = {
 
                     $('#deleteGoal').off("click").on("click", function () { //delete action
                         $.ajax({
-                            url: 'assets/php/deleteGoal.php',
+                            url: 'assets/heroku/deleteGoal.php',
                             data: {
                                 id: rs.goal_id
                             },
