@@ -676,7 +676,7 @@ goals.prototype = {
                         var targetGPA = $("#comparegpa").text();
 
                         $.ajax({
-                            url: 'assets/php/updateGoals.php',
+                            url: 'assets/heroku/updateGoals.php',
                             data: {
                                 id: rs.goal_id,
                                 target: targetGPA,
