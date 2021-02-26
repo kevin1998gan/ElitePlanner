@@ -12,7 +12,7 @@ $db = new PDO($dsn);
 $id = $_POST['id'];
 
 
-$stmt = $db->query("Select * from getPastGoals('$id')");
+$stmt = $db->query("Select * from getLeaderboards()");
 $r = $stmt->fetchAll();
 
 

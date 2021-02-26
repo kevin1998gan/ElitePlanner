@@ -34,7 +34,7 @@ leaderboard.prototype = {
 
     loadLeaderboard: function (session_variables) {
         $.ajax({
-            url: 'assets/php/getLeaderboards.php',
+            url: 'assets/heroku/getLeaderboards.php',
             data: {
 
             },
