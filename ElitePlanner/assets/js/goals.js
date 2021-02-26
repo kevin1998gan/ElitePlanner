@@ -87,6 +87,10 @@ goals.prototype = {
             }
         });
 
+        $('#end_date').change(function() {
+            $("#date_warning").removeClass("d-none");
+        });
+
         $('#onCreate').off("click").on("click", function () { //add pressed
             var goal_name = $('#goalName').val();
             var start_date = $("#start_date").val();
