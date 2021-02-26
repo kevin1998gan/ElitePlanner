@@ -709,7 +709,7 @@ goals.prototype = {
                                     url: 'assets/php/goalsAchievedPoints.php',
                                     data: {
                                         id: session_variables.id,
-                                        points: 50,
+                                        points: 30,
                                     },
                                     type: 'POST',
                                 }).done(function () {
@@ -717,7 +717,7 @@ goals.prototype = {
                                         url: 'assets/php/updateCoinSession.php',
                                         data: {
                                             in_coins: 0,
-                                            in_points: 50
+                                            in_points: 30
                                         },
                                         type: 'POST',
                                     }).done(function (resp) {
