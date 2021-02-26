@@ -320,7 +320,7 @@ goals.prototype = {
                 editHour = $('#edit_creditHour').val();
 
                 $.ajax({
-                    url: 'assets/php/updateEffort.php',
+                    url: 'assets/heroku/updateEffort.php',
                     data: {
                         id: data.effort_id,
                         effort: editEffort,
@@ -347,7 +347,7 @@ goals.prototype = {
             var data = window["dt_tblGoals"].row(selected).data();
             effort_id = data.effort_id;
             $.ajax({
-                url: 'assets/php/deleteEffort.php',
+                url: 'assets/heroku/deleteEffort.php',
                 data: {
                     id: effort_id
                 },
