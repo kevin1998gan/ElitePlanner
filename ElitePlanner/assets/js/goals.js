@@ -329,7 +329,6 @@ goals.prototype = {
                     },
                     type: 'POST',
                 }).done(function () {
-                    $('#editModal').modal('toggle');
                     $("#editClicked").removeClass("d-none");
                     $("#doneClicked").addClass("d-none");
                     that.loadPage(session_variables);
