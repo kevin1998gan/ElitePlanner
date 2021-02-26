@@ -253,7 +253,7 @@ goals.prototype = {
                 }).done(function (resp) {
                     rs = JSON.parse(resp);
                     $.ajax({
-                        url: 'assets/php/addEffort.php',
+                        url: 'assets/heroku/addEffort.php',
                         data: {
                             id: rs.goal_id,
                             effort: addEffort,
