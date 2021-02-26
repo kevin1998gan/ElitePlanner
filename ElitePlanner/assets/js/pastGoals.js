@@ -19,7 +19,6 @@ pastGoals.prototype = {
                     rs = text;
                 }
             }
-            //test
         })
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
