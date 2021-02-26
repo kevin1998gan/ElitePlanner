@@ -128,6 +128,7 @@ calendar.prototype = {
                             editedTask = $('#task').val();
                             editedType = $('#type').val();
                             editedDate = $("#date").val();
+                            var newEditedDate = editedDate.split("T");
                             var noMill = newEditedDate[1].split(".");
                             var in_due = newEditedDate[0] + " " + noMill[0];
 
