@@ -686,7 +686,7 @@ goals.prototype = {
                         }).done(function () {
                             if (actualGPA >= targetGPA) {
                                 $.ajax({
-                                    url: 'assets/php/goalsAchievedPoints.php',
+                                    url: 'assets/heroku/goalsAchievedPoints.php',
                                     data: {
                                         id: session_variables.id,
                                         points: 100,
