@@ -37,7 +37,7 @@ calendar.prototype = {
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
         $("#points").text(session_variables.points);
         $.ajax({
-            url: 'assets/php/getTasks.php',
+            url: 'assets/heroku/getTasks.php',
             data: {
                 id: session_variables.id,
             },
@@ -64,10 +64,10 @@ calendar.prototype = {
                 events: rs,
                 eventDataTransform: function (eventData) {
                     var ro = new Object();
-                    ro.start = eventData.Due_date;
-                    ro.title = eventData.Task_name;
+                    ro.start = eventData.due_date;
+                    ro.title = eventData.task_name;
                     ro.type = eventData.type;
-                    ro.id = eventData.Tasks_Id;
+                    ro.id = eventData.tasks_id;
                     ro.sourceObject = eventData;
 
                     return ro;
@@ -128,11 +128,11 @@ calendar.prototype = {
                             editedTask = $('#task').val();
                             editedType = $('#type').val();
                             editedDate = $("#date").val();
-                            var newEditedDate = editedDate.split("T");
-                            var in_due = newEditedDate[0] + " " + newEditedDate[1];
+                            var noMill = newEditedDate[1].split(".");
+                            var in_due = newEditedDate[0] + " " + noMill[0];
 
                             $.ajax({
-                                url: 'assets/php/editTask.php',
+                                url: 'assets/heroku/editTask.php',
                                 data: {
                                     id: task_id,
                                     task_name: editedTask,
