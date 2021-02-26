@@ -74,7 +74,7 @@ profile.prototype = {
             } else {
 
                 $.ajax({
-                    url: 'assets/php/updateUser.php',
+                    url: 'assets/heroku/updateUser.php',
                     data: {
                         id: session_variables.id,
                         in_fname: fname,
@@ -133,7 +133,7 @@ profile.prototype = {
         $('#onYes1coin').off("click").on("click", function () {
             deductPoints = -100;
             $.ajax({
-                url: 'assets/php/coinPurchase.php',
+                url: 'assets/heroku/coinPurchase.php',
                 data: {
                     id: session_variables.id,
                     in_points: deductPoints,
@@ -161,7 +161,7 @@ profile.prototype = {
         $('#onYes5coin').off("click").on("click", function () {
             deductPoints = -450;
             $.ajax({
-                url: 'assets/php/coinPurchase.php',
+                url: 'assets/heroku/coinPurchase.php',
                 data: {
                     id: session_variables.id,
                     in_points: deductPoints,
