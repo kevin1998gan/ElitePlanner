@@ -117,7 +117,7 @@ goals.prototype = {
                     $("#date_warning").removeClass("d-none");
                 } else {
                     $.ajax({
-                        url: 'assets/php/saveGoals.php',
+                        url: 'assets/heroku/saveGoals.php',
                         data: {
                             goalName: goal_name,
                             start: start_date,
