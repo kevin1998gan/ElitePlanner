@@ -388,8 +388,8 @@ goals.prototype = {
         }).done(function (resp) {
             rs = JSON.parse(resp);
             today = new Date(today);
-            min = new Date(rs.minStart);
-            max = new Date(rs.maxEnd);
+            min = new Date(rs.minstart);
+            max = new Date(rs.maxend);
 
             if (today >= min && today <= max) {
                 $("#goals").removeClass("d-none");
@@ -401,7 +401,7 @@ goals.prototype = {
             }
 
             $.ajax({
-                url: 'assets/php/getGoals.php',
+                url: 'assets/heroku/getGoals.php',
                 data: {
                     id: session_variables.id
                 },
@@ -409,9 +409,9 @@ goals.prototype = {
             }).done(function (resp) {
                 rs = JSON.parse(resp);
                 $("#mainName").text(rs.goal_name);
-                $("#achievedBy").text(rs.goal_endDate);
+                $("#achievedBy").text(rs.goal_enddate);
                 today = new Date(today);
-                endDate = new Date(rs.goal_endDate);
+                endDate = new Date(rs.goal_enddate);
                 var days = today.getTime() - endDate.getTime();
                 var dayDifference = days / (1000 * 3600 * 24);
 
@@ -453,7 +453,7 @@ goals.prototype = {
                 }
 
                 $.ajax({
-                    url: 'assets/php/getUserEfforts.php',
+                    url: 'assets/heroku/getUserEfforts.php',
                     data: {
                         id: rs.goal_id,
                     },
