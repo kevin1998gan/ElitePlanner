@@ -773,7 +773,7 @@ goals.prototype = {
                         }).done(function () {
                             deductPoints = -50;
                             $.ajax({
-                                url: 'assets/php/coinPurchase.php',
+                                url: 'assets/heroku/coinPurchase.php',
                                 data: {
                                     id: session_variables.id,
                                     in_points: deductPoints,
