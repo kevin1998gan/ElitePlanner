@@ -362,6 +362,9 @@ tasks.prototype = {
             } else {
                 $("#total_no").text(incomplete_count - overdue_count);
             }
+        
+        
+            
         });
 
     }
