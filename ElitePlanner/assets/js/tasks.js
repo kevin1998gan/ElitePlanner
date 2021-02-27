@@ -335,6 +335,7 @@ tasks.prototype = {
                 dates.push(due_date);
             }
 
+
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -344,8 +345,15 @@ tasks.prototype = {
 
             today = mm + '/' + dd + '/' + yyyy;
             var overdue_count = 0;
-            for (i = 0; i < dates.length; i++) {
-                if (dates[i] < today && progress[i] < 100) {
+
+            var now = new Date();
+            var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+            var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            var dateTime = date + ' ' + time;
+            
+            for (i = 0; i < alldates.length; i++) {
+                if (Date.parse(alldates[i]) < Date.parse(dateTime) && progress[i] < 100) {
+                    console.log(alldates[i] + dateTime)
                     overdue_count++;
                 }
             }
@@ -372,13 +380,13 @@ tasks.prototype = {
                     var dayDifference = days / (1000 * 3600 * 24);
                 }
                 if (dayDifference < 10) {
-                    comingSoon ++;
+                    comingSoon++;
                 }
 
             }
 
-            
-            if (comingSoon >0){
+
+            if (comingSoon > 0) {
                 $('#reminderNo').text(comingSoon);
                 $('#reminderModal').modal('toggle');
             }
