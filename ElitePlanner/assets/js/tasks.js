@@ -239,7 +239,7 @@ tasks.prototype = {
             url: 'assets/heroku/getUserTasks.php',
             data: {
                 id: session_variables.id,
-                type : task_type
+                type: task_type
             },
             type: 'POST'
         }).always(function (resp) {
@@ -362,6 +362,27 @@ tasks.prototype = {
             } else {
                 $("#total_no").text(incomplete_count - overdue_count);
             }
+
+            var comingSoon = 0;
+            for (i = 0; i < dates.length; i++) {
+                today = new Date(today);
+                endDate = new Date(dates[i]);
+                var days = endDate.getTime() - today.getTime();
+                if (today < endDate) {
+                    var dayDifference = days / (1000 * 3600 * 24);
+                }
+                if (dayDifference < 10) {
+                    comingSoon++;
+                }
+
+            }
+
+
+            if (comingSoon > 0) {
+                $('#reminderNo').text(comingSoon);
+                $('#reminderModal').modal('toggle');
+            }
+
         });
 
     }
