@@ -49,7 +49,9 @@
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid">
-                        <div></div><a href="profile.html"><span class="userName" id = "userName">John Doe</span><span class="userName ml-1" id ="points">180</span><i class="fa fa-book" style="color: rgb(189,221,63);"></i></a>
+                        <div></div><a href="profile.html"><span class="userName" id="userName">John Doe</span><span
+                                class="userName ml-1" id="points">180</span><i class="fa fa-book"
+                                style="color: rgb(189,221,63);"></i></a>
                     </div>
                 </nav>
                 <div class="container-fluid">
@@ -250,7 +252,8 @@
 
                                                     <div class="row" style="margin-top: 5px;">
                                                         <div class="col">
-                                                            <label for="slider">Progression: <span id="value"></span></label>
+                                                            <label for="slider">Progression: <span
+                                                                    id="value"></span></label>
                                                             <input type="range" min="0" max="100" value="50"
                                                                 class="slider" id="myRange" name="slider">
                                                         </div>
@@ -262,7 +265,7 @@
                                                 var slider = document.getElementById("myRange");
                                                 var output = document.getElementById("value");
                                                 output.innerHTML = slider.value + "%";
-                
+
                                                 slider.oninput = function () {
                                                     output.innerHTML = this.value + "%";
                                                 }
@@ -303,6 +306,31 @@
                                         </div>
 
                                     </div>
+                                </div>
+
+                                <!-- Reminder Modal -->
+                                <div id="reminderModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog modal-sm">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: #4c94b2;">
+                                                <h4 class="modal-title  font-weight-bold" style="color: white;">
+                                                    Reminder!
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img class="img-thumbnail rounded mx-auto d-block"
+                                                    src="assets/img/reminder.png">
+                                                <p class="text-center">You have <span class="font-weight-bold"
+                                                        id="reminderNo"></span> tasks that are right around the corner!
+                                                    Be sure to update the progress for the task!</p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                             </div>
