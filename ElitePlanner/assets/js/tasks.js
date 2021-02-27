@@ -350,6 +350,16 @@ tasks.prototype = {
                 }
             }
 
+            var now = new Date();
+            var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+            var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            var dateTime = date + ' ' + time;
+            
+            for (i = 0; i < alldates.length; i++) {
+                if (Date.parse(alldates[i]) < Date.parse(dateTime) && progress[i] < 100) {
+                    overdue_count++;
+                }
+            }
 
             for (i = 0; i < progress.length; i++) {
                 if (progress[i] < 100) {
