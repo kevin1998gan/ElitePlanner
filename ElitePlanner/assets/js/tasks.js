@@ -27,6 +27,27 @@ tasks.prototype = {
     },
 
     initEvents: function (session_variables) {
+
+        $('#divRecPerPage_Index').off("click").on("click", function () { //define no. of rows to load per page
+            if ($('#txtRecPerPage_Index').val() != undefined && $('#txtRecPerPage_Index').val() != null && $('#txtRecPerPage_Index').val() != '') {
+                var val = $('#txtRecPerPage_Index').val();
+                if (parseInt(val) != 0) {
+                    window['dt_tblTasks'].page.len(val).draw();
+                }
+            }
+        });
+
+        $('#txtRecPerPage_Index').off('keyup keypress').on('keyup keypress', function (e) {
+            if (e.keyCode == 13) {  //define no. of rows to load per page (button Enter)
+                if ($('#txtRecPerPage_Index').val() != undefined && $('#txtRecPerPage_Index').val() != null && $('#txtRecPerPage_Index').val() != '') {
+                    var val = $('#txtRecPerPage_Index').val();
+                    if (parseInt(val) != 0) {
+                        window['dt_tblTasks'].page.len(val).draw();
+                    }
+                }
+            }
+        });
+
         var that = this;
 
         elem = document.getElementById("add_date")
