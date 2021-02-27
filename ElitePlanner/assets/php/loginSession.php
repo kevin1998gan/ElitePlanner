@@ -15,6 +15,7 @@ $_SESSION["points"] = $points;
 $_SESSION["login"] = $login;
 $_SESSION["coins"] = $coins;
 $_SESSION["spend"] = 0;
+$_SESSION["reminder"] = 0;
 
 
 echo json_encode($_SESSION);

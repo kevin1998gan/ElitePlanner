@@ -388,9 +388,21 @@ tasks.prototype = {
             }
 
 
-            if (comingSoon > 0) {
-                $('#reminderNo').text(comingSoon);
-                $('#reminderModal').modal('toggle');
+            if (comingSoon > 0 && session_variables.reminder == 0) {
+
+                $.ajax({
+                    url: 'assets/php/updateReminder.php',
+                    data: {
+                        reminder: 1
+    
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    $('#reminderNo').text(comingSoon);
+                    $('#reminderModal').modal('toggle');
+                });
+
+
             }
 
         });
