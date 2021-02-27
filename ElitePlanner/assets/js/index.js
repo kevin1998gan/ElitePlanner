@@ -380,6 +380,7 @@ index.prototype = {
     },
 
     loadTasks: function (session_variables) {
+        $('#progressCard').addClass('d-none');
         $('#task_name').text("");
         $('#task_name1').text("");
         $('#progress').text("");
