@@ -97,6 +97,7 @@ tasks.prototype = {
                 var newAddDate = addDate.split("T");
                 var noMill = newAddDate[1].split(".");
                 var in_due = newAddDate[0] + " " + noMill[0];
+                $('#addModal').modal('toggle');
                 $.ajax({
                     url: 'assets/heroku/addTask.php',
                     data: {
@@ -108,7 +109,6 @@ tasks.prototype = {
                     },
                     type: 'POST',
                 }).done(function () {
-                    $('#addModal').modal('toggle');
                     that.loadTasks(session_variables);
                     $('#addtask').val("");
                     $("#add_date").val("");
