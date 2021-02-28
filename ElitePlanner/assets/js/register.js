@@ -120,7 +120,8 @@ register.prototype = {
             } else if (rpassword != password) {
                 rpassword_message = "Please make sure that both password match"
             } else {
-
+                $("#loader").removeClass('d-none');
+                $("#container").addClass('d-none');
                 $.ajax({
                     url: 'assets/php/register.php',
                     data: {
