@@ -245,6 +245,7 @@ goals.prototype = {
 
 
                 addHour = $('#creditHour').val();
+                $('#addModal').modal('toggle');
                 $.ajax({
                     url: 'assets/heroku/getGoals.php',
                     data: {
@@ -253,7 +254,6 @@ goals.prototype = {
                     type: 'POST',
                 }).done(function (resp) {
                     rs = JSON.parse(resp);
-                    $('#addModal').modal('toggle');
                     $.ajax({
                         url: 'assets/heroku/addEffort.php',
                         data: {
@@ -748,8 +748,17 @@ goals.prototype = {
                             },
                             type: 'POST',
                         }).done(function () {
-                            $("#goals").addClass("d-none");
-                            $("#noGoals").removeClass("d-none");
+                            $.ajax({
+                                url: 'assets/heroku/deleteAllEffort.php',
+                                data: {
+                                    id: rs.goal_id
+                                },
+                                type: 'POST',
+                            }).done(function () {
+                                $("#goals").addClass("d-none");
+                                $("#noGoals").removeClass("d-none");
+    
+                            });
 
                         });
                     });
