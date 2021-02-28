@@ -120,7 +120,8 @@ register.prototype = {
             } else if (rpassword != password) {
                 rpassword_message = "Please make sure that both password match"
             } else {
-                
+                $("#loader").removeClass('d-none');
+                $("#container").addClass('d-none');
                 $.ajax({
                     url: 'assets/heroku/register.php',
                     data: {
@@ -142,7 +143,7 @@ register.prototype = {
             rpassword_input.setCustomValidity(rpassword_message);
         });
 
-    
+
 
     }
 };
