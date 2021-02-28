@@ -387,14 +387,12 @@ tasks.prototype = {
 
             }
 
-
+            console.log(session_variables.reminder);
             if (comingSoon > 0 && session_variables.reminder == 0) {
-
                 $.ajax({
                     url: 'assets/php/updateReminder.php',
                     data: {
                         reminder: 1
-    
                     },
                     type: 'POST',
                 }).done(function (resp) {
