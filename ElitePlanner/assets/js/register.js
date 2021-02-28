@@ -120,7 +120,7 @@ register.prototype = {
             } else if (rpassword != password) {
                 rpassword_message = "Please make sure that both password match"
             } else {
-
+                
                 $.ajax({
                     url: 'assets/heroku/register.php',
                     data: {

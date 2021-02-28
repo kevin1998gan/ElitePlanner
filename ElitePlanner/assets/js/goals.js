@@ -120,6 +120,7 @@ goals.prototype = {
                 if (dayDifference < 49) {
                     $("#date_warning").removeClass("d-none");
                 } else {
+                    $('#createModal').modal('toggle');
                     $.ajax({
                         url: 'assets/heroku/saveGoals.php',
                         data: {
@@ -130,7 +131,7 @@ goals.prototype = {
                         },
                         type: 'POST',
                     }).done(function () {
-                        $('#createModal').modal('toggle');
+
                         $('#noGoals').addClass('d-none');
                         $('#goals').removeClass('d-none');
                         that.loadPage(session_variables);
@@ -252,6 +253,7 @@ goals.prototype = {
                     type: 'POST',
                 }).done(function (resp) {
                     rs = JSON.parse(resp);
+                    $('#addModal').modal('toggle');
                     $.ajax({
                         url: 'assets/heroku/addEffort.php',
                         data: {
@@ -262,7 +264,6 @@ goals.prototype = {
                         },
                         type: 'POST',
                     }).done(function () {
-                        $('#addModal').modal('toggle');
                         $("#editClicked").removeClass("d-none");
                         $("#doneClicked").addClass("d-none");
                         that.loadPage(session_variables);
