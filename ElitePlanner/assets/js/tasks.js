@@ -344,11 +344,6 @@ tasks.prototype = {
 
             today = mm + '/' + dd + '/' + yyyy;
             var overdue_count = 0;
-            for (i = 0; i < dates.length; i++) {
-                if (dates[i] < today && progress[i] < 100) {
-                    overdue_count++;
-                }
-            }
 
             var now = new Date();
             var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
