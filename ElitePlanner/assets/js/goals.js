@@ -78,6 +78,7 @@ goals.prototype = {
         });
 
         $('#goalName').off('keyup keypress').on('keyup keypress', function (e) {
+            $("#ntg_warning").addClass("d-none");
             var regex = "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$";
             var task_name = $('#goalName').val();
             if (task_name.match(regex)) {
@@ -88,7 +89,7 @@ goals.prototype = {
         });
 
         $('#end_date').change(function() {
-            $("#date_warning").removeClass("d-none");
+            $("#date_warning").addClass("d-none");
         });
 
         $('#onCreate').off("click").on("click", function () { //add pressed
