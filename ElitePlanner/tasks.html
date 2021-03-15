@@ -191,13 +191,13 @@
                                                         <div class="col">
                                                             <label for="add_date">Due Date:</label>
                                                             <input type="datetime-local" id="add_date"
-                                                                class="form-control" name="add_date" required>
+                                                                class="form-control" name="add_date" step=".1" required>
                                                         </div>
                                                     </div>
 
 
                                             </div>
-                                            <div class="modal-footer">
+                                            <div class=" modal-footer">
                                                 <button type="button" class="btn btn-danger" id="onCancelAdd"
                                                     data-dismiss="modal">Cancel</button>
                                                 <input type="submit" type="button" class="btn btn-success" id="onAdd"
@@ -230,7 +230,8 @@
                                                             <input type="text" class="form-control"
                                                                 placeholder="Task Name" id="task" />
                                                             <li style="list-style-type: none; font-size: 13px"
-                                                                id="task_warning">* Please only use letters and numbers
+                                                                id="task_warning">* Please only use letters and
+                                                                numbers
                                                             </li>
 
                                                         </div>
@@ -246,7 +247,7 @@
                                                         <div class="col">
                                                             <label for="date">Due Date:</label>
                                                             <input type="datetime-local" id="date" class="form-control"
-                                                                name="date" step = ".1">
+                                                                name="date" step=".1">
                                                         </div>
                                                     </div>
 
@@ -290,7 +291,8 @@
                                         <!-- Modal content-->
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color: #4c94b2;">
-                                                <h4 class="modal-title  font-weight-bold" style="color: white;">Are you
+                                                <h4 class="modal-title  font-weight-bold" style="color: white;">Are
+                                                    you
                                                     sure?
                                                 </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
@@ -323,7 +325,8 @@
                                                 <img class="img-thumbnail rounded mx-auto d-block"
                                                     src="assets/img/reminder.png">
                                                 <p class="text-center">You have <span class="font-weight-bold"
-                                                        id="reminderNo"></span> tasks that are right around the corner!
+                                                        id="reminderNo"></span> tasks that are right around the
+                                                    corner!
                                                     Be sure to update the progress for the task!</p>
                                             </div>
 
