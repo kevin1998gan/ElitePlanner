@@ -29,10 +29,11 @@ calendar.prototype = {
         elem = document.getElementById("date")
         var iso = new Date().toISOString();
         var minDate = iso.substring(0, iso.length - 1);
-        elem.min = minDate;
+        var thisDate = minDate.split(".")
+        elem.min = thisDate[0];
 
         elem2 = document.getElementById("date")
-        elem2.min = minDate;
+        elem2.min = thisDate[0];
 
         $("#userName").text(session_variables.fname + " " + session_variables.lname);
         $("#points").text(session_variables.points);

@@ -53,11 +53,12 @@ tasks.prototype = {
         elem = document.getElementById("add_date")
         var iso = new Date().toISOString();
         var minDate = iso.substring(0, iso.length - 1);
-        elem.min = minDate;
+        var thisDate = minDate.split(".")
+        elem.min = thisDate[0];
 
         elem2 = document.getElementById("date")
-        elem2.min = minDate;
-        console.log(minDate);
+        elem2.min = thisDate[0];
+        
 
         $("#points").text(session_variables.points);
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
