@@ -378,10 +378,11 @@ tasks.prototype = {
     },
     
     reminder: function (session_variables) {
-        var tables = $('.dataTable').DataTable();
-        var alldates = tables.tables(['#tblTasks']).column(5).data();
-        console.log(alldates);
+        var table = $('tblTasks').DataTable();
+        var alldates = table.column(5).data();
         var i;
+        console.log(table);
+        console.log(alldates);
         var dates = [];
         for (i = 0; i < alldates.length; i++) {
             var theDate = alldates[i].split(" ");
