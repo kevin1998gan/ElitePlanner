@@ -377,7 +377,8 @@ tasks.prototype = {
 
     },
     reminder: function (session_variables) {
-        var alldates = window['dt_tblTasks'].column(5).data();
+        var table = $('#tblTasks').DataTable();
+        var alldates = table.column(5).data();
         var i;
         var dates = [];
         for (i = 0; i < alldates.length; i++) {
