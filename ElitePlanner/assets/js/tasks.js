@@ -57,6 +57,7 @@ tasks.prototype = {
 
         elem2 = document.getElementById("date")
         elem2.min = minDate;
+        console.log(minDate);
 
         $("#points").text(session_variables.points);
         $('#tblTasks').off("click").on('click', 'tbody tr', function (e) { // table row onclick
