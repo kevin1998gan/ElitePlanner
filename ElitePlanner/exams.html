@@ -189,7 +189,7 @@
                                                         <div class="col">
                                                             <label for="add_date">Due Date:</label>
                                                             <input type="datetime-local" id="add_date"
-                                                                class="form-control" name="add_date" required>
+                                                                class="form-control" name="add_date" step="any" required>
                                                         </div>
                                                     </div>
 
@@ -199,7 +199,7 @@
                                                 <button type="button" class="btn btn-danger" id="onCancelAdd"
                                                     data-dismiss="modal">Cancel</button>
                                                 <input type="submit" type="button" class="btn btn-success" id="onAdd"
-                                                    value="Add"></input>
+                                                    value="Add" onsubmit="return false"></input>
                                             </div>
                                             </form>
                                         </div>
@@ -244,7 +244,7 @@
                                                         <div class="col">
                                                             <label for="date">Due Date:</label>
                                                             <input type="datetime-local" id="date" class="form-control"
-                                                                name="date">
+                                                                name="date" step="any">
                                                         </div>
                                                     </div>
 
@@ -254,7 +254,7 @@
                                                 <button type="button" class="btn btn-danger" id="onCancelEdit"
                                                     data-dismiss="modal">Cancel</button>
                                                 <input type="submit" type="button" class="btn btn-success" id="onSave"
-                                                    value="Save"></input>
+                                                    value="Save" onsubmit="return false"></input>
                                             </div>
                                             </form>
                                         </div>
