@@ -24,7 +24,6 @@ tasks.prototype = {
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
         this.loadTasks(session_variables);
-        this.reminder(session_variables);
     },
 
     initEvents: function (session_variables) {
@@ -371,61 +370,40 @@ tasks.prototype = {
                 $("#total_no").text(incomplete_count - overdue_count);
             }
 
+            var comingSoon = 0;
+            for (i = 0; i < dates.length; i++) {
+                today = new Date(today);
+                endDate = new Date(dates[i]);
+                var days = endDate.getTime() - today.getTime();
+                if (today < endDate) {
+                    var dayDifference = days / (1000 * 3600 * 24);
+                }
+                if (dayDifference < 10) {
+                    comingSoon++;
+                }
+
+            }
+
+            if (comingSoon > 0 && session_variables.reminder == 0) {
+                $.ajax({
+                    url: 'assets/php/updateReminder.php',
+                    data: {
+                        reminder: 1
+                    },
+                    type: 'POST',
+                }).done(function (resp) {
+                    $('#reminderNo').text(comingSoon);
+                    $('#reminderModal').modal('toggle');
+                });
+
+
+            }
 
 
         });
 
     },
-    
-    reminder: function (session_variables) {
-        var table = $('#tblTasks');
-        var alldates = table.column(5).data();
-        var i;
-        console.log(table);
-        console.log(alldates);
-        var dates = [];
-        for (i = 0; i < alldates.length; i++) {
-            var theDate = alldates[i].split(" ");
-            mmddyy = theDate[0].split("-");
-            due_date = mmddyy[1] + '/' + mmddyy[2] + '/' + mmddyy[0];
-            dates.push(due_date);
-        }
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-
-        var comingSoon = 0;
-        for (i = 0; i < dates.length; i++) {
-            today = new Date(today);
-            endDate = new Date(dates[i]);
-            var days = endDate.getTime() - today.getTime();
-            if (today < endDate) {
-                var dayDifference = days / (1000 * 3600 * 24);
-            }
-            if (dayDifference < 10) {
-                comingSoon++;
-            }
-
-        }
-
-        if (comingSoon > 0 && session_variables.reminder == 0) {
-            $.ajax({
-                url: 'assets/php/updateReminder.php',
-                data: {
-                    reminder: 1
-                },
-                type: 'POST',
-            }).done(function (resp) {
-                $('#reminderNo').text(comingSoon);
-                $('#reminderModal').modal('toggle');
-            });
-
-
-        }
-    }
 
 };
 
