@@ -23,7 +23,7 @@ tasks.prototype = {
         })
         session_variables = JSON.parse(rs);
         this.initEvents(session_variables);
-        this.loadTasks(session_variables);
+        this.loadTasks(session_variables,0);
     },
 
     initEvents: function (session_variables) {
@@ -111,7 +111,7 @@ tasks.prototype = {
                     },
                     type: 'POST',
                 }).done(function () {
-                    that.loadTasks(session_variables);
+                    that.loadTasks(session_variables,1);
                     $('#addtask').val("");
                     $("#add_date").val("");
                 });
@@ -133,7 +133,7 @@ tasks.prototype = {
         });
 
         $('#reset').off("click").on("click", function () {
-            that.loadTasks(session_variables);
+            that.loadTasks(session_variables,1);
         });
 
         $('#onDelete').off("click").on("click", function () { //delete action
@@ -147,7 +147,7 @@ tasks.prototype = {
                 },
                 type: 'POST',
             }).done(function () {
-                that.loadTasks(session_variables);
+                that.loadTasks(session_variables,1);
 
             });
         });
@@ -183,7 +183,7 @@ tasks.prototype = {
                     type: 'POST',
                 }).done(function () {
                     $('#editModal').modal('toggle');
-                    that.loadTasks(session_variables);
+                    that.loadTasks(session_variables,1);
                 });
 
                 var newValue = $('#value').text();
@@ -197,10 +197,10 @@ tasks.prototype = {
                     type: 'POST',
                 }).done(function () {
                     if (newValue == "100%") {
-                        that.loadTasks(session_variables);
+                        that.loadTasks(session_variables,1);
 
                     } else {
-                        that.loadTasks(session_variables);
+                        that.loadTasks(session_variables,1);
 
                     }
 
@@ -235,7 +235,7 @@ tasks.prototype = {
 
     },
 
-    loadTasks: function (session_variables) {
+    loadTasks: function (session_variables,isReminded) {
         task_type = "Task";
         $.ajax({
             url: 'assets/heroku/getUserTasks.php',
@@ -384,7 +384,7 @@ tasks.prototype = {
 
             }
 
-            if (comingSoon > 0 && session_variables.reminder == 0) {
+            if (comingSoon > 0 && session_variables.reminder == 0 && isReminded == 0) {
                 $.ajax({
                     url: 'assets/php/updateReminder.php',
                     data: {
