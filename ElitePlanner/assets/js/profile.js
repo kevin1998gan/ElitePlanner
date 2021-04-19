@@ -93,6 +93,7 @@ profile.prototype = {
                         type: 'POST',
                     }).done(function () {
                         ds = JSON.parse(resp);
+                        console.log(ds);
                         $("#userName").text(ds.fname + " " + ds.lname);
                         $("#points").text(ds.points);
                         $("#first_name").attr("placeholder", ds.fname);
