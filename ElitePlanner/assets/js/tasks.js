@@ -376,8 +376,9 @@ tasks.prototype = {
                 endDate = new Date(dates[i]);
                 var days = endDate.getTime() - today.getTime();
                 if (today < endDate) {
-                    console.log(endDate);
                     var dayDifference = days / (1000 * 3600 * 24);
+                }else{
+                    var dayDifference = 11;
                 }
                 if (dayDifference < 10) {
                     comingSoon++;
