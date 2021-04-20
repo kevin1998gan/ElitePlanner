@@ -267,6 +267,7 @@ goals.prototype = {
                     }).done(function () {
                         $("#editClicked").removeClass("d-none");
                         $("#doneClicked").addClass("d-none");
+                        $("#addForm")[0].reset();
                         that.loadPage(session_variables);
                     });
                 });
